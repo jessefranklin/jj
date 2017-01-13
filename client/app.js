@@ -6,22 +6,46 @@
     .module('app', ['auth0.lock', 'angular-jwt', 'ui.router'])
     .config(config);
 
-  config.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider'];
+  config.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider', 'jwtOptionsProvider'];
 
-  function config($stateProvider, lockProvider, $urlRouterProvider) {
+  function config($stateProvider, lockProvider, $urlRouterProvider, jwtOptionsProvider) {
 
     $stateProvider
-      .state('home', {
+      .state('app', {
         url: '/home',
         controller: 'HomeController',
-        templateUrl: 'app/home/home.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        views: {
+          'header': {
+              templateUrl: 'app/shell/header.html'
+          },
+          'content': {
+              templateUrl: 'app/shell/home.html'
+          },
+          'footer': {
+              templateUrl: 'app/shell/footer.html'
+          }
+        }
       })
-      .state('login', {
-        url: '/login',
-        controller: 'LoginController',
-        templateUrl: 'app/login/login.html',
-        controllerAs: 'vm'
+      .state('app.home', {
+        url: '/home',
+        controller: 'HomeController',
+        controllerAs: 'vm',
+        views : {
+          'content@' : {
+              templateUrl: 'app/home/home.html'
+          }
+        }
+      })
+      .state('app.manage', {
+        url: '/manage',
+        controller: 'manageCtrl',
+        controllerAs: 'vm',
+        views : {
+          'content@' : {
+              templateUrl: 'app/manage/manage.html'
+          }
+        }
       });
 
     lockProvider.init({
@@ -30,6 +54,19 @@
     });
 
     $urlRouterProvider.otherwise('/home');
+
+    // Configuration for angular-jwt
+    jwtOptionsProvider.config({
+      tokenGetter: ['options', function (options) {
+        if (options && options.url.substr(options.url.length - 5) == '.html') {
+          return null;
+        }
+        return localStorage.getItem('id_token');
+      }],
+      whiteListedDomains: ['localhost'],
+      unauthenticatedRedirectPath: '/login'
+    });
+
   }
 
 })();

@@ -6,18 +6,12 @@
     .module('app')
     .run(run);
 
-  run.$inject = ['$rootScope', 'authService', 'lock'];
+  run.$inject = ['$rootScope', 'authService', 'authManager', 'lock'];
 
-  function run($rootScope, authService, lock) {
-    // Put the authService on $rootScope so its methods
-    // can be accessed from the nav bar
+  function run($rootScope, authService, authManager, lock) {
     $rootScope.authService = authService;
-
-    // Register the authentication listener that is
-    // set up in auth.service.js
     authService.registerAuthenticationListener();
-
-    // Register the synchronous hash parser
+    authManager.checkAuthOnRefresh();
     lock.interceptHash();
   }
 

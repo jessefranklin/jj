@@ -13,6 +13,10 @@
     var vm = this;
     vm.authService = authService;
 
+    authService.getProfileDeferred().then(function (profile) {
+      vm.profile = profile;
+    });
+    
   }
 
 }());
