@@ -2,11 +2,11 @@
 
   angular
     .module('app')
-    .factory('jobsService', ['$http', '$q', '$angularCacheFactory', jobsService]);
+    .factory('jobsService', ['$http', '$q', 'globalConfig', jobsService]);
 
-  jobsService.$inject = ['$http', '$q', '$angularCacheFactory'];
+  jobsService.$inject = ['$http', '$q', 'globalConfig'];
 
-  function jobsService ($http, $q, $angularCacheFactory) {
+  function jobsService ($http, $q, globalConfig) {
     var service = {
       allJobs: allJobs
     };
@@ -17,7 +17,7 @@
       var deferred = $q.defer(),
       start = new Date().getTime();
 
-      $http.get('http://localhost:3010/jobs/')
+      $http.get(globalConfig.devPath.dev+'jobs/')
         .success(function(data) {
           console.log('time taken for request: ' + (new Date().getTime() - start) + 'ms');
           deferred.resolve(data);
