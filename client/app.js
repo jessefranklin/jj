@@ -1,5 +1,4 @@
 (function () {
-
   'use strict';
 
   angular
@@ -9,12 +8,9 @@
   config.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider', 'jwtOptionsProvider'];
 
   function config($stateProvider, lockProvider, $urlRouterProvider, jwtOptionsProvider) {
-
     $stateProvider
       .state('app', {
-        url: '/home',
-        controller: 'HomeController',
-        controllerAs: 'vm',
+        url: '',
         views: {
           'header': {
               templateUrl: 'app/shell/header.html'
@@ -29,21 +25,21 @@
       })
       .state('app.home', {
         url: '/home',
-        controller: 'HomeController',
-        controllerAs: 'vm',
         views : {
           'content@' : {
-              templateUrl: 'app/home/home.html'
+              templateUrl: 'app/home/home.html',
+              controller: 'homeCtrl',
+              controllerAs: 'vm'
           }
         }
       })
       .state('app.manage', {
         url: '/manage',
-        controller: 'manageCtrl',
-        controllerAs: 'vm',
         views : {
           'content@' : {
-              templateUrl: 'app/manage/manage.html'
+              templateUrl: 'app/manage/manage.html',
+              controller: 'manageCtrl',
+              controllerAs: 'vm'
           }
         }
       });
