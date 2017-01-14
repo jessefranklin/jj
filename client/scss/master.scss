@@ -1,0 +1,10 @@
+$someColor: #ff0000;
+
+h1 {
+	color: $someColor;
+	font-size: 40px;
+	font-weigth: 200;
+	span {
+		font-size: 12px;
+	} 
+}

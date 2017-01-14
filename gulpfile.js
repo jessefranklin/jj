@@ -7,7 +7,7 @@ var ngHtml2Js = require("gulp-ng-html2js");
 var browserSync = require('browser-sync');
 var pkg = require('./package.json');
 var plug = require('gulp-load-plugins')();
-
+var sass = require('gulp-ruby-sass');
 var reload = browserSync.reload;
 var colors = plug.util.colors;
 var env = plug.util.env;
@@ -31,6 +31,18 @@ gulp.task('watch', function() {
   });
 });
 
+gulp.task('styles', function () {
+    return sass('./client/scss/master.scss')
+        .on('error', sass.logError)
+        .pipe(gulp.dest('./client/css/'));
+});
+
+gulp.task('watch:styles', function() {
+  watch(['./client/scss/*.scss'], function () {
+    gulp.start('styles');
+  });
+});
+
 /**
  * serve the dev environment
  */
@@ -39,8 +51,7 @@ gulp.task('serve', function() {
     // startBrowserSync();
 });
 
-
-gulp.task('default', ['serve']);
+gulp.task('default', ['watch:styles','serve']);
 
 function serve() {
     var options = {
