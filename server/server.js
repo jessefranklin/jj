@@ -12,9 +12,8 @@ var express        = require('express')
     , mongo        = require('mongodb')
     , mongoose     = require('mongoose')
     , jwt          = require('jsonwebtoken')
-
+    , fs           = require('fs')
     , config       = require('./config')
-    , jobs         = require('./routes/jobs')
     , port         = process.env.PORT || 3010;
 
 
@@ -27,7 +26,17 @@ app.use(bodyParser.json());
 // Support static file content
 app.use( fileServer( __dirname+'/../client' )); // was fileServer( process.cwd() )
 
-app.get('/jobs', jobs.findAll);
+require('./models/db');
+
+fs.readdirSync(__dirname+'/models').forEach(function(filename) {
+    if(~filename.indexOf('.js')) require(__dirname+'/models/'+filename);
+});
+
+var routesApi = require('./routes/jobs');
+
+app.use('/api', routesApi);
+
+
 
 app.listen(port, function() {
     console.log('env = ' + app.get('env') +
