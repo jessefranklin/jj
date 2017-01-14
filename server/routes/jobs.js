@@ -19,9 +19,15 @@ db.open(function(err, db) {
     }
 });
  
+exports.findAll = function(req, res) {
+    db.collection('jobs', function(err, collection) {
+        collection.find().toArray(function(err, items) {
+            res.send(items);
+        });
+    });
+};
 
-
- var populateDB = function() {
+var populateDB = function() {
  
     var jobs = [
     {
@@ -38,24 +44,6 @@ db.open(function(err, db) {
     'cost': {
         'type':'Fixed',
         'hours':'4-6',
-        'amount':'90'
-    },
-    'category': 'Manual Labour, Junk Removal'
-    },
-    {
-    'name': 'Jill',
-    'serviceName': 'Need Gardener',
-    'dateRequired':'Feb 15, 2014',
-    'serviceDesc': 'Tend to Garden once a month',
-    'location': {
-        'address': '21 Ruttan St.',
-        'lat': '48.444414',
-        'long': '-89.217045',
-        'majorIntersection':'Dundas / Roncesvalle'
-    },
-    'cost': {
-        'type':'Per Hour',
-        'hours':'8',
         'amount':'90'
     },
     'category': 'Manual Labour, Junk Removal'

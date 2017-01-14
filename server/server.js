@@ -1,7 +1,6 @@
 /**
  * Express application server handling all client requests
  *
- *
  */
 var express        = require('express')
     , app          = express()
@@ -15,7 +14,7 @@ var express        = require('express')
     , jwt          = require('jsonwebtoken')
 
     , config       = require('./config')
-    , jobs         = require('./models/jobs')
+    , jobs         = require('./routes/jobs')
     , port         = process.env.PORT || 3010;
 
 
@@ -28,6 +27,7 @@ app.use(bodyParser.json());
 // Support static file content
 app.use( fileServer( __dirname+'/../client' )); // was fileServer( process.cwd() )
 
+app.get('/jobs', jobs.findAll);
 
 app.listen(port, function() {
     console.log('env = ' + app.get('env') +
