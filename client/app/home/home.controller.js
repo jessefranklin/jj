@@ -4,7 +4,7 @@
 
   angular
     .module('app')
-    .controller('HomeController', HomeController);
+    .controller('homeCtrl', HomeController);
 
   HomeController.$inject = ['authService'];
 
@@ -12,11 +12,11 @@
 
     var vm = this;
     vm.authService = authService;
-
     authService.getProfileDeferred().then(function (profile) {
-      vm.profile = profile;
+      vm.userProfile = profile;
     });
     
+
   }
 
 }());

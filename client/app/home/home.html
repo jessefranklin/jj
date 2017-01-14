@@ -4,7 +4,8 @@
     <p>You are not yet authenticated.</p>
   </div>
   <div class="text-center" ng-if="isAuthenticated">
-    <h2>Welcome, {{ vm.profile }}</h2>
-    <img ng-src="{{ vm.profile }}">
+    <h2>Welcome, {{ vm.userProfile.name }}</h2>
+    <img ng-src="{{ vm.userProfile.picture }}"> 
+    <p>{{ vm.userProfile.user_id }}</p>
   </div>
 </div>

@@ -15,6 +15,12 @@
             vm.homeSref    = 'app.home';
             vm.states      = headerStates;
             vm.authService = authService;
+
+            console.log(authService);
+            
+            authService.getProfileDeferred().then(function (profile) {
+              vm.userProfile = profile;
+            });
     }
 
 }( this.angular ));
