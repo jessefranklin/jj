@@ -1,22 +1,27 @@
-﻿<nav class="navbar navbar-inverse navbar-fixed-top" data-ng-controller="header as vm">
-    <div class="navbar-inner">
-        <a href="#" class="brand" data-ui-sref="{{vm.homeSref}}">
-            <span class="title">JoeJobs</span>
-        </a>
-        <div>
-            <ul>
+﻿<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">joejobs</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
                 <li data-ng-repeat="state in vm.states"
                     data-ng-class="{ active: vm.isSelected(state) }" data-ng-click="vm.selectState(state)" >
                     <a href="#" data-ui-sref="{{state.sref}}" >{{state.name}}</a>
                 </li>
-            </ul>
-        </div>
-        <div class="btn-group pull-right">
-            <ul>
                 <li ng-if="!isAuthenticated"><a ng-click="vm.authService.login()">Log In</a></li>
-                <li ng-if="isAuthenticated"><a ui-sref="app.profile">{{vm.userProfile.name}}</a></li>
+                <li ng-if="isAuthenticated"><a ui-sref="app.manage">{{vm.userProfile.name}}</a></li>
                 <li ng-if="isAuthenticated"><a ui-sref="app.home" ng-click="authService.logout()">Log Out</a></li>
             </ul>
         </div>
+        <!-- /.navbar-collapse -->
+
     </div>
+    <!-- /.container-fluid -->
 </nav>

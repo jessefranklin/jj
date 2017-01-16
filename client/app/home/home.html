@@ -1,12 +1,139 @@
-<div class="jumbotron">
-  <h2 class="text-center">Home</h2>
-  <div class="text-center" ng-if="!isAuthenticated">
-    <p>You are not yet authenticated.</p>
-  </div>
-  <div class="text-center" ng-if="isAuthenticated">
-    <h2>Welcome, {{ vm.userProfile.name }}</h2>
-    <img ng-src="{{ vm.userProfile.picture }}"> 
-    <p>{{ vm.userProfile.user_id }}</p>
-    <p>{{ vm.userProfile }}</p>
-  </div>
-</div>
+<header>
+    <div class="header-content">
+        <div class="header-content-inner" ng-if="!isAuthenticated">
+            <h1 id="homeHeading">Welcome, Guest</h1>
+            <hr>
+            <p>Lets get started</p>
+        </div>
+
+        <div class="header-content-inner" ng-if="isAuthenticated">
+            <h1 id="homeHeading">Welcome, {{ vm.userProfile.name }}</h1>
+            <hr>
+            <p>Lorem ipsum {{ vm.userProfile }}</p> 
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">joejobs are low liability work needed. Little to no supervision</h2>
+                <hr class="light">
+                <p class="text-faded">Shovel my driveway, clean my garage.</p>
+                <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Lets get started</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-usd text-primary sr-icons"></i>
+                        <h3>Post your job</h3>
+                        <p class="text-muted">Simply post your work, geotag where the work and when its needed.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-usd text-primary sr-icons"></i>
+                        <h3>Have our vendors bid on your work</h3>
+                        <p class="text-muted">Take the first applicant or wait until multiple offers are in and choose the one that best suits you.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-usd text-primary sr-icons"></i>
+                        <h3>Be notified when the work is completed.</h3>
+                        <p class="text-muted">Validate the work was completed. And pay the vendor.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-usd text-primary sr-icons"></i>
+                        <h3>Rate vendor.</h3>
+                        <p class="text-muted">Rate vendor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter popup-gallery">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/1.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/1.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Shovel my driveway
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/2.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/2.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Clean my garage
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Lets get started, post work</h2>
+                <a data-ui-sref="app.post" class="btn btn-default btn-xl sr-button">Get Started</a>
+            </div>
+        </div>
+    </aside>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Want to learn more about our programs</h2>
+                    <hr class="primary">
+                    <p>Ready to start your next project with us? That's great!</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x sr-contact"></i>
+                    <p>xxx</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a>xxx@joejobs.ca</a></p>
+                </div>
+            </div>
+        </div>
+    </section>

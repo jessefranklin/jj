@@ -1,0 +1,52 @@
+<div class="jumbotron">
+  	<h2 class="text-center">Add Job</h2>
+  	<div>
+		<input type="hidden" ng-model="vm.job.status" value="draft" />
+		<input type="hidden" ng-model="vm.job.request.active" value="false" />
+
+		<label>Title</label>
+		<input ng-model="vm.job.title" placeholder="Name" />
+	
+		<label>Service Name</label>
+		<input ng-model="vm.job.service_name" placeholder="Service Required"/>
+	
+		<label>Service Description</label>
+		<textarea ng-model="vm.job.service_description" placeholder="50 Char max"/></textarea>
+
+		<label>Service Category</label>
+		<select ng-model="vm.job.service_category">
+			<option ng-repeat="cat in vm.categories" value="{{cat.name}}">
+				{{cat.name}}
+			</option>
+		</select>
+	
+		<label>Date Required</label>
+		<input ng-model="vm.job.request.date_required"  placeholder="Date Required"/>
+		{{job.dateRequired}}
+
+		<label>Address</label>
+		<input ng-model="vm.job.location.address" required ng-Autocomplete />
+		
+		<label>Cost Type</label>
+		<select ng-model="vm.job.cost.arrange">
+			<option value="hr">Per Hour</option>
+			<option value="fixed">Fixed Cost</option>
+		</select>
+	
+		<label>Est. Hours of Service</label>
+		<input ng-model="vm.job.cost.hours" />
+	
+		<label>Amount</label>
+		<input ng-model="vm.job.cost.amount" />
+		<span ng-show="vm.job.cost.arrange === 'hr'">/hr.</span>
+		<span ng-show="vm.job.cost.arrange === 'fixed'">Fixed Cost Total</span>
+	
+		<div ng-show="vm.job.cost.type === 'hr'">
+			Total = {{job.cost.hours * job.cost.amount}}
+		</div>
+
+		<input type="button" ng-click="vm.addJob(vm.job)" value="add job" />
+ 
+		{{vm.job | json}}
+	</div>
+</div>

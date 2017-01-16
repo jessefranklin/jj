@@ -7,12 +7,12 @@
     function controller(  $location , authService) {
 
         var headerStates = [
-            { name: 'Home', sref: 'app.home', roots: ['/home'] },
-            { name: 'Manage', sref: 'app.manage', roots: ['/manage'] }
+            { name: 'Home', sref: 'app', roots: ['/'] },
+            { name: 'Add Job', sref: 'app.post', roots: ['/post'] }
         ];
 
         var vm = this;
-            vm.homeSref    = 'app.home';
+            vm.homeSref    = 'app';
             vm.states      = headerStates;
             vm.authService = authService;
             
