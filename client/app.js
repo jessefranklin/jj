@@ -3,10 +3,13 @@
 
   angular
     .module('app', [
+      //vendor auth
       'auth0.lock',
       'angular-jwt',
+      //angular
       'ui.router',
       'ngAutocomplete',
+      
       'geolocation'
     ])
     .config(config);
@@ -39,6 +42,16 @@
           'content@' : {
               templateUrl: 'app/dashboard/post-form.html',
               controller: 'postCtrl',
+              controllerAs: 'vm'
+          }
+        }
+      })
+      .state('app.detail', {
+        url: 'detail/:id',
+        views : {
+          'content@' : {
+              templateUrl: 'app/dashboard/detail.html',
+              controller: 'detailCtrl',
               controllerAs: 'vm'
           }
         }

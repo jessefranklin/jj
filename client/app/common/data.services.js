@@ -2,14 +2,20 @@
 
   angular
     .module('app')
-    .factory('jobsService', ['$http', jobsService]);
+    .factory('jobsService', ['$http','$q', jobsService]);
 
-  jobsService.$inject = ['$http'];
+  jobsService.$inject = ['$http','$q'];
 
-  function jobsService ($http) {
+  function jobsService ($http,$q) {
     return {
       get : function() {
         return $http.get('/api/jobs');
+      },
+      getById : function(id) {
+        return $http.get('/api/jobs/' + id);
+      },
+      update : function(id) {
+        return $http.put('/api/jobs/' + id, job);
       },
       create : function(job) {
         return $http.post('/api/jobs', job);

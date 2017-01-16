@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <h2 class="text-center">Details</h2>
+  	{{vm.jobs}}
+	<div class="row marketing">
+	  <h1>{{vm.jobs.title}}</h1>
+	  <h2>{{vm.jobs.service_name}}</h2>
+	  <p>{{vm.jobs.service_description}}</p>
+	  <p ng-show="jobs.cost.type === 'hr'">
+	  	${{vm.jobs.cost.amount}}/{{vm.jobs.cost.type}} for {{vm.jobs.cost.hours}} hours.
+	  </p>
+	  <p ng-show="jobs.cost.type === 'fixed'">
+	  	${{vm.jobs.cost.amount}} {{vm.jobs.cost.type}} cost for {{vm.jobs.cost.hours}} hours of service.
+	  </p>
+	  <h3>{{vm.jobs.dateRequired}}</h3>
+	  <p>{{vm.jobs.serviceDesc}}<br />
+	  	{{vm.jobs.location.majorIntersection}}
+	  </p>
+	  <p>{{vm.jobs.category}}</p>
+
+	  <a href="/edit/{{vm.jobs._id}}" class="btn btn-default" ng-if="user.user_id === jobs.owner">Edit Post</a>
+
+	  <a href="/edit/{{vm.jobs._id}}" class="btn btn-default" ng-if="vm.jobs.status === 'draft' && user.user_id === jobs.owner">Publish</a>
+
+	  <a href="" class="btn btn-default" ng-click="createRequest();" ng-if="user.user_id != jobs.owner">Lets do this!</a>
+
+	</div>
+
+</div>

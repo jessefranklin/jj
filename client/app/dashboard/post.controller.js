@@ -16,8 +16,6 @@
       vm.userProfile = profile;
     });
 
-    
-
     vm.addJob = function(){
       geocoder = new google.maps.Geocoder();
       geocoder.geocode({ 'address': vm.job.location.address}, function(results, status) {
@@ -30,9 +28,10 @@
       });
 
       jobsService.create(vm.job)
-        .success(function(data) {
-              vm.loading = false;
-              $location.path('/detail/' + data._id);
+        .then(function(data) {
+            console.log(data.data._id);
+            vm.loading = false;
+            $location.path('/detail/' + data.data._id);
         });
     };
   }
