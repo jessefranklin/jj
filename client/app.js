@@ -2,42 +2,52 @@
   'use strict';
 
   angular
-    .module('app', ['auth0.lock', 'angular-jwt', 'ui.router'])
+    .module('app', [
+      'auth0.lock',
+      'angular-jwt',
+      'ui.router',
+      'ngAutocomplete',
+      'geolocation'
+    ])
     .config(config);
 
-  config.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider', 'jwtOptionsProvider'];
+  config.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider', 'jwtOptionsProvider', '$locationProvider' ];
 
-  function config($stateProvider, lockProvider, $urlRouterProvider, jwtOptionsProvider) {
+  function config($stateProvider, lockProvider, $urlRouterProvider, jwtOptionsProvider, $locationProvider) {
     $stateProvider
       .state('app', {
-        url: '',
+        url: '/',
         views: {
           'header': {
-              templateUrl: 'app/shell/header.html'
+              templateUrl: 'app/shell/header.html',
+              controller: 'header',
+              controllerAs: 'vm'
           },
           'content': {
-              templateUrl: 'app/shell/home.html'
+              templateUrl: 'app/home/home.html',
+              controller: 'homeCtrl',
+              controllerAs: 'vm'
           },
           'footer': {
               templateUrl: 'app/shell/footer.html'
           }
         }
       })
-      .state('app.home', {
-        url: '/home',
+      .state('app.post', {
+        url: 'post',
         views : {
           'content@' : {
-              templateUrl: 'app/home/home.html',
-              controller: 'homeCtrl',
+              templateUrl: 'app/dashboard/post-form.html',
+              controller: 'postCtrl',
               controllerAs: 'vm'
           }
         }
       })
       .state('app.manage', {
-        url: '/manage',
+        url: 'manage',
         views : {
           'content@' : {
-              templateUrl: 'app/manage/manage.html',
+              templateUrl: 'app/dashboard/manage.html',
               controller: 'manageCtrl',
               controllerAs: 'vm'
           }
@@ -49,7 +59,8 @@
       domain: AUTH0_DOMAIN
     });
 
-    $urlRouterProvider.otherwise('/home');
+    $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('/');
 
     // Configuration for angular-jwt
     jwtOptionsProvider.config({

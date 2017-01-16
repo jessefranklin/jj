@@ -1,6 +1,7 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+	config   = require('../config');
 
-mongoose.connect('mongodb://localhost:27017/jj');
+mongoose.connect(config.localURL);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {

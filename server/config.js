@@ -1,4 +1,3 @@
 module.exports = {
-    'secret': 'joejob',
-    'database': 'mongodb://localhost:27017'
+    localURL: 'mongodb://localhost:27017/jj'
 };

@@ -2,37 +2,21 @@
 
   angular
     .module('app')
-    .factory('jobsService', ['$http', '$q', 'globalConfig', jobsService]);
+    .factory('jobsService', ['$http', jobsService]);
 
-  jobsService.$inject = ['$http', '$q', 'globalConfig'];
+  jobsService.$inject = ['$http'];
 
-  function jobsService ($http, $q, globalConfig) {
-    var service = {
-      allJobs: allJobs
+  function jobsService ($http) {
+    return {
+      get : function() {
+        return $http.get('/api/jobs');
+      },
+      create : function(job) {
+        return $http.post('/api/jobs', job);
+      },
+      delete : function(id) {
+        return $http.delete('/api/jobs/' + id);
+      }
     };
-
-    return service;
-
-    function allJobs() {
-      var deferred = $q.defer(),
-      start = new Date().getTime();
-
-      $http.get(globalConfig.devPath.dev+'jobs/')
-        .success(function(data) {
-          console.log('time taken for request: ' + (new Date().getTime() - start) + 'ms');
-          deferred.resolve(data);
-        })
-        .error(function(data, status){
-          deferred.reject({
-            'status': status,
-            'data': data
-        });
-      });
-
-      return deferred.promise;
-    }
-
-
   }
-
 })();
