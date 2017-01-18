@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('app')
+    .module('app.post')
     .controller('manageCtrl',  ['jobsService','authService',manageController]);
 
   manageController.$inject = ['jobsService','authService'];

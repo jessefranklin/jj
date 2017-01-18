@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('app')
+    .module('app.post')
     .controller('detailCtrl',  ['jobsService','$state','authService',detailController]);
 
   detailController.$inject = ['jobsService','$state','authService'];

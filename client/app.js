@@ -3,15 +3,13 @@
 
   angular
     .module('app', [
-      //vendor auth
+      //vendor authO
       'auth0.lock',
       'angular-jwt',
-      'flow',
       //angular
       'ui.router',
-      'ngAutocomplete',
-      'ngFileUpload',
-      'geolocation'
+      //Custom Modules
+      'app.post'
     ])
     .config(config);
 
