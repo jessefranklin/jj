@@ -31,6 +31,10 @@ var jobSchema = new Schema({
 		min_hours: Number,
 		max_hours: Number
 	},
+	images: [{
+		image_name: String,
+		image_path: String
+	}],
 	applicants: [{
 		status: String,
 		id: Number
