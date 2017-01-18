@@ -34,6 +34,7 @@
       });
     };
 
+
     vm.upload = function (file) {
         Upload.upload({
             url: globalFunc.uploadPath,

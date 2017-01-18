@@ -7,11 +7,15 @@ var jobSchema = new Schema({
 	service_description: String,
 	service_category: String,
 	owner: String,
+	owner_meta : {
+		telephone: Number
+	},
 	status: String,
 	request: {
 		active: Boolean,
 		state: String,
 		date_required: Date,
+		time_required: Number,
 		date_fulfillment_by: Date,
 	},
 	location: {
