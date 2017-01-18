@@ -2,11 +2,11 @@
 
   angular
     .module('app')
-    .controller('postCtrl',['jobsService','authService', '$location','globalFunc',postController]);
+    .controller('postCtrl',['jobsService','Upload','authService', '$location','globalFunc', postController]);
 
-  postController.$inject = ['jobsService','authService', '$location','globalFunc'];
+  postController.$inject = ['jobsService','Upload','authService', '$location','globalFunc'];
 
-  function postController(jobsService,authService,$location,globalFunc) {
+  function postController(jobsService,Upload,authService,$location,globalFunc) {
     var vm = this, geocoder;
     vm.authService = authService;
     vm.job = {};
@@ -15,25 +15,51 @@
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
     });
-
+   
     vm.addJob = function(){
       geocoder = new google.maps.Geocoder();
       geocoder.geocode({ 'address': vm.job.location.address}, function(results, status) {
         if (status === 'OK') {
           vm.job.location.lat = results[0].geometry.location.lat();
           vm.job.location.long = results[0].geometry.location.lng();
-          console.log(vm.userProfile.user_id);
           vm.job.owner = vm.userProfile.user_id;
+          if(vm.file){
+            if (vm.upload_form.file.$valid && vm.file) {
+              vm.upload(vm.file);
+            }
+          } else {
+            vm.submitForm();
+          }
         }
       });
+    };
 
+    vm.upload = function (file) {
+        Upload.upload({
+            url: globalFunc.uploadPath,
+            data: {file:file}
+        }).then(function (resp) {
+            if(resp.data.error_code === 0){
+              console.log('Success '+resp.config.data.file.name);
+              vm.job.image = {
+                image_name : resp.config.data.file.name,
+                image_path : globalFunc.uploadPath
+              };
+              vm.submitForm();
+            } else {
+              console.log('an error occured '+ resp);
+            }
+        });
+    };
+
+    vm.submitForm = function(){
       jobsService.create(vm.job)
         .then(function(data) {
-            console.log(data.data._id);
             vm.loading = false;
             $location.path('/detail/' + data.data._id);
         });
     };
+
   }
 
 }());

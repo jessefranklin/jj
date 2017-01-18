@@ -31,7 +31,7 @@ var jobSchema = new Schema({
 		min_hours: Number,
 		max_hours: Number
 	},
-	images: [{
+	image: [{
 		image_name: String,
 		image_path: String
 	}],

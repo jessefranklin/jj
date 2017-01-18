@@ -6,10 +6,11 @@
       //vendor auth
       'auth0.lock',
       'angular-jwt',
+      'flow',
       //angular
       'ui.router',
       'ngAutocomplete',
-      
+      'ngFileUpload',
       'geolocation'
     ])
     .config(config);

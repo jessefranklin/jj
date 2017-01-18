@@ -17,3 +17,11 @@ curl -i -X POST -H 'Content-Type: application/json' -d '{"title": "Test Name","s
 curl -XGET http://localhost:3000/api/jobs
 
 curl -X "DELETE" http://localhost:3000/api/jobs/587a91f81dd688068f60c5ee
+
+
+temp
+
+<form method="post" enctype="multipart/form-data" action="/upload">
+    <input type="file" name="file">
+    <input type="submit" value="Submit">
+</form>

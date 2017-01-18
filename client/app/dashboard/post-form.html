@@ -45,8 +45,29 @@
 			Total = {{job.cost.hours * job.cost.amount}}
 		</div>
 
+		<form name="vm.upload_form">
+			<div flow-init="{target: './uploads'}">
+				<input 
+				type="file" 
+				ngf-select 
+				ng-model="vm.file" 
+				name="file" 
+				ngf-pattern="'image/*'"
+				accept="image/*" 
+				ngf-max-size="20MB" 
+				flow-btn />
+				
+				<i ng-show="vm.upload_form.file.$error.maxSize">File too large {{vm.file.size / 1000000|number:1}}</i>
+
+				<div ng-repeat="file in $flow.files">
+				    <img flow-img="file" />
+
+				</div>
+			</div>
+		</form>
+
 		<input type="button" ng-click="vm.addJob(vm.job)" value="add job" />
- 
+
 		{{vm.job | json}}
 	</div>
 </div>
