@@ -10,6 +10,7 @@
     var vm = this, geocoder;
     vm.authService = authService;
     vm.job = {};
+    vm.state = 'Add';
     vm.categories = globalFunc.categories;
 
     authService.getProfileDeferred().then(function (profile) {

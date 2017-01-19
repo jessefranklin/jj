@@ -65,6 +65,16 @@
           }
         }
       })
+      .state('app.edit', {
+        url: 'edit/:id',
+        views : {
+          'content@' : {
+              templateUrl: 'app/posts/post-form.html',
+              controller: 'editPostCtrl',
+              controllerAs: 'vm'
+          }
+        }
+      })
       .state('app.manage', {
         url: 'manage',
         views : {

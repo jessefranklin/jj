@@ -59,6 +59,6 @@
       logout: logout,
       registerAuthenticationListener: registerAuthenticationListener,
       getProfileDeferred: getProfileDeferred
-    }
+    };
   }
 })();

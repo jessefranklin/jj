@@ -14,7 +14,10 @@
       getById : function(id) {
         return $http.get('/api/jobs/' + id);
       },
-      update : function(id) {
+      getAllByOwner : function(id) {
+        return $http.get('/api/myjobs/' + id);
+      },
+      update : function(id, job) {
         return $http.put('/api/jobs/' + id, job);
       },
       create : function(job) {

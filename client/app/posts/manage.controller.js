@@ -11,11 +11,15 @@
     vm.authService = authService;
     vm.jobs = jobsService;
 
-    console.log(jobsService);
-
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
+      jobsService.getAllByOwner(vm.userProfile.user_id)
+        .then(function(data){
+          vm.jobs = data.data;
+      });
+
     });
+
   }
 
 }());

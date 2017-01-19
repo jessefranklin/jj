@@ -1,4 +1,19 @@
-<div class="jumbotron">
+<div class="container">
   <h2 class="text-center">Manage</h2>
   {{vm.userProfile}}
+
+
+
+<div ng-repeat="job in vm.jobs" >
+
+	<div class="row marketing">
+	  <h1>{{job.owner}}</h1>
+	  <h2>{{job.service_name}}</h2>
+	  <p>{{job.service_description}}</p>
+	
+	 <a href="edit/{{job._id}}" class="btn btn-default" ng-if="vm.userProfile.user_id === job.owner">Edit Post {{job._id}}</a>
+
+	  </div>
+</div>
+
 </div>
