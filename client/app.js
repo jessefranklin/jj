@@ -39,7 +39,7 @@
         url: 'post',
         views : {
           'content@' : {
-              templateUrl: 'app/dashboard/post-form.html',
+              templateUrl: 'app/posts/post-form.html',
               controller: 'postCtrl',
               controllerAs: 'vm'
           }
@@ -49,8 +49,18 @@
         url: 'detail/:id',
         views : {
           'content@' : {
-              templateUrl: 'app/dashboard/detail.html',
+              templateUrl: 'app/posts/detail.html',
               controller: 'detailCtrl',
+              controllerAs: 'vm'
+          }
+        }
+      })
+      .state('app.search', {
+        url: 'list/',
+        views : {
+          'content@' : {
+              templateUrl: 'app/posts/list.html',
+              controller: 'listCtrl',
               controllerAs: 'vm'
           }
         }
@@ -59,7 +69,7 @@
         url: 'manage',
         views : {
           'content@' : {
-              templateUrl: 'app/dashboard/manage.html',
+              templateUrl: 'app/posts/manage.html',
               controller: 'manageCtrl',
               controllerAs: 'vm'
           }

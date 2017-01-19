@@ -23,7 +23,7 @@
     <link href="css/creative.css" rel="stylesheet">
     <link href="css/master.css" rel="stylesheet" />
   </head>
-  <body id="page-top" ng-app="app">
+  <body ng-app="app">
 
       <div data-ui-view="header"></div>
       <div id="shell-content" data-ui-view="content"></div>
@@ -60,21 +60,27 @@
     <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
     <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 
+    <!-- App.post module -->
+    <script type="text/javascript" src="app/posts/app.post.js"></script>
+    <script type="text/javascript" src="app/posts/post.controller.js"></script>
+    <script type="text/javascript" src="app/posts/detail.controller.js"></script>
+    <script type="text/javascript" src="app/posts/list.controller.js"></script>
+    <script type="text/javascript" src="app/posts/manage.controller.js"></script>
 
+    <!-- app module -->
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="app.config.js"></script>
     <script type="text/javascript" src="app.run.js"></script>
+
+    <!-- Shell & layout -->
     <script type="text/javascript" src="app/shell/header.js"></script>
     <script type="text/javascript" src="app/home/home.controller.js"></script>
     <script type="text/javascript" src="app/auth/auth.service.js"></script>
-    <script type="text/javascript" src="app/dashboard/manage.controller.js"></script>
-    
-    <script type="text/javascript" src="app/dashboard/app.post.js"></script>
-    <script type="text/javascript" src="app/dashboard/post.controller.js"></script>
-    <script type="text/javascript" src="app/dashboard/detail.controller.js"></script>
-    
+
+    <!-- Services -->
     <script type="text/javascript" src="app/common/data.services.js"></script>
 
+    <!-- Directives  -->
     <script type="text/javascript" src="app/common/data.directive.js"></script>
   </body>
 </html>

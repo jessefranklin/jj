@@ -43,7 +43,7 @@ var jobSchema = new Schema({
 		status: String,
 		id: Number
 	}],
-	created_at: Date
+	created_at: { type : Date, default: Date.now }
 });
 
 jobSchema.pre('save', function(next) {

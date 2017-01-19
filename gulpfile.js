@@ -51,7 +51,7 @@ gulp.task('serve', function() {
     // startBrowserSync();
 });
 
-gulp.task('default', ['watch:styles','serve']);
+gulp.task('default', ['watch','watch:styles','serve']);
 
 function serve() {
     var options = {

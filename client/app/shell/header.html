@@ -5,14 +5,16 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">joejobs</a>
+            <a class="navbar-brand page-scroll" href="/" data-ui-sref="app" class="ng-binding">joejobs</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li data-ng-repeat="state in vm.states"
-                    data-ng-class="{ active: vm.isSelected(state) }" data-ng-click="vm.selectState(state)" >
+                    data-ng-class="{ active: vm.isSelected(state) }" 
+                    data-ng-click="vm.selectState(state)" 
+                    ng-if="isAuthenticated === state.auth || state.auth === false" >
                     <a href="#" data-ui-sref="{{state.sref}}" >{{state.name}}</a>
                 </li>
                 <li ng-if="!isAuthenticated"><a ng-click="vm.authService.login()">Log In</a></li>
