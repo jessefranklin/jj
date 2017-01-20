@@ -7,6 +7,8 @@
     "start": "gulp"
   },
   "dependencies": {
+    "angular-google-maps": "^2.4.1",
+    "angular-simple-logger": "^0.1.7",
     "aws-sdk": "^2.7.24",
     "body-parser": "~1.0.0",
     "breeze-mongodb": "0.0.6",
