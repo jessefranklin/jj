@@ -1,4 +1,4 @@
-﻿<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+﻿<nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -17,9 +17,9 @@
                     ng-if="isAuthenticated === state.auth || state.auth === false" >
                     <a href="#" data-ui-sref="{{state.sref}}" >{{state.name}}</a>
                 </li>
-                <li ng-if="!isAuthenticated"><a ng-click="vm.authService.login()">Log In</a></li>
+                <li ng-if="!isAuthenticated"><a ng-click="authService.login()">Log In</a></li>
                 <li ng-if="isAuthenticated"><a ui-sref="app.manage">{{vm.userProfile.name}}</a></li>
-                <li ng-if="isAuthenticated"><a ui-sref="app.home" ng-click="authService.logout()">Log Out</a></li>
+                <li ng-if="isAuthenticated"><a data-ui-sref="app" ng-click="authService.logout()">Log Out</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

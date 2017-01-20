@@ -17,6 +17,7 @@
       vm.userProfile = profile;
     });
    
+    
     vm.addJob = function(){
       geocoder = new google.maps.Geocoder();
       geocoder.geocode({ 'address': vm.job.location.address}, function(results, status) {

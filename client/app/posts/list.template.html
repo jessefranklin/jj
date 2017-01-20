@@ -1,0 +1,17 @@
+<div class="row marketing">
+<h1>{{job.title}}</h1>
+<h2>{{job.service_name}}</h2>
+<p>{{job.service_description}}</p>
+<p ng-show="job.cost.type === 'hr'">
+	${{vm.job.cost.amount}}/{{vm.job.cost.type}} for {{vm.job.cost.hours}} hours.
+</p>
+<p ng-show="job.cost.type === 'fixed'">
+	${{vm.jobs.cost.amount}} {{vm.jobs.cost.type}} cost for {{vm.jobs.cost.hours}} hours of service.
+</p>
+<h3>{{vm.job.dateRequired}}</h3>
+<p>{{vm.job.service_description}}<br />
+	{{vm.job.location.address}}
+</p>
+<p>{{vm.job.category}} </p>
+<a href="detail/{{job._id}}" class="btn btn-default" >Lets do this!</a>
+</div>

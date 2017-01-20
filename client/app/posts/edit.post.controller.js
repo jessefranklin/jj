@@ -12,8 +12,6 @@
     vm.job = {};
     vm.state = 'edit';
 
-    console.log($state.params.id);
-
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
     });
@@ -21,6 +19,7 @@
     jobsService.getById($state.params.id)
       .then(function(data){
         vm.job = data.data[0];
+        vm.job.request.date_required = new Date(vm.job.request.date_required);
     });
 
     vm.addJob = function(){

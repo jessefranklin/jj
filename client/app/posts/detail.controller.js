@@ -10,9 +10,13 @@
     var vm = this;
     vm.authService = authService;
     
+    authService.getProfileDeferred().then(function (profile) {
+      vm.userProfile = profile;
+    });
+
     jobsService.getById($state.params.id)
       .then(function(data){
-        vm.jobs = data.data[0];
+        vm.job = data.data[0];
     });
 
   }

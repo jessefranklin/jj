@@ -1,30 +1,13 @@
 <div class="container">
 
   <h2 class="text-center">List</h2>
-  	<div ng-repeat="job in vm.jobs" >
-	  	{{job}}
-		<div class="row marketing">
-		  <h1>{{job.title}}</h1>
-		  <h2>{{job.service_name}}</h2>
-		  <p>{{job.service_description}}</p>
-		  <p ng-show="job.cost.type === 'hr'">
-		  	${{vm.job.cost.amount}}/{{vm.job.cost.type}} for {{vm.job.cost.hours}} hours.
-		  </p>
-		  <p ng-show="job.cost.type === 'fixed'">
-		  	${{vm.jobs.cost.amount}} {{vm.jobs.cost.type}} cost for {{vm.jobs.cost.hours}} hours of service.
-		  </p>
-		  <h3>{{vm.job.dateRequired}}</h3>
-		  <p>{{vm.job.service_description}}<br />
-		  	{{vm.job.location.address}}
-		  </p>
-		  <p>{{vm.job.category}} </p>
-
-		  <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="user.user_id === job.owner">Edit Post</a>
-
-		  <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && user.user_id === job.owner">Publish</a>
-
-		  <a href="" class="btn btn-default" ng-click="createRequest();" ng-if="user.user_id != job.owner">Lets do this!</a>
-
-		</div>
+	
+  	<div id="map_canvas">
+	    <ui-gmap-google-map center="vm.map.center" zoom="vm.map.zoom" options="vm.options">
+	     	<ui-gmap-marker ng-repeat="m in vm.jobs.location" coords="m" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+	    </ui-gmap-google-map>
 	</div>
+
+	<joblist jobs='vm.jobs'></joblist>
+
 </div>
