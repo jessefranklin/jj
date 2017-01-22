@@ -15,7 +15,9 @@ var jobSchema = new Schema({
 		active: Boolean,
 		state: String,
 		date_required: Date,
+		time_range: String,
 		time_required: Number,
+		expire_post: Boolean,
 		date_fulfillment_by: Date,
 	},
 	location: {
@@ -26,8 +28,8 @@ var jobSchema = new Schema({
 	},
 	cost: {
 		arrange: String,
-		fee: Number,
-		amount: Number,
+		hours: Number,
+		rate: Number,
 		total_amount: Number
 	},
 	hours: {
