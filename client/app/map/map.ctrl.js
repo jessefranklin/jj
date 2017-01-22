@@ -2,18 +2,13 @@
 
   angular
     .module('app.map')
-    .controller('mapCtrl',  ['jobsService','authService','uiGmapIsReady','uiGmapGoogleMapApi','mapoptions','geoservices',mapController]);
+    .controller('mapCtrl', ['uiGmapIsReady','uiGmapGoogleMapApi','mapoptions','geoservices',mapController]);
 
-  mapController.$inject = ['jobsService','authService','uiGmapIsReady','uiGmapGoogleMapApi','mapoptions','geoservices'];
+  mapController.$inject = ['uiGmapIsReady','uiGmapGoogleMapApi','mapoptions','geoservices'];
 
-  function mapController(jobsService,authService,uiGmapIsReady,uiGmapGoogleMapApi,mapoptions,geoservices) {
+  function mapController(uiGmapIsReady,uiGmapGoogleMapApi,mapoptions,geoservices) {
     var vm = this;
-    vm.authService = authService;
     vm.markers = {};
-
-    authService.getProfileDeferred().then(function (profile) {
-      vm.userProfile = profile;
-    });
 
     var location = JSON.parse(localStorage.getItem('location'));
 
@@ -24,24 +19,13 @@
 
     uiGmapGoogleMapApi.then(function(gmaphandle) {
       vm.gmaphandle = gmaphandle;
-      vm.map = {
-        center : location,
-        Zoom   : 8,
-        // Events : mapevents,
-        Options: {
-          rotateControl:  true,
-          mapTypeControl: true,
-          scaleControl:   false
-        },
-        Control: {}
-      };
 
       vm.marker = {
         id: 0,
         coords: location,
         options: {
           draggable: false,
-          title: 'mon label'
+          title: 'currently here'
         },
         events: {
             click: function (marker, eventName, model, args) {
@@ -54,7 +38,6 @@
                 labelContent: "lat: " + vm.marker.coords.latitude + ' ' + 'lon: ' + vm.marker.coords.longitude,
                 labelAnchor: "100 0",
                 labelClass: "marker-labels"
-
               };
             }
           }
@@ -62,8 +45,8 @@
     });
 
     uiGmapIsReady.promise().then(function (maps) {
-
-
+      console.log(vm.jobs);
+      //$scope.$apply();
     });
 
   }
