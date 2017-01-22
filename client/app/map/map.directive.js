@@ -5,7 +5,6 @@
     .directive('mapapp', function () {
       return {
         restrict: "E",
-        replace: true,
         scope: {
           jobs: '='
         },

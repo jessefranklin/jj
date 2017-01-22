@@ -2,53 +2,58 @@
 
   angular
     .module('app.map')
-    .controller('mapCtrl', ['uiGmapIsReady','uiGmapGoogleMapApi','mapoptions','geoservices',mapController]);
+    .controller('mapCtrl', ['jobsService','mapoptions','geoservices',mapController]);
 
-  mapController.$inject = ['uiGmapIsReady','uiGmapGoogleMapApi','mapoptions','geoservices'];
+  mapController.$inject = ['jobsService','mapoptions','geoservices'];
 
-  function mapController(uiGmapIsReady,uiGmapGoogleMapApi,mapoptions,geoservices) {
+  function mapController(jobsService,mapoptions,geoservices) {
     var vm = this;
     vm.markers = {};
 
     var location = JSON.parse(localStorage.getItem('location'));
 
-    vm.map = {
-      center : location,
-      Zoom   : 8
+    var mapOptions = {
+        zoom: 14,
+        center: new google.maps.LatLng(location.latitude,location.longitude),
+        mapTypeId: google.maps.MapTypeId.TERRAIN
     };
 
-    uiGmapGoogleMapApi.then(function(gmaphandle) {
-      vm.gmaphandle = gmaphandle;
+    vm.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    vm.markers = [];
+    
+    var infoWindow = new google.maps.InfoWindow();
+    var image = 'img/green-flag.png';
+    var newMarker = function (info){
+        var marker = new google.maps.Marker({
+            map: vm.map,
+            icon: image,
+            label: '$300',
+            position: new google.maps.LatLng(info.location.lat, info.location.long),
+            title: info.title
+        });
+        marker.content = '<div class="infoWindowContent">$3000' + info.service_name + '</div>';
+        
+        google.maps.event.addListener(marker, 'click', function(){
+            infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content + '<br/><a href="/detail/'+info._id+'" class="button"><i class="icon-plus"></i>Do it</a>');
+            infoWindow.open(vm.map, marker);
+        });
+        
+        vm.markers.push(marker);
+    };
 
-      vm.marker = {
-        id: 0,
-        coords: location,
-        options: {
-          draggable: false,
-          title: 'currently here'
-        },
-        events: {
-            click: function (marker, eventName, model, args) {
-              var lat = marker.getPosition().lat();
-              var lon = marker.getPosition().lng();
+    vm.openInfoWindow = function(e, selectedMarker){
+        e.preventDefault();
+        google.maps.event.trigger(selectedMarker, 'click');
+    };
 
-              vm.marker.options = {
-                draggable: false,
-                title: 'mon label moved',
-                labelContent: "lat: " + vm.marker.coords.latitude + ' ' + 'lon: ' + vm.marker.coords.longitude,
-                labelAnchor: "100 0",
-                labelClass: "marker-labels"
-              };
-            }
-          }
-        };
+    jobsService.get()
+      .then(function(data){
+        for (i = 0; i < data.data.length; i++){
+            newMarker(data.data[i]);
+        }
     });
-
-    uiGmapIsReady.promise().then(function (maps) {
-      console.log(vm.jobs);
-      //$scope.$apply();
-    });
-
+    
+    
   }
 
 }());

@@ -1,16 +1,9 @@
 (function () {
 	angular
     .module('app.map')
-    .config(function(uiGmapGoogleMapApiProvider) {
-      uiGmapGoogleMapApiProvider.configure({
-        key: '',
-        v: '3.18',
-        libraries: 'weather,geometry,visualization'
-      });
-    })
     .service('mapoptions', mapoptions);
 
-    function mapoptions($http, $q, uiGmapGoogleMapApi) {
+    function mapoptions($http, $q) {
       this.getMapOptions = function(){
         return{
           mapOptions : {

@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('listCtrl',  ['jobsService','authService','uiGmapIsReady',listController]);
+    .controller('listCtrl',  ['jobsService','authService',listController]);
 
-  listController.$inject = ['jobsService','authService','uiGmapIsReady'];
+  listController.$inject = ['jobsService','authService'];
 
-  function listController(jobsService,authService,uiGmapIsReady) {
+  function listController(jobsService,authService) {
     var vm = this;
     vm.authService = authService;
     vm.markers = {};
@@ -19,7 +19,6 @@
       .then(function(data){
         vm.jobs = data.data;
     });
-
   }
 
 }());
