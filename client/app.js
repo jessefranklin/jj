@@ -10,6 +10,7 @@
       'ui.router',
 
       //Custom Modules
+      'app.profile',
       'app.map',
       'app.post'
     ])

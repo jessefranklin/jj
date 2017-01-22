@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('app.post')
+    .module('app.profile')
     .directive('profileview', function () {
       return {
         restrict: "E",
