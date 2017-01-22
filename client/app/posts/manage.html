@@ -1,5 +1,6 @@
 <div class="container">
 	<h2 class="text-center">Manage</h2>
 	<profileview user='vm.userProfile' viewingself='true'></profileview>
-	<joblist jobs='vm.jobs' manage='true'></joblist>
+	Search: <input ng-model="vm.searchText">
+	<joblist jobs='vm.jobs' searchtext='vm.searchText' manage='true'></joblist>
 </div>

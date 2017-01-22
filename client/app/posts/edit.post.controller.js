@@ -11,6 +11,7 @@
     vm.authService = authService;
     vm.job = {};
     vm.state = 'edit';
+    vm.categories = globalFunc.categories;
 
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;

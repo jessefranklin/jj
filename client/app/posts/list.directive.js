@@ -8,9 +8,10 @@
         replace: true,
         scope: {
           jobs: '=',
-          searchtext:'='
+          searchtext:'=',
+          manage: '='
         },
-        template: "<ul><jobdetail ng-repeat='job in jobs|filter:searchtext' job='job'></jobdetail></ul>"
+        template: "<ul><jobdetail ng-repeat='job in jobs | filter : searchtext' job='job' manage='manage'></jobdetail></ul>"
       };
     })
 
@@ -19,7 +20,8 @@
         restrict: "E",
         replace: true,
         scope: {
-          job: '='
+          job: '=',
+          manage: '='
         },
         templateUrl: "app/posts/list.template.html",
         link: function (scope, element, attrs) {
