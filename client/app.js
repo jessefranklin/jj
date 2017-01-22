@@ -41,7 +41,7 @@
         url: 'post',
         views : {
           'content@' : {
-              templateUrl: 'app/posts/post-form.html',
+              templateUrl: 'app/posts/manage/post-form.html',
               controller: 'postCtrl',
               controllerAs: 'vm'
           }
@@ -51,7 +51,7 @@
         url: 'detail/:id',
         views : {
           'content@' : {
-              templateUrl: 'app/posts/detail.html',
+              templateUrl: 'app/posts/manage/detail.html',
               controller: 'detailCtrl',
               controllerAs: 'vm'
           }
@@ -61,7 +61,7 @@
         url: 'list/',
         views : {
           'content@' : {
-              templateUrl: 'app/posts/list.html',
+              templateUrl: 'app/posts/find.list.html',
               controller: 'listCtrl',
               controllerAs: 'vm'
           }
@@ -71,7 +71,7 @@
         url: 'edit/:id',
         views : {
           'content@' : {
-              templateUrl: 'app/posts/post-form.html',
+              templateUrl: 'app/posts/manage/post-form.html',
               controller: 'editPostCtrl',
               controllerAs: 'vm'
           }
@@ -81,7 +81,7 @@
         url: 'manage',
         views : {
           'content@' : {
-              templateUrl: 'app/posts/manage.html',
+              templateUrl: 'app/posts/manage.list.html',
               controller: 'manageCtrl',
               controllerAs: 'vm'
           }

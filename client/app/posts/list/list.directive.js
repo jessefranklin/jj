@@ -23,7 +23,7 @@
           job: '=',
           manage: '='
         },
-        templateUrl: "app/posts/list.template.html",
+        templateUrl: "app/posts/list/list.template.html",
         link: function (scope, element, attrs) {
           if (angular.isArray(scope.job.children)) {
             element.append("<joblist joblist='job.children'></joblist>");

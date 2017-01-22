@@ -8,7 +8,7 @@
         scope: {
           user: '='
         },
-        templateUrl: 'app/posts/profile.template.html'
+        templateUrl: 'app/profile/profile.template.html'
       };
     });
 
