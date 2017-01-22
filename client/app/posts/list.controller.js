@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('listCtrl',  ['jobsService','authService',listController]);
+    .controller('listCtrl',  ['jobsService','authService','myservice',listController]);
 
-  listController.$inject = ['jobsService','authService'];
+  listController.$inject = ['jobsService','authService','myservice'];
 
-  function listController(jobsService,authService) {
+  function listController(jobsService,authService,myservice) {
     var vm = this;
     vm.authService = authService;
     vm.markers = {};

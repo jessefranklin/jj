@@ -6,7 +6,7 @@
       return {
         restrict: "E",
         scope: {
-          jobs: '='
+          searchtext:'='
         },
         controller: 'mapCtrl',
         controllerAs: 'vm',

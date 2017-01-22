@@ -1,4 +1,3 @@
 <div id="map"></div>
-<div id="class" ng-repeat="marker in markers | orderBy : 'title'">
-     <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
-</div>
+<div id="class" ng-repeat="marker in vm.markers"></div>
+<span ng-repeat="x in nas = (markerdata  | filter:searchtext )"></span>

@@ -1,6 +1,6 @@
 <div class="container">
-
-  <h2 class="text-center">List</h2>
-	<mapapp></mapapp>
-	<joblist jobs='vm.jobs'></joblist>
+  	<h2 class="text-center">List</h2>
+	<mapapp searchtext='vm.searchText'></mapapp>
+	Search: <input ng-model="vm.searchText">
+	<joblist jobs='vm.jobs' searchtext='vm.searchText'></joblist>
 </div>

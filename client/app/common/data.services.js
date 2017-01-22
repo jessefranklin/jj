@@ -2,7 +2,8 @@
 
   angular
     .module('app')
-    .factory('jobsService', ['$http','$q', jobsService]);
+    .factory('jobsService', ['$http','$q', jobsService])
+    .factory('myservice',['$http','$q', myservice]);
 
   jobsService.$inject = ['$http','$q'];
 
@@ -25,6 +26,18 @@
       },
       delete : function(id) {
         return $http.delete('/api/jobs/' + id);
+      }
+    };
+  }
+
+  function myservice(){
+    var myjsonObj = null;
+    return {
+      getJson:function(){
+        return myjsonObj;
+      },
+      setJson:function(value){
+        myjsonObj = value;
       }
     };
   }

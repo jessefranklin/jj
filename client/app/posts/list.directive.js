@@ -7,9 +7,10 @@
         restrict: "E",
         replace: true,
         scope: {
-          jobs: '='
+          jobs: '=',
+          searchtext:'='
         },
-        template: "<ul><jobdetail ng-repeat='job in jobs' job='job'></jobdetail></ul>"
+        template: "<ul><jobdetail ng-repeat='job in jobs|filter:searchtext' job='job'></jobdetail></ul>"
       };
     })
 

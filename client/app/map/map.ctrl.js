@@ -2,13 +2,14 @@
 
   angular
     .module('app.map')
-    .controller('mapCtrl', ['jobsService','mapoptions','geoservices',mapController]);
+    .controller('mapCtrl', ['$scope','$timeout','jobsService','mapoptions','geoservices',mapController]);
 
-  mapController.$inject = ['jobsService','mapoptions','geoservices'];
+  mapController.$inject = ['$scope','$timeout','jobsService','mapoptions','geoservices'];
 
-  function mapController(jobsService,mapoptions,geoservices) {
+  function mapController($scope,$timeout,jobsService,mapoptions,geoservices) {
     var vm = this;
-    vm.markers = {};
+    vm.markers = [];
+    vm.searchtext = '';
 
     var location = JSON.parse(localStorage.getItem('location'));
 
@@ -19,7 +20,6 @@
     };
 
     vm.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    vm.markers = [];
     
     var infoWindow = new google.maps.InfoWindow();
     var image = 'img/green-flag.png';
@@ -48,12 +48,23 @@
 
     jobsService.get()
       .then(function(data){
+        $scope.markerdata = data.data;
         for (i = 0; i < data.data.length; i++){
             newMarker(data.data[i]);
         }
     });
     
-    
+    $scope.$watch('nas',
+        function (newValue, oldValue) {
+            for (jdx in vm.markers) {
+                vm.markers[jdx].setMap(null);
+            }
+            vm.markers = [];
+            for (idx in $scope.nas) {
+                newMarker($scope.nas[idx]);
+            }
+    }, true);
+
   }
 
 }());
