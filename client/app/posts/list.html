@@ -1,13 +1,6 @@
 <div class="container">
 
   <h2 class="text-center">List</h2>
-	
-  	<div id="map_canvas">
-	    <ui-gmap-google-map center="vm.map.center" zoom="vm.map.zoom" options="vm.options">
-	     	<ui-gmap-marker ng-repeat="m in vm.jobs.location" coords="m" icon="m.icon" idkey="m.id"></ui-gmap-marker>
-	    </ui-gmap-google-map>
-	</div>
-
+	<mapapp></mapapp>
 	<joblist jobs='vm.jobs'></joblist>
-
 </div>

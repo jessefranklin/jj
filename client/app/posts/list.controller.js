@@ -2,26 +2,17 @@
 
   angular
     .module('app.post')
-    .controller('listCtrl',  ['jobsService','authService','uiGmapGoogleMapApi',listController]);
+    .controller('listCtrl',  ['jobsService','authService','uiGmapIsReady','uiGmapGoogleMapApi','geoservices',listController]);
 
-  listController.$inject = ['jobsService','authService','uiGmapGoogleMapApi'];
+  listController.$inject = ['jobsService','authService','uiGmapIsReady','uiGmapGoogleMapApi','geoservices'];
 
-  function listController(jobsService,authService,uiGmapGoogleMapApi) {
+  function listController(jobsService,authService,uiGmapIsReady,uiGmapGoogleMapApi,geoservices) {
     var vm = this;
     vm.authService = authService;
+    vm.markers = {};
 
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
-    });
-
-    vm.map = {
-      center: { latitude:43.6392556, longitude: -79.4445523},
-      markers: [],
-      zoom: 14
-    };
-
-    uiGmapGoogleMapApi.then(function(maps) {
-      vm.options = { scrollwheel: false} ;
     });
 
     jobsService.get()

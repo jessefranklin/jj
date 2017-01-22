@@ -4,19 +4,17 @@
 
   angular
     .module('app')
-    .controller('homeCtrl', HomeController);
+    .controller('homeCtrl',['authService','geoservices', HomeController]);
 
-  HomeController.$inject = ['authService'];
+  HomeController.$inject = ['authService','geoservices'];
 
-  function HomeController(authService) {
-
+  function HomeController(authService,geoservices) {
     var vm = this;
     vm.authService = authService;
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
     });
-    
 
+    geoservices.getCurrentLocation();
   }
-
 }());

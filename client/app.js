@@ -8,7 +8,9 @@
       'angular-jwt',
       //angular
       'ui.router',
+
       //Custom Modules
+      'app.map',
       'app.post'
     ])
     .config(config);
