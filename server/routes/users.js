@@ -39,9 +39,8 @@ module.exports = function (app) {
         });
     });
 
-    // Edit job
+    // Remove job from user array
     app.put('/api/userjobs/:id', function (req, res) {
-    	console.log(req.body);
 		var query = {'user_id':req.params.id},
 		update = {
 			"$pull": { 'jobs': { 'job_id':req.body.job_id }}
