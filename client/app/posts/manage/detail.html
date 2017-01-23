@@ -1,22 +1,21 @@
 <div class="container">
   <h2 class="text-center">Details</h2>
-  	{{vm.job}}
 	<div class="row marketing">
-	  <h1>{{vm.job.title}}</h1>
-	  <h2>{{vm.job.service_name}}</h2>
-	  <p>{{vm.job.service_description}}</p>
-	  <p ng-show="jobs.cost.type === 'hr'">
-	  	${{vm.job.cost.amount}}/{{vm.job.cost.type}} for {{vm.job.cost.hours}} hours.
-	  </p>
-	  <p ng-show="jobs.cost.type === 'fixed'">
-	  	${{vm.job.cost.amount}} {{vm.job.cost.type}} cost for {{vm.job.cost.hours}} hours of service.
-	  </p>
-	  <h3>{{vm.job.dateRequired}}</h3>
-	  <p>{{vm.job.serviceDesc}}<br />
-	  	{{vm.job.location.majorIntersection}}
-	  </p>
-	  <p>{{vm.job.category}}</p>
+		<div class="header">
+		  	<div class="cost">${{vm.job.cost.total_amount}}</div>
+	  		<p>{{vm.job.service_category}}</p>
+		  	<h1> - {{vm.job.title}}</h1>
+		  	<h2>{{vm.job.service_name}}</h2>
+		  	<div ng-repeat="image in vm.job.image">
+			    <img ng-src="{{vm.image_path}}{{image.image_path}}" />
+			</div>
 
+		  	<img ng-src=="{{vm.job.image.image_name}}">
+	  	</div>
+	  	<p>{{vm.job.service_description}}</p>
+	  	<h3>{{vm.job.request.time_range}}  {{vm.job.request.date_required}} - {{vm.job.request.date_fulfillment_by}}</h3>
+	  	{{vm.job.location.address}}
+	  	{{vm.job.cost.hours}}
 
 	  <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.userProfile.user_id == job.owner">Edit Post</a>
 

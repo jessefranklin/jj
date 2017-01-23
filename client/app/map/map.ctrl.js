@@ -9,8 +9,7 @@
   function mapController($scope,$timeout,jobsService,mapoptions,geoservices) {
     var vm = this;
     vm.markers = [];
-    vm.searchtext = '';
-
+    vm.searchtext = [];
     var location = JSON.parse(localStorage.getItem('location'));
 
     var mapOptions = {
@@ -27,11 +26,11 @@
         var marker = new google.maps.Marker({
             map: vm.map,
             icon: image,
-            label: '$300',
+            label: '$'+info.cost.total_amount,
             position: new google.maps.LatLng(info.location.lat, info.location.long),
             title: info.title
         });
-        marker.content = '<div class="infoWindowContent">$3000' + info.service_name + '</div>';
+        marker.content = '<div class="infoWindowContent">' + '$'+info.cost.total_amount +'<br/>'+ info.service_name + '</div>';
         
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content + '<br/><a href="/detail/'+info._id+'" class="button"><i class="icon-plus"></i>Do it</a>');
@@ -53,6 +52,7 @@
             newMarker(data.data[i]);
         }
     });
+
     
     $scope.$watch('nas',
         function (newValue, oldValue) {

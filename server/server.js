@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads/');
+        cb(null, './client/uploads/');
     },
     filename: function (req, file, cb) {
         var datetimestamp = Date.now();
@@ -71,18 +71,21 @@ var upload = multer({
 
 app.post('/upload', function(req, res) {
     upload(req,res,function(err){
+        console.log(req.file);
         if(err){
             console.log(err);
             res.json({error_code:1,err_desc:err});
             return;
         }
-        res.json({error_code:0,err_desc:null});
+        res.json({error_code:0,err_desc:err,data:req.file});
     });
 });
 
 app.use( fileServer( __dirname+'/../client' ));
 require('./models/db');
 require('./routes/jobs')(app);
+require('./routes/users')(app);
+require('./routes/request')(app);
 
 app.use(function(req, res) {
   res.sendFile(path.join(__dirname, '/../client', 'index.html'));

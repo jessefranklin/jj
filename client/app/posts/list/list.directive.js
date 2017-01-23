@@ -23,6 +23,8 @@
           job: '=',
           manage: '='
         },
+        controller: 'manageCtrl',
+        controllerAs: 'vm',
         templateUrl: "app/posts/list/list.template.html",
         link: function (scope, element, attrs) {
           if (angular.isArray(scope.job.children)) {

@@ -21,7 +21,7 @@
         }
       })
       .value('globalFunc', {
-        uploadPath : 'http://localhost:3010/upload',
+        uploadPath : 'http://localhost:3000/uploads/',
         categories : [{
           name:'labour'
         },{

@@ -50,12 +50,12 @@ module.exports = function (app) {
 
     // Delete job
     app.delete('/api/jobs/:id', function (req, res) {
-		console.log(req);
         JobModel.remove({
-			_id: req.params._id
+			_id: req.params.id
         },function(err, jobs) {
 			if (err) res.send(err);
 			console.log(jobs);
+			res.json('completed');
         });
     });
 

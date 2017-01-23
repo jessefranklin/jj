@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('listCtrl',  ['jobsService','authService','myservice',listController]);
+    .controller('listCtrl',  ['jobsService','authService',listController]);
 
-  listController.$inject = ['jobsService','authService','myservice'];
+  listController.$inject = ['jobsService','authService'];
 
-  function listController(jobsService,authService,myservice) {
+  function listController(jobsService,authService) {
     var vm = this;
     vm.authService = authService;
 
@@ -18,6 +18,7 @@
       .then(function(data){
         vm.jobs = data.data;
     });
+
   }
 
 }());
