@@ -18,9 +18,9 @@ module.exports = function (app) {
 		});
     });
 
-    // Get job by id
+    // Get user by owner
     app.get('/api/user/:id', function (req, res) {
-        UserModel.find({_id:req.params.id},function(err, users) {
+        UserModel.find({'user_id':req.params.id},function(err, users) {
 			if(err) res.send(err);
 			res.json(users);
         });
@@ -28,14 +28,27 @@ module.exports = function (app) {
 
     // Edit job
     app.put('/api/user/:id', function (req, res) {
-		var query = {_id:req.params.id},
+		var query = {'user_id':req.params.id},
 		update = {
 			"$set": req.body
 		},
 		options = { "multi": true };
         UserModel.update(query, update, options, function(err, users) {
 			if(err) res.send(err);
-			console.log(req.body);
+			res.json(users);
+        });
+    });
+
+    // Edit job
+    app.put('/api/userjobs/:id', function (req, res) {
+    	console.log(req.body);
+		var query = {'user_id':req.params.id},
+		update = {
+			"$pull": { 'jobs': { 'job_id':req.body.job_id }}
+		},
+		options = { "multi": true };
+        UserModel.update(query, update, options, function(err, users) {
+			if(err) res.send(err);
 			res.json(users);
         });
     });
