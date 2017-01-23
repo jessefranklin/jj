@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('editPostCtrl',['jobsService','authService', '$state','$location','globalFunc', editPostController]);
+    .controller('editPostCtrl',['jobsService','authService','Upload', '$state','$location','globalFunc', editPostController]);
 
-  editPostController.$inject = ['jobsService','authService', '$state','$location','globalFunc'];
+  editPostController.$inject = ['jobsService','authService','Upload', '$state','$location','globalFunc'];
 
-  function editPostController(jobsService,authService,$state,$location,globalFunc) {
+  function editPostController(jobsService,authService,Upload,$state,$location,globalFunc) {
     var vm = this, geocoder;
     vm.authService = authService;
     vm.job = {};
@@ -21,6 +21,7 @@
       .then(function(data){
         vm.job = data.data[0];
         vm.job.request.date_required = new Date(vm.job.request.date_required);
+        vm.job.request.date_fulfillment_by = new Date(vm.job.request.date_fulfillment_by);
     });
 
     vm.addJob = function(){
@@ -40,6 +41,24 @@
         }
       });
     };
+
+    vm.upload = function (file) {
+        Upload.upload({
+            url: 'http://localhost:3010/upload',
+            data: {file:file}
+        }).then(function (resp) {
+            if(resp.data.error_code === 0){
+              vm.job.image = {
+                image_name : resp.data.data.originalname,
+                image_path : resp.data.data.filename
+              };
+              vm.submitForm();
+            } else {
+              console.log('an error occured '+ resp);
+            }
+        });
+    };
+
    
     vm.submitForm = function(){
       jobsService.update(vm.job._id, vm.job)

@@ -8,7 +8,7 @@
 <div class="form-group row">
   <label for="title-input" class="col-2 col-form-label">Title</label>
   <div class="col-10">
-    <input class="form-control" ng-model="vm.job.title" type="text" value="Title" id="title-input">
+    <input class="form-control" ng-model="vm.job.title" type="text" placeholder="Title for post" id="title-input">
   </div>
 </div>
 <div class="form-group row">
@@ -26,7 +26,7 @@
 <div class="form-group row">
   <label for="service-category-select" class="col-2 col-form-label">Service Category</label>
   <div class="col-10">
-    <select class="form-control" ng-model="vm.job.service_category" id="service-category-select">
+    <select class="form-control"  ng-init="vm.job.service_category = 'labour'" ng-model="vm.job.service_category" id="service-category-select">
 		<option ng-repeat="cat in vm.categories" value="{{cat.name}}">
 			{{cat.name}}
 		</option>
@@ -44,7 +44,7 @@
 <div class="form-group row">
   <label for="date-input" class="col-2 col-form-label">Date Required</label>
   <div class="col-10">
-    <input class="form-control" ng-model="vm.job.request.date_required" placeholder="Date Required" type="date" value="2011-08-19" id="date-input">
+    <input class="form-control" ng-model="vm.job.request.date_required" type="date" value="2011-08-19" id="date-input">
   </div>
 </div>
 
@@ -63,7 +63,7 @@
 <div class="form-group row" ng-if="vm.job.request.time_range === 'specified'">
   <label for="time-input" class="col-2 col-form-label">Specify Time:</label>
   <div class="col-10">
-    <input class="form-control" ng-model="vm.job.request.time_required" type="time" value="2011-08-19" id="time-input">
+    <input class="form-control" ng-model="vm.job.request.time_required" type="time" id="time-input">
   </div>
 </div>
 
@@ -75,24 +75,9 @@
 <div class="form-group row" ng-if="vm.job.request.expire_post">
   <label for="date-end-input" class="col-2 col-form-label">Date Fulfilled by:</label>
   <div class="col-10">
-    <input class="form-control" ng-model="vm.job.request.date_fulfillment_by" placeholder="Date Required by:" type="date" value="2011-08-19" id="date-end-input"> 
+    <input class="form-control" ng-model="vm.job.request.date_fulfillment_by" type="date" id="date-end-input"> 
   </div>
 </div>
-
-<!-- <div class="form-group row">
-  <label for="time-input" class="col-2 col-form-label">Time</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.request.time_required" type="time" value="13:45:00" id="time-input">
-  </div>
-</div>
- -->
-<!-- <div class="form-group row">
-  <label for="tel-input" class="col-2 col-form-label">Telephone</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.owner_meta.telephone" type="type" id="tel-input">
-  </div>
-</div>
- -->
 
 <div class="form-group row">
   <label for="cost-type-input" class="col-2 col-form-label">Cost type</label>
@@ -105,14 +90,18 @@
 <div class="form-group row">
   <label for="hours-input" class="col-2 col-form-label">Est. Hours of Service</label>
   <div class="col-10">
-    <input class="form-control" ng-model="vm.job.cost.hours" type="text" id="hours-input">
+    <input class="form-control" ng-model="vm.job.cost.hours" 
+    ng-value="vm.job.cost.arrange === 'hr'?'0':''"
+    type="number" id="hours-input">
   </div>
 </div>
 
 <div class="form-group row" ng-if="vm.job.cost.arrange === 'hr'">
   <label for="amount-input" class="col-2 col-form-label">Rate</label>
   <div class="col-10">
-    <input class="form-control" ng-model="vm.job.cost.rate" type="text" id="amount-input">
+    <input class="form-control" ng-model="vm.job.cost.rate" 
+    ng-value="vm.job.cost.arrange === 'hr'?'0':''"
+    type="number" id="amount-input">
     <span ng-if="vm.job.cost.arrange === 'hr'">/hr.</span>
   <span ng-if="vm.job.cost.arrange === 'fixed'">Fixed Cost Total</span>
   </div>
@@ -121,8 +110,9 @@
 <div class="form-group row">
   <label for="amount-input" class="col-2 col-form-label">Amount</label>
   <div class="col-10">
-    <input class="form-control" ng-disabled="vm.job.cost.arrange === 'hr'" ng-model="vm.job.cost.total_amount" type="text" 
-    ng-value="vm.job.cost.arrange === 'hr'?vm.job.cost.hours*vm.job.cost.rate:''"
+    <input class="form-control" ng-disabled="vm.job.cost.arrange === 'hr'" \
+    ng-model="vm.job.cost.total_amount" type="number" 
+    ng-value="vm.job.cost.arrange === 'hr'?(vm.job.cost.hours*vm.job.cost.rate):''"
     id="amount-input">
     <span ng-if="vm.job.cost.arrange === 'hr'">/hr. total</span>
 	   <span ng-if="vm.job.cost.arrange === 'fixed'">Fixed Cost Total</span>

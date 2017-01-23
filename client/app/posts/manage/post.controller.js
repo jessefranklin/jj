@@ -39,14 +39,15 @@
 
     vm.upload = function (file) {
         Upload.upload({
-            url: globalFunc.uploadPath,
+            url: 'http://localhost:3010/upload',
             data: {file:file}
         }).then(function (resp) {
+            console.log(resp.data.data);
             if(resp.data.error_code === 0){
-              console.log('Success '+resp.config.data.file.name);
+              console.log('Success '+resp.data.data);
               vm.job.image = {
-                image_name : resp.config.data.file.name,
-                image_path : globalFunc.uploadPath
+                image_name : resp.data.data.originalname,
+                image_path : resp.data.data.filename
               };
               vm.submitForm();
             } else {
