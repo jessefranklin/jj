@@ -21,6 +21,9 @@
       },
       delete : function(id) {
         return $http.delete('/api/request/' + id);
+      },
+      addToJob : function(id, applicant) {
+        return $http.put('/api/jobapply/' + id, applicant);
       }
     };
   }

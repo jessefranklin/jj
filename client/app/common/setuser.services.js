@@ -9,37 +9,38 @@
       var vm = this;
       vm.userProfile = {};
 
-      var addToUser = function(userProfile,userData){
+      var addToUser = function(userProfile,userData,type){
         vm.userProfile = userProfile;
         userService.getById(userProfile.user_id)
           .then(function(data) {
               if(data.data.length){
                 vm.user_data = data.data;
-                updateUser(userProfile.user_id,userData);
+                updateUser(userProfile.user_id,userData,type);
               } else {
-                createUser(userData);
+                createUser(userData,type);
               }
           });
       },
 
-      createUser=function(userData){
+      createUser=function(userData,type){
         vm.user_data = {
           user_id: vm.userProfile.user_id,
           name: vm.userProfile.name,
           email: vm.userProfile.email || null,
           picture: vm.userProfile.picture,
           role: 'employer',
-          status: 'active',
+          status: 'active'
         };
-        vm.user_data.jobs = userData;
+        vm.user_data[type] = userData;
         userService.create(vm.user_data)
           .then(function(data) {
               console.log('user created');
           });
       },
 
-      updateUser=function(user_id,userData){
-        vm.user_data[0].jobs[vm.user_data[0].jobs.length]=userData;
+      updateUser=function(user_id,userData,type){
+        var x = vm.user_data[0][type]?vm.user_data[0][type].length:0;
+        vm.user_data[0][type][x]=userData;
         userService.update(user_id,vm.user_data[0])
           .then(function(data) {
               console.log('update user');

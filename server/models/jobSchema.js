@@ -42,8 +42,8 @@ var jobSchema = new Schema({
 		image_path: String
 	}],
 	applicants: [{
-		status: String,
-		id: Number
+		applicant_id: String,
+		status: String
 	}],
 	created_at: { type : Date, default: Date.now }
 });

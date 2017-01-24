@@ -48,6 +48,20 @@ module.exports = function (app) {
         });
     });
 
+    // Add applicant
+    app.put('/api/jobapply/:id', function (req, res) {
+        JobModel.findByIdAndUpdate(
+			req.params.id,
+			{$push: {"applicants": req.body }},
+			{safe: true, upsert: true},
+			function(err, jobs) {
+				if(err) res.send(err);
+				console.log(req.body);
+				res.json(jobs);
+			}
+        );
+    });
+
     // Delete job
     app.delete('/api/jobs/:id', function (req, res) {
         JobModel.remove({

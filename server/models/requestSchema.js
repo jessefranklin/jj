@@ -18,6 +18,7 @@ var requestSchema = new Schema({
 	title: String,
 	completed: Boolean,
 	archived: Boolean,
+	active: Boolean,
 	created_at: { type : Date, default: Date.now }
 });
 

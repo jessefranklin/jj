@@ -12,6 +12,10 @@ var userSchema = new Schema({
 		job_id: String,
 		title: String
 	}],
+	requests : [{
+		request_id: String,
+		title: String
+	}],
 	created_at: { type : Date, default: Date.now }
 });
 
