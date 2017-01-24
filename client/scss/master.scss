@@ -1,12 +1,30 @@
-$someColor: #ff0000;
+@import "profile";
 
-h1 {
-	color: $someColor;
-	font-size: 40px;
-	font-weigth: 200;
-	span {
-		font-size: 12px;
-	} 
+
+.navbar-default {
+	background-color:rgba(#fafafa,0.8);
 }
 
-.angular-google-map-container { height: 400px; }
+#map { height: 400px; }
+
+.navbar-toggle {
+	padding: 0 10px;
+}
+
+.post-image {
+	width: 200px;
+}
+
+#shell-content {
+	padding: 60px 0 120px;
+}
+
+img {
+	max-width: 100%;
+}
+
+.navbar-fixed-bottom {
+	background-color:rgba(#fafafa,0.8);
+	padding: 5px;
+	min-height: auto;
+}

@@ -1,153 +1,154 @@
-<div class="jumbotron">
-  <h2>{{vm.state}} Job</h2>
 
 <div class="container">
-<input type="hidden" ng-model="vm.job.status" value="draft" />
-<input type="hidden" ng-model="vm.job.request.active" value="false" />
-
-<div class="form-group row">
-  <label for="title-input" class="col-2 col-form-label">Title</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.title" type="text" placeholder="Title for post" id="title-input">
+  <div class="jumbotron">
+    <h1>{{vm.state}} Job</h1>
   </div>
-</div>
-<div class="form-group row">
-  <label for="service-name-input" class="col-2 col-form-label">Service Name</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.service_name" type="text" placeholder="Service Required" id="service-name-input">
+  <div class="group">
+    <div class="row">
+      <div class="six columns">
+        <label for="title-input" class="col-2 col-form-label">Title</label>
+        <input class="form-control" ng-model="vm.job.title" type="text" placeholder="Title for post" id="title-input">
+      </div>
+      <div class="six columns">
+        <label for="service-name-input" class="col-2 col-form-label">Service Name</label>
+        <input class="form-control" ng-model="vm.job.service_name" type="text" placeholder="Service Required" id="service-name-input">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="service-description-input" class="col-2 col-form-label">Service Description</label>
+      <div class="col-10">
+      	<textarea class="form-control" id="service-description-input" ng-model="vm.job.service_description" placeholder="Service Description"/></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="service-category-select" class="col-2 col-form-label">Service Category</label>
+      <div class="col-10">
+        <select class="form-control"  ng-init="vm.job.service_category = 'labour'" ng-model="vm.job.service_category" id="service-category-select">
+    		<option ng-repeat="cat in vm.categories" value="{{cat.name}}">
+    			{{cat.name}}
+    		</option>
+    	</select>
+      </div>
+    </div>
   </div>
-</div>
-<div class="form-group row">
-  <label for="service-description-input" class="col-2 col-form-label">Service Description</label>
-  <div class="col-10">
-  	<textarea class="form-control" id="service-description-input" ng-model="vm.job.service_description" placeholder="Service Description"/></textarea>
+
+  <div class="group">
+    <div class="form-group row">
+      <label for="address-input" class="col-2 col-form-label">Address</label>
+      <div class="col-10">
+      	<input class="form-control" type="text" id="address-input" ng-model="vm.job.location.address" placeholder="address" required ng-Autocomplete />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="six columns">
+        <label for="date-input" class="col-2 col-form-label">Date Required</label>
+        <input class="form-control" ng-model="vm.job.request.date_required" type="date" value="2011-08-19" id="date-input">
+      </div>
+
+      <div class="six columns">
+        <label for="time-range-input" class="col-2 col-form-label">Time Range:</label>
+        <select class="form-control" ng-init="vm.job.request.time_range = 'anytime'" ng-model="vm.job.request.time_range" id="time-range-input">
+          <option value="anytime">Any</option>
+          <option value="morning">Morning</option>
+          <option value="afternoon">Afternoon</option>
+          <option value="specified">Specific Time</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row" ng-if="vm.job.request.time_range === 'specified'">
+      <label for="time-input" class="col-2 col-form-label">Specify Time:</label>
+      <input class="form-control" ng-model="vm.job.request.time_required" type="time" id="time-input">
+      </div>
+
+      <label for="expire">
+      <input type="checkbox" ng-model="vm.job.request.expire_post" id="expire">
+      <span class="label-body">Expire post if not fulfilled by:</span>
+    </label>
+
+    <div class="row" ng-if="vm.job.request.expire_post">
+      <label for="date-end-input" class="col-2 col-form-label">Date Fulfilled by:</label>
+      <div class="col-10">
+        <input class="form-control" ng-model="vm.job.request.date_fulfillment_by" type="date" id="date-end-input"> 
+      </div>
+    </div>
   </div>
-</div>
-<div class="form-group row">
-  <label for="service-category-select" class="col-2 col-form-label">Service Category</label>
-  <div class="col-10">
-    <select class="form-control"  ng-init="vm.job.service_category = 'labour'" ng-model="vm.job.service_category" id="service-category-select">
-		<option ng-repeat="cat in vm.categories" value="{{cat.name}}">
-			{{cat.name}}
-		</option>
-	</select>
+
+  <div class="group">
+    <div class="row">
+      <div class="columns">
+        <label for="cost-type-input" class="col-2 col-form-label">Cost type</label>
+        <select class="form-control" ng-init="vm.job.cost.arrange = 'fixed'"  ng-model="vm.job.cost.arrange" id="cost-type-input">
+      		<option value="fixed">Fixed Cost</option>
+          <option value="hr">Per Hour</option>
+      	</select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="six columns">
+        <label for="hours-input" class="col-2 col-form-label">Est. Hours of Service</label>
+        <input class="form-control" ng-model="vm.job.cost.hours" 
+          ng-value="vm.job.cost.arrange === 'hr'?'0':''"
+          type="number" id="hours-input">
+      </div>
+      <div  class="six columns" ng-if="vm.job.cost.arrange === 'hr'">
+        <label for="amount-input" class="col-2 col-form-label">Rate</label>
+        <input class="form-control" ng-model="vm.job.cost.rate" 
+          ng-value="vm.job.cost.arrange === 'hr'?'0':''"
+          type="number" id="amount-input">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="amount-input" class="col-2 col-form-label">Total Cost</label>
+      <div class="col-10">
+        <input class="form-control" ng-disabled="vm.job.cost.arrange === 'hr'" \
+        ng-model="vm.job.cost.total_amount" type="number" 
+        ng-value="vm.job.cost.arrange === 'hr'?(vm.job.cost.hours*vm.job.cost.rate):''"
+        id="amount-input">
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="form-group row">
-  <label for="address-input" class="col-2 col-form-label">Address</label>
-  <div class="col-10">
-  	<input class="form-control" type="text" id="address-input" ng-model="vm.job.location.address" placeholder="address" required ng-Autocomplete />
+
+  <div class="group">
+    <form name="vm.upload_form" flow-init="{target: './uploads'}">
+    		<label for="image-upload" class="col-2 col-form-label">Images</label>
+    		<input 
+    		type="file" 
+    		ng-model="vm.file" 
+    		name="file" 
+    		ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" id="image-upload" flow-btn />
+    		<i ng-show="vm.upload_form.file.$error.maxSize">File too large {{vm.file.size / 1000000|number:1}}</i>
+    		
+
+        <div class="row" >
+          <div class="col-xs-6 col-md-3" ng-repeat="file in $flow.files">
+            <a href="#" class="thumbnail">
+              <img class="post-image" flow-img="file" />
+            </a>
+          </div>
+        </div>
+
+    </form>
   </div>
-</div>
 
-<div class="form-group row">
-  <label for="date-input" class="col-2 col-form-label">Date Required</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.request.date_required" type="date" value="2011-08-19" id="date-input">
+      <div class="">
+        <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === job.owner">Publish</a>
+
+        <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === job.owner">Publish</a>
+
+        <input type="button" ng-if="vm.state === 'edit'" ng-click="vm.addJob()" value="save" />
+
+        <input type="button" ng-if="vm.state === 'edit'" ng-click="vm.addJob(true)" value="save and view post" />
+
+        <input type="button" ng-if="vm.state !='edit'" ng-click="vm.addJob()" value="add job" />
+      </div>
+
+  	</div>
   </div>
-</div>
-
-<div class="form-group row">
-  <label for="time-range-input" class="col-2 col-form-label">Time Range:</label>
-  <div class="col-10">
-    <select class="form-control" ng-init="vm.job.request.time_range = 'anytime'" ng-model="vm.job.request.time_range" id="time-range-input">
-      <option value="anytime">Any</option>
-      <option value="morning">Morning</option>
-      <option value="afternoon">Afternoon</option>
-      <option value="specified">Specific Time</option>
-    </select>
-  </div>
-</div>
-
-<div class="form-group row" ng-if="vm.job.request.time_range === 'specified'">
-  <label for="time-input" class="col-2 col-form-label">Specify Time:</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.request.time_required" type="time" id="time-input">
-  </div>
-</div>
-
-<div class="form-group row">
-  <label for="expire" class="col-2 col-form-label">Expire post if not fulfilled by:</label>
-  <input class="form-control" type="checkbox" ng-model="vm.job.request.expire_post" id="expire">
-</div>
-
-<div class="form-group row" ng-if="vm.job.request.expire_post">
-  <label for="date-end-input" class="col-2 col-form-label">Date Fulfilled by:</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.request.date_fulfillment_by" type="date" id="date-end-input"> 
-  </div>
-</div>
-
-<div class="form-group row">
-  <label for="cost-type-input" class="col-2 col-form-label">Cost type</label>
-  <select class="form-control" ng-init="vm.job.cost.arrange = 'fixed'"  ng-model="vm.job.cost.arrange" id="cost-type-input">
-		<option value="fixed">Fixed Cost</option>
-    <option value="hr">Per Hour</option>
-	</select>
-</div>
-
-<div class="form-group row">
-  <label for="hours-input" class="col-2 col-form-label">Est. Hours of Service</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.cost.hours" 
-    ng-value="vm.job.cost.arrange === 'hr'?'0':''"
-    type="number" id="hours-input">
-  </div>
-</div>
-
-<div class="form-group row" ng-if="vm.job.cost.arrange === 'hr'">
-  <label for="amount-input" class="col-2 col-form-label">Rate</label>
-  <div class="col-10">
-    <input class="form-control" ng-model="vm.job.cost.rate" 
-    ng-value="vm.job.cost.arrange === 'hr'?'0':''"
-    type="number" id="amount-input">
-    <span ng-if="vm.job.cost.arrange === 'hr'">/hr.</span>
-  <span ng-if="vm.job.cost.arrange === 'fixed'">Fixed Cost Total</span>
-  </div>
-</div>
-
-<div class="form-group row">
-  <label for="amount-input" class="col-2 col-form-label">Amount</label>
-  <div class="col-10">
-    <input class="form-control" ng-disabled="vm.job.cost.arrange === 'hr'" \
-    ng-model="vm.job.cost.total_amount" type="number" 
-    ng-value="vm.job.cost.arrange === 'hr'?(vm.job.cost.hours*vm.job.cost.rate):''"
-    id="amount-input">
-    <span ng-if="vm.job.cost.arrange === 'hr'">/hr. total</span>
-	   <span ng-if="vm.job.cost.arrange === 'fixed'">Fixed Cost Total</span>
-  </div>
-</div>
-
-<form name="vm.upload_form">
-	<div flow-init="{target: './uploads'}" >
-		<label for="image-upload" class="col-2 col-form-label">Images</label>
-		<div class="col-10">
-		<input 
-		type="file" 
-		ngf-select 
-		ng-model="vm.file" 
-		name="file" 
-		ngf-pattern="'image/*'"
-		accept="image/*" 
-		ngf-max-size="20MB" 
-		id="image-upload"
-		flow-btn />
-		
-		<i ng-show="vm.upload_form.file.$error.maxSize">File too large {{vm.file.size / 1000000|number:1}}</i>
-
-		<div ng-repeat="file in $flow.files">
-		    <img flow-img="file" />
-		</div>
-		</div>
-	</div>
-</form>
-
-  <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === job.owner">Publish</a>
-  <input type="button" ng-click="vm.addJob(vm.job)" value="add job" />
-  <br />
-  <br />
-	{{vm.job | json}}
-	</div>
-</div>
 </div>
