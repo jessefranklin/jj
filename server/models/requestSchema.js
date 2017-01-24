@@ -2,14 +2,19 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var requestSchema = new Schema({
+	job_id: String,
+	job_owner_id: String,
+	provider_id: String,
+	provider_date: Date,
+	provider_name: String,
+	rating: String,
+	bid: Number,
+	status: String,
+	stage: Number,
+	comment: String,
 	title: String,
-	service_name: String,
-	service_description: String,
-	service_category: String,
-	owner: String,
-	owner_meta : {
-		telephone: Number
-	},
+	completed: Boolean,
+	archived: Boolean,
 	created_at: { type : Date, default: Date.now }
 });
 
