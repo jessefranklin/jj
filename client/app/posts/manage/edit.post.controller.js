@@ -24,7 +24,8 @@
         vm.job.request.date_fulfillment_by = new Date(vm.job.request.date_fulfillment_by);
     });
 
-    vm.addJob = function(){
+    vm.addJob = function(view){
+      vm.view = view;
       geocoder = new google.maps.Geocoder();
       geocoder.geocode({ 'address': vm.job.location.address}, function(results, status) {
         if (status === 'OK') {
@@ -65,7 +66,9 @@
         .then(function(data) {
             console.log(data);
             vm.loading = false;
-            //$location.path('/detail/' + $state.params.id);
+            if(vm.view === true){
+              $location.path('/detail/' + $state.params.id);
+            }
         });
     };
 

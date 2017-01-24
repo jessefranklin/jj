@@ -25,6 +25,9 @@
           vm.job.location.lat = results[0].geometry.location.lat();
           vm.job.location.long = results[0].geometry.location.lng();
           vm.job.owner = vm.userProfile.user_id;
+          vm.job.status = 'draft';
+          vm.job.request.active = false;
+
           if(vm.file){
             if (vm.upload_form.file.$valid && vm.file) {
               vm.upload(vm.file);
@@ -60,13 +63,10 @@
       jobsService.create(vm.job)
         .then(function(data) {
             vm.loading = false;
-            vm.detail.d_id = data.data._id;
-            vm.detail.name = data.data.title;
             vm.jobArray = {
               job_id:data.data._id,
               title:data.data.title
             };
-
             setuserService.addToUser(vm.userProfile,vm.jobArray);
             $location.path('/detail/' + data.data._id);
         });
