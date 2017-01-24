@@ -46,7 +46,10 @@
           });
       },
 
-      deleteJob=function(user_id,userData){
+      deleteJobFromUser=function(user_id,data){
+        var userData = {
+          job_id: data
+        };
         userService.updateJobs(user_id,userData)
           .then(function(data) {
               console.log(data);
@@ -57,7 +60,7 @@
         addToUser: addToUser,
         createUser: createUser,
         updateUser: updateUser,
-        deleteJob: deleteJob
+        deleteJobFromUser: deleteJobFromUser
       };
 
   }

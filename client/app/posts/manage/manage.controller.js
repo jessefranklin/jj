@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('manageCtrl',  ['$scope','jobsService','userService','authService',manageController]);
+    .controller('manageCtrl',  ['$scope','jobsService','setuserService','authService',manageController]);
 
-  manageController.$inject = ['$scope','jobsService','userService','authService'];
+  manageController.$inject = ['$scope','jobsService','setuserService','authService'];
 
-  function manageController($scope,jobsService,userService,authService) {
+  function manageController($scope,jobsService,setuserService,authService) {
     var vm = this;
     vm.authService = authService;
     vm.jobs = [];
@@ -36,15 +36,8 @@
           }
       });
 
-      var data = {
-        job_id: id
-      };
       
-      userService.updateJobs(user_id,data)
-        .then(function(data) {
-            console.log(data);
-        });
-
+      setuserService.deleteJobFromUser(user_id,id);
 
     };
     
