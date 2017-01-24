@@ -11,7 +11,9 @@ var requestSchema = new Schema({
 	bid: Number,
 	status: String,
 	stage: Number,
-	comment: String,
+	comments: [{
+		comment: String
+	}],
 	title: String,
 	completed: Boolean,
 	archived: Boolean,

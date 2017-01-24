@@ -16,7 +16,7 @@
 }
 
 #shell-content {
-	padding: 60px 0 120px;
+	padding: 0px 0 120px;
 }
 
 img {
@@ -27,4 +27,42 @@ img {
 	background-color:rgba(#fafafa,0.8);
 	padding: 5px;
 	min-height: auto;
+}
+
+.container {
+	padding: 20px;
+}
+.item {
+	margin-bottom: 40px;
+	.cost {
+		float: right;
+		font-size: 20px;
+	}
+	h2,h5, > div {
+		margin-bottom: 0px;
+	}
+	.content {
+		margin-top: 20px;
+	}
+	.actions {
+		margin-top: 20px;
+	}
+}
+
+.detail {
+	&.hero {
+		position: relative;
+		display: block;
+		min-height: 150px;
+		background:rgba(#555,0.8);
+		.category {
+			position: absolute;
+			bottom: 0;
+			right: 10px;
+			padding: 0 10px;
+			text-align: right;
+			color: #fff;
+			font-size: 16px;
+		}
+	}
 }

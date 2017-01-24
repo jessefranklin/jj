@@ -1,7 +1,7 @@
 (function() {
 
   angular
-    .module('app.communication')
+    .module('app.request')
     .factory('requestService', ['$http','$q', requestService]);
 
   requestService.$inject = ['$http','$q'];

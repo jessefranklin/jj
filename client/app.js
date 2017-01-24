@@ -12,7 +12,8 @@
       //Custom Modules
       'app.profile',
       'app.map',
-      'app.post'
+      'app.post',
+      'app.request'
     ])
     .config(config);
 
@@ -84,6 +85,16 @@
           'content@' : {
               templateUrl: 'app/posts/manage.list.html',
               controller: 'manageCtrl',
+              controllerAs: 'vm'
+          }
+        }
+      })
+      .state('app.request', {
+        url: 'request',
+        views : {
+          'content@' : {
+              templateUrl: 'app/request/request.temp.html',
+              controller: 'requestCtrl',
               controllerAs: 'vm'
           }
         }
