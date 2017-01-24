@@ -67,7 +67,7 @@
               job_id:data.data._id,
               title:data.data.title
             };
-            setuserService.addToUser(vm.userProfile,vm.jobArray);
+            setuserService.addToUser(vm.userProfile,vm.jobArray,'jobs');
             $location.path('/detail/' + data.data._id);
         });
     };
