@@ -1,11 +1,8 @@
 <div class="item">
-  	<div class="cost">${{job.cost.total_amount}}</div>
-  	<h5>{{job.service_name}}</h5>
-  	<h2>{{job.title}}</h2>
-  	<div>{{job.service_description}}</div>
+  	<h5>{{vm.request.service_name}}</h5>
+  	<h2>{{vm.request}}</h2>
   	<div class="actions">
-		<a href="edit/{{job._id}}" ng-if="manage" class="btn btn-default" >Edit</a>
-		<a href="detail/{{job._id}}" class="btn btn-default" ><span ng-if="manage">View Posting</span><span ng-if="!(manage)">Lets do this!</span></a>
-		<a ng-click="vm.deletePost(job._id)"  ng-if="manage" class="btn btn-default" >Delete</a> 
+		<a class="btn btn-default" >Edit</a>
+		<a ng-click="vm.confirm()" class="btn btn-default">Confirm</a> 
 	</div>
 </div>

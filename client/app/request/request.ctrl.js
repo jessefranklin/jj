@@ -9,8 +9,12 @@
   function requestController(jobsService,requestService) {
     var vm = this;
 
-    console.log(requestService.getRequest());
+    vm.request = requestService.getRequest()[0];
+    console.log(vm.request);
 
+    vm.confirm = function(){
+		requestService.submitRequest();
+    };
   }
 
 }());
