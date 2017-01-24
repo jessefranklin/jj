@@ -2,10 +2,10 @@
 
   angular
     .module('app.request')
-    .factory('requestService', ['$http','$q', requestService]);
+    .factory('requestRestService', ['$http','$q', requestRestService]);
 
-  requestService.$inject = ['$http','$q'];
-  function requestService ($http,$q) {
+  requestRestService.$inject = ['$http','$q'];
+  function requestRestService ($http,$q) {
     return {
       get : function() {
         return $http.get('/api/request');

@@ -6,6 +6,7 @@ var requestSchema = new Schema({
 	job_owner_id: String,
 	provider_id: String,
 	provider_date: Date,
+	provider_time: String,
 	provider_name: String,
 	rating: String,
 	bid: Number,

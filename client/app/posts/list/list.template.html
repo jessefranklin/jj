@@ -5,7 +5,7 @@
   	<div>{{job.service_description}}</div>
   	<div class="actions">
 		<a href="edit/{{job._id}}" ng-if="manage" class="btn btn-default" >Edit</a>
-		<a href="detail/{{job._id}}" class="btn btn-default" ><span ng-if="manage">View Posting</span><span ng-if="!(manage)">Lets do this!</span></a>
+		<a href="detail/{{job._id}}" class="btn btn-default" ><span ng-if="manage">View Posting</span><span ng-if="!(manage)">View Posting</span></a>
 		<a ng-click="vm.deletePost(job._id)"  ng-if="manage" class="btn btn-default" >Delete</a> 
 	</div>
 </div>

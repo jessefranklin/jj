@@ -15,10 +15,41 @@
 	  	</div>
 
 	  	<div class="actions">
-			<a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.userProfile.user_id == job.owner">Edit Post</a>
+			<a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.userProfile.user_id && vm.userProfile.user_id && vm.userProfile.user_id == vm.job.owner">Edit Post</a>
+			<a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === vm.job.owner">Publish</a>
+			<a href="" class="btn btn-default" ng-if="vm.userProfile.user_id != vm.job.owner" data-toggle="modal" data-target="#myModal">Lets do this!</a>
+		</div>
 
-			<a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === job.owner">Publish</a>
 
-			<a href="" class="btn btn-default" ng-click="vm.createRequest();" ng-if="vm.userProfile.user_id != job.owner">Lets do this!</a>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Bid, Date & Time</h4>
+		      </div>
+		      <div class="modal-body">
+	        	<div class="row">
+					<label for="bid-input">Bid on Fee</label>
+					<input class="form-control" ng-model="vm.request.bid" type="number" id="bid-input">
+				</div>
+				<div class="row">
+					<div  class="six columns">
+						<label for="date-input">I can come by:</label>
+		      			<input class="form-control" ng-model="vm.request.provider_date" type="date" id="date-input">
+	      			</div>
+	      			<div  class="six columns">
+						<label for="time-input">Within the hour of:</label>
+		      			<input class="form-control" ng-model="vm.request.provider_time" type="time" id="time-input">
+	      			</div> 
+      			</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <a href="" class="btn btn-default" ng-click="vm.createRequest();" ng-if="vm.userProfile.user_id != vm.job.owner">Lets do this!</a>
+		      </div>
+		    </div>
+		  </div>
 		</div>
 </div>
