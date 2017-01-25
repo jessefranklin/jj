@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 
 var userSchema = new Schema({
 	user_id: String,
@@ -10,11 +11,13 @@ var userSchema = new Schema({
 	status: String,
 	jobs : [{
 		job_id: String,
-		title: String
+		title: String,
+		status: String
 	}],
 	requests : [{
 		request_id: String,
-		title: String
+		title: String,
+		status: String
 	}],
 	created_at: { type : Date, default: Date.now }
 });
