@@ -1,4 +1,5 @@
 var JobModel = require('../models/jobSchema');
+var requestModel = require('../models/requestSchema');
 
 module.exports = function (app) {
 	// Get all jobs
@@ -30,9 +31,23 @@ module.exports = function (app) {
     app.get('/api/myjobs/:id', function (req, res) {
         JobModel.find({'owner':req.params.id},function(err, jobs) {
 			if(err) res.send(err);
-			res.json(jobs);
-        });
+			var newJobs = [];
+			var len = jobs.length;
+    		var curIdx = 0;
+			jobs.forEach(function(job){
+				requestModel.find({'job_id':job._id }, function(err,req) {
+					job.set('req', req, {strict: false})
+					newJobs.push(job);
+					++curIdx;
+					if (curIdx == len) {
+                        res.json(newJobs);
+                    }
+				});
+			});
+		});
     });
+
+
 
     // Edit job
     app.put('/api/jobs/:id', function (req, res) {
