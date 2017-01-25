@@ -56,7 +56,6 @@ module.exports = function (app) {
 			{safe: true, upsert: true},
 			function(err, jobs) {
 				if(err) res.send(err);
-				console.log(req.body);
 				res.json(jobs);
 			}
         );

@@ -39,9 +39,7 @@
       },
 
       updateUser=function(user_id,userData,type){
-        var x = vm.user_data[0][type]?vm.user_data[0][type].length:0;
-        vm.user_data[0][type][x]=userData;
-        userService.update(user_id,vm.user_data[0])
+        userService.addToUser(user_id,type,userData)
           .then(function(data) {
               console.log('update user');
           });
@@ -51,7 +49,7 @@
         var userData = {
           job_id: data
         };
-        userService.updateJobs(user_id,userData)
+        userService.removeFromUser(user_id,userData)
           .then(function(data) {
               console.log(data);
           });

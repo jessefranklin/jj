@@ -16,8 +16,11 @@
       update : function(id, user) {
         return $http.put('/api/user/' + id, user);
       },
-      updateJobs : function(id, job_id) {
-        return $http.put('/api/userjobs/' + id, job_id);
+      removeFromUser : function(id, job_id) {
+        return $http.put('/api/removefromuser/' + id, job_id);
+      },
+      addToUser : function(id,type, data) {
+        return $http.put('/api/addtouser/'+id+'/'+type, data);
       },
       create : function(user) {
         return $http.post('/api/user', user);
@@ -25,6 +28,7 @@
       delete : function(id) {
         return $http.delete('/api/user/' + id);
       }
+      
     };
   }
 

@@ -40,10 +40,25 @@ module.exports = function (app) {
     });
 
     // Remove job from user array
-    app.put('/api/userjobs/:id', function (req, res) {
+    app.put('/api/removefromuser/:id', function (req, res) {
 		var query = {'user_id':req.params.id},
 		update = {
 			"$pull": { 'jobs': { 'job_id':req.body.job_id }}
+		},
+		options = { "multi": true };
+        UserModel.update(query, update, options, function(err, users) {
+			if(err) res.send(err);
+			res.json(users);
+        });
+    });
+
+    // Add job or apply to user array
+    app.put('/api/addtouser/:id/:type', function (req, res) {
+		var key = req.params.type, push = {};
+		push[key] = req.body;
+		var query = {'user_id':req.params.id},
+		update = {
+			"$push":push
 		},
 		options = { "multi": true };
         UserModel.update(query, update, options, function(err, users) {
