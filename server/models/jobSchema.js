@@ -20,12 +20,11 @@ var jobSchema = new Schema({
 		expire_post: Boolean,
 		date_fulfillment_by: Date,
 	},
+	address: String,
 	location: {
-		address: String,
-		lat: Number,
-		long: Number,
-		intersection: String
-	},
+        type: { type: String },
+        coordinates: [Number]
+    },
 	cost: {
 		arrange: String,
 		hours: Number,
@@ -43,6 +42,7 @@ var jobSchema = new Schema({
 	}],
 	applicants: [{
 		applicant_id: String,
+		request_id: String,
 		status: String
 	}],
 	created_at: { type : Date, default: Date.now }
@@ -54,6 +54,8 @@ jobSchema.pre('save', function(next) {
   if (!this.created_at) this.created_at = currentDate;
   next();
 });
+
+jobSchema.index({ "location": "2dsphere" });
 
 var Jobs = mongoose.model('Jobs', jobSchema);
 
