@@ -9,7 +9,8 @@
   function listController(jobsService,authService) {
     var vm = this;
     vm.authService = authService;
-
+    vm.manage = false;
+    
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
     });

@@ -6,12 +6,8 @@
       return {
         restrict: "E",
         replace: true,
-        scope: {
-          jobs: '=',
-          searchtext:'=',
-          manage: '='
-        },
-        template: "<ul><jobdetail ng-repeat='job in jobs | filter : searchtext' job='job' manage='manage'></jobdetail></ul>"
+        scope: true,
+        template: "<ul><jobdetail ng-repeat='job in vm.jobs | filter : searchtext'></jobdetail></ul>"
       };
     })
 
@@ -19,12 +15,7 @@
       return {
         restrict: "E",
         replace: true,
-        scope: {
-          job: '=',
-          manage: '='
-        },
-        controller: 'manageCtrl',
-        controllerAs: 'vm',
+        scope: true,
         templateUrl: "app/posts/list/list.template.html",
         link: function (scope, element, attrs) {
           if (angular.isArray(scope.job.children)) {

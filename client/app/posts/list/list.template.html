@@ -4,8 +4,17 @@
   	<h2>{{job.title}}</h2>
   	<div>{{job.service_description}}</div>
   	<div class="actions">
-		<a href="edit/{{job._id}}" ng-if="manage" class="btn btn-default" >Edit</a>
-		<a href="detail/{{job._id}}" class="btn btn-default" ><span ng-if="manage">View Posting</span><span ng-if="!(manage)">View Posting</span></a>
-		<a ng-click="vm.deletePost(job._id)"  ng-if="manage" class="btn btn-default" >Delete</a> 
+		<a href="edit/{{job._id}}" ng-if="vm.manage" class="btn btn-default" >Edit</a>
+		<a href="detail/{{job._id}}" class="btn btn-default" ><span ng-if="vm.manage">View Posting</span><span ng-if="!(vm.manage)">View Posting</span></a>
+		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage" class="btn btn-default" >Delete</a> 
+	</div>
+	<div ng-if="vm.manage" ng-repeat="req in job.req">
+		{{req.provider_name}} {{req.rating}}
+		offered {{req.bid}} on the date of {{req.provider_date}}
+		<div ng-repeat="comment in req.comments">
+			{{comment}}
+		</div>
+		<a ng-click="vm.acceptOffer(req._id)" class="btn btn-default" >Accept</a>
+		<a ng-click="vm.declineOffer(req._id)" class="btn btn-default" >Decline</a> 
 	</div>
 </div>
