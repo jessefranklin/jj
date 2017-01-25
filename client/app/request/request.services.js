@@ -31,8 +31,10 @@
 
       vm.requestArray = {
         request_id:job._id,
-        title:job.title
+        title:job.title,
+        status:'pending'
       };
+
       vm.user = user;
       requestData.push(vm.request);
 
@@ -50,6 +52,7 @@
           setuserService.addToUser(vm.user,vm.requestArray,'requests');
           var applicant = {
             applicant_id: vm.request.provider_id,
+            request_id: data.data._id,
             status: 'pending'
           };
           requestRestService.addToJob(vm.request.job_id,applicant);
