@@ -72,4 +72,25 @@ module.exports = function (app) {
         });
     });
 
+    //Using $geonear
+    app.get('/api/jobs/near/', function (req, res) {
+		var lat = req.body.lat,
+		long = req.body.long;
+		JobModel.aggregate([{
+		"$geoNear": {
+			"near": {
+				"type": "Point",
+				"coordinates": [long,lat]
+				},
+			"distanceField": "distance",
+			"sperical": true,
+			"maxDistance": 10000
+			}
+		}],
+		function(err,results) {
+			res.json(results);
+		});
+		//.find({loc: {$near: [-122.418,37.775], $maxDistance:10/69 } })
+	});
+
 };
