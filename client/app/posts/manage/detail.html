@@ -11,13 +11,14 @@
 	  	<div>{{vm.job.service_description}}</div>
 
 	  	<div class="content">
-	  		<p>{{vm.job.location.address}}</p>
+	  		<p>{{vm.job.address}}</p>
 	  	</div>
 
 	  	<div class="actions">
 			<a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.userProfile.user_id && vm.userProfile.user_id && vm.userProfile.user_id == vm.job.owner">Edit Post</a>
 			<a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === vm.job.owner">Publish</a>
-			<a href="" class="btn btn-default" ng-if="vm.userProfile.user_id != vm.job.owner" data-toggle="modal" data-target="#myModal">Lets do this!</a>
+			<a href="" class="btn btn-default" ng-if="vm.userProfile.user_id != vm.job.owner && vm.already_applied" data-toggle="modal" data-target="#myModal">Lets do this!</a>
+			<a href="" class="btn btn-default" ng-if="vm.userProfile.user_id != vm.job.owner && !vm.already_applied" data-toggle="modal" data-target="#myModal">View Request</a>
 		</div>
 
 

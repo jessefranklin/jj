@@ -27,11 +27,9 @@
     vm.addJob = function(view){
       vm.view = view;
       geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ 'address': vm.job.location.address}, function(results, status) {
+      geocoder.geocode({ 'address': vm.job.address }, function(results, status) {
         if (status === 'OK') {
-          vm.job.location.lat = results[0].geometry.location.lat();
-          vm.job.location.long = results[0].geometry.location.lng();
-          vm.job.owner = vm.userProfile.user_id;
+          vm.job.location.coordinates = [results[0].geometry.location.lng(),results[0].geometry.location.lat()];
           if(vm.file){
             if (vm.upload_form.file.$valid && vm.file) {
               vm.upload(vm.file);

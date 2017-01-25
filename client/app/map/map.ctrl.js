@@ -27,7 +27,7 @@
             map: vm.map,
             icon: image,
             label: '$'+info.cost.total_amount,
-            position: new google.maps.LatLng(info.location.lat, info.location.long),
+            position: new google.maps.LatLng(info.location.coordinates[1], info.location.coordinates[0]),
             title: info.title
         });
         marker.content = '<div class="infoWindowContent">' + '$'+info.cost.total_amount +'<br/>'+ info.service_name + '</div>';
@@ -53,7 +53,6 @@
         }
     });
 
-    
     $scope.$watch('nas',
         function (newValue, oldValue) {
             for (jdx in vm.markers) {

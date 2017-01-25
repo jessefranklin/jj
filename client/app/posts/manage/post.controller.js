@@ -12,6 +12,7 @@
     vm.job = {};
     vm.detail = {};
     vm.state = 'Add';
+    vm.job.location = {};
     vm.categories = globalFunc.categories;
 
     authService.getProfileDeferred().then(function (profile) {
@@ -20,10 +21,10 @@
    
     vm.addJob = function(){
       geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ 'address': vm.job.location.address}, function(results, status) {
+      geocoder.geocode({ 'address': vm.job.address}, function(results, status) {
         if (status === 'OK') {
-          vm.job.location.lat = results[0].geometry.location.lat();
-          vm.job.location.long = results[0].geometry.location.lng();
+          vm.job.location.type = 'Point';
+          vm.job.location.coordinates = [results[0].geometry.location.lng(),results[0].geometry.location.lat()];
           vm.job.owner = vm.userProfile.user_id;
           vm.job.status = 'draft';
           vm.job.request.active = false;
