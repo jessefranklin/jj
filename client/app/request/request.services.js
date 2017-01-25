@@ -61,13 +61,22 @@
     };
 
     getRequest = function(){
-        return requestData;
+      return requestData;
+    };
+
+    getPostRequests = function(job_id){
+      requestRestService.getPostRequests(job_id)
+        .then(function(data){
+          console.log(data);
+          return data;
+      });
     };
 
     return {
       createRequest: createRequest,
       submitRequest: submitRequest,
       getRequest: getRequest,
+      getPostRequests: getPostRequests,
       close: close
     };
 
