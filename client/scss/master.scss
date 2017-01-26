@@ -49,6 +49,14 @@ img {
 	}
 }
 
+.confirmed {
+	background: #dff0d8;
+}
+
+.declined {
+	background: #ccc;
+}
+
 .detail {
 	&.hero {
 		position: relative;
