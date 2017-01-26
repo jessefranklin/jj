@@ -8,14 +8,14 @@ var requestSchema = new Schema({
 	provider_date: Date,
 	provider_time: String,
 	provider_name: String,
-	rating: String,
+	title: String,
 	bid: Number,
 	status: String,
 	stage: Number,
+	rating: Number,
 	comments: [{
 		comment: String
 	}],
-	title: String,
 	completed: Boolean,
 	archived: Boolean,
 	active: Boolean,

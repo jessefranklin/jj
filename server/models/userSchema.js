@@ -12,12 +12,19 @@ var userSchema = new Schema({
 	jobs : [{
 		job_id: String,
 		title: String,
+		category: String,
 		status: String
 	}],
 	requests : [{
 		request_id: String,
+		job_id: String,
 		title: String,
 		status: String
+	}],
+	rating: [{
+		rating: Number,
+		category: String,
+		comment: String
 	}],
 	created_at: { type : Date, default: Date.now }
 });

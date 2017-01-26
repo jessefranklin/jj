@@ -7,10 +7,11 @@ var jobSchema = new Schema({
 	service_description: String,
 	service_category: String,
 	owner: String,
+	address: String,
+	status: String,
 	owner_meta : {
 		telephone: Number
 	},
-	status: String,
 	request: {
 		active: Boolean,
 		state: String,
@@ -20,7 +21,6 @@ var jobSchema = new Schema({
 		expire_post: Boolean,
 		date_fulfillment_by: Date,
 	},
-	address: String,
 	location: {
         type: { type: String },
         coordinates: [Number]
