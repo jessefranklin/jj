@@ -40,10 +40,12 @@ module.exports = function (app) {
     });
 
     // Remove job from user array
-    app.put('/api/removefromuser/:id', function (req, res) {
+    app.put('/api/removefromuser/:id/:type', function (req, res) {
+		var key = req.params.type, pull = {};
+		pull[key] = req.body;
 		var query = {'user_id':req.params.id},
 		update = {
-			"$pull": { 'jobs': { 'job_id':req.body.job_id }}
+			$pull: pull
 		},
 		options = { "multi": true };
         UserModel.update(query, update, options, function(err, users) {

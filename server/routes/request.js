@@ -42,6 +42,7 @@ module.exports = function (app) {
         });
     });
 
+
     // Edit request
     app.put('/api/request/:id', function (req, res) {
 		var query = {_id:req.params.id},
@@ -49,7 +50,7 @@ module.exports = function (app) {
 			"$set": req.body
 		},
 		options = { "multi": true };
-        request.update(query, update, options, function(err, request) {
+        requestModel.update(query, update, options, function(err, request) {
 			if(err) res.send(err);
 			console.log(req.body);
 			res.json(request);
