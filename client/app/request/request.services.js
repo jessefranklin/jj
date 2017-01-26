@@ -30,7 +30,8 @@
       };
 
       vm.requestArray = {
-        request_id:job._id,
+        request_id:request._id,
+        job_id:job._id,
         title:job.title,
         status:'pending'
       };
@@ -68,6 +69,13 @@
       return requestRestService.getOwnerRequests(id);
     };
 
+    updateRequest = function(id, data){
+      requestRestService.update(id,data)
+        .then(function(data){
+            console.log('request updated');
+            console.log(data);
+        });
+    };
 
     getPostRequests = function(job_id){
       requestRestService.getPostRequests(job_id)
@@ -77,13 +85,27 @@
       });
     };
 
+    deleteRequest = function(job_id,req_id,data){
+      requestRestService.delete(req_id)
+        .then(function(data){
+          console.log(data);
+      });
+      requestRestService.removeFromJob(job_id,data)
+        .then(function(data){
+          console.log(data);
+      });
+    };
+
+
     return {
       createRequest: createRequest,
       submitRequest: submitRequest,
       getRequest: getRequest,
       getRequestsByOwner: getRequestsByOwner,
       getPostRequests: getPostRequests,
-      close: close
+      close: close,
+      updateRequest: updateRequest,
+      deleteRequest: deleteRequest
     };
 
   }

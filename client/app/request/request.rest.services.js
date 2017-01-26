@@ -22,6 +22,9 @@
       update : function(id, request) {
         return $http.put('/api/request/' + id, request);
       },
+      updateRequest : function(id, request) {
+        return $http.put('/api/requestupdate/' + id, request);
+      },
       create : function(request) {
         return $http.post('/api/request', request);
       },
@@ -30,6 +33,9 @@
       },
       addToJob : function(id, applicant) {
         return $http.put('/api/jobapply/' + id, applicant);
+      },
+      removeFromJob : function(id,applicant) {
+        return $http.put('/api/jobremove/'+id, applicant);
       }
     };
   }

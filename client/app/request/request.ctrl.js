@@ -10,10 +10,9 @@
     var vm = this;
 
     vm.request = requestService.getRequest()[0];
-    console.log(vm.request);
 
     vm.confirm = function(){
-		requestService.submitRequest();
+      requestService.submitRequest();
     };
   }
 
