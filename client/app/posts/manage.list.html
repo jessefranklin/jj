@@ -1,21 +1,23 @@
 <div class="container">
 	<profileview user='vm.userProfile' viewingself='true'></profileview>
+	
 	<div ng-if="vm.jobs" class="">
 	<h4>Current Postings</h4>
 	<joblist jobs='vm.jobs' searchtext='vm.searchText'></joblist>
 	</div>
 
-	<div ng-if="vm.manageRequests" class="">
+	<div ng-if="vm.manageRequests">
 		<h4>Current Requests</h4>
-		<div ng-repeat="request in vm.manageRequests">
+		<div ng-repeat="request in vm.manageRequests" class="well {{request.status}}" >
 			{{request.title}}
 			{{request.status}}
 			{{request.bid}}
 			{{request.provider_date | date:'MM/dd/yyyy'}}
 			{{request.provider_time}}
-			<a href="detail/{{request.job_id}}" class="btn btn-default" >Delete</a>
-			<a href="detail/{{request.job_id}}" class="btn btn-default" >Edit</a>
-			<a href="detail/{{request.job_id}}" class="btn btn-default" >View</a>
+
+			<a ng-click="vm.removeRequest(request.job_id,request._id)" class="btn btn-default">Delete</a>
+			<a ng-click="vm.editRequest(request.job_id)" class="btn btn-default">Edit</a>
+			<a ng-click="vm.viewFullRequest(request.job_id)" class="btn btn-default">View</a>
 		</div>
 	</div>
 </div>

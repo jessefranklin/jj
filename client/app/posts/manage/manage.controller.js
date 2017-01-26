@@ -34,26 +34,37 @@
       });
     };
 
+    // Remove request
+    vm.removeRequest = function(id,rid){
+      var data = { request_id: rid };
+      var data2 = { job_id: id };
+
+      requestService.deleteRequest(id,rid,data);
+      setuserService.deleteJobFromUser(user_id,'requests',data2);
+    };
+
     vm.deletePost = function(id){
       //Todo add are you sure dialog
       jobsService.delete(id)
         .then(function(data){
-          if(data.data == 'completed'){
             console.log('update view');
-          } else {
-            console.log('nope');
-          }
-      });
+        });
 
-      setuserService.deleteJobFromUser(user_id,id);
+      var data = { job_id: id };
+      setuserService.deleteJobFromUser(user_id,'jobs',data);
     };
 
-    vm.acceptOffer = function(id){
-      console.log('accept'+id);
+    vm.acceptOffer = function(id,job_id){
+      data = {stage:2,status:'confirmed'};
+      job_data = {status:'confirmed'};
+      requestService.updateRequest(id,data);
+      jobsService.update(job_id,job_data);
     };
     
     vm.declineOffer = function(id){
-      console.log('decline'+id);
+      data = { status:'declined' };
+      requestService.updateRequest(id,data);
+
     };
 
   }
