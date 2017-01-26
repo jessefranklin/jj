@@ -17,29 +17,35 @@
       vm.userProfile = profile;
       user_id = vm.userProfile.user_id;
       vm.getAllByOwner(user_id);
+      vm.getRequestsByOwner(user_id);
     });
+
+    vm.getRequestsByOwner = function(id){
+      requestService.getRequestsByOwner(id)
+        .then(function(user_data){
+          vm.manageRequests = user_data.data;
+      });
+    };
 
     vm.getAllByOwner = function(user_id){
       jobsService.getAllByOwner(user_id)
         .then(function(data){
-          console.log(data.data);
           vm.jobs = data.data;
       });
     };
 
     vm.deletePost = function(id){
       //Todo add are you sure dialog
-      console.log('delete'+id);
-      // jobsService.delete(id)
-      //   .then(function(data){
-      //     if(data.data == 'completed'){
-      //       console.log('update view');
-      //     } else {
-      //       console.log('nope');
-      //     }
-      // });
+      jobsService.delete(id)
+        .then(function(data){
+          if(data.data == 'completed'){
+            console.log('update view');
+          } else {
+            console.log('nope');
+          }
+      });
 
-      //setuserService.deleteJobFromUser(user_id,id);
+      setuserService.deleteJobFromUser(user_id,id);
     };
 
     vm.acceptOffer = function(id){

@@ -10,7 +10,7 @@
 	</div>
 	<div ng-if="vm.manage" ng-repeat="req in job.req">
 		{{req.provider_name}} {{req.rating}}
-		offered {{req.bid}} on the date of {{req.provider_date}}
+		offered {{req.bid}} on the date of {{req.provider_date | date:'MM/dd/yyyy'}}
 		<div ng-repeat="comment in req.comments">
 			{{comment}}
 		</div>

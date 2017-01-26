@@ -16,6 +16,9 @@
       getPostRequests : function(id) {
         return $http.get('/api/getpostrequests/' + id);
       },
+      getOwnerRequests : function(id) {
+        return $http.get('/api/getreqbyowner/' + id);
+      },
       update : function(id, request) {
         return $http.put('/api/request/' + id, request);
       },

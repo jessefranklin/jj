@@ -34,6 +34,14 @@ module.exports = function (app) {
         });
     });
 
+    // Get all requests by Post id
+    app.get('/api/getreqbyowner/:id', function (req, res) {
+        requestModel.find({'provider_id':req.params.id},function(err, request) {
+			if(err) res.send(err);
+			res.json(request);
+        });
+    });
+
     // Edit request
     app.put('/api/request/:id', function (req, res) {
 		var query = {_id:req.params.id},

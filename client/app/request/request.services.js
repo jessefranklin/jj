@@ -64,6 +64,11 @@
       return requestData;
     };
 
+    getRequestsByOwner = function(id){
+      return requestRestService.getOwnerRequests(id);
+    };
+
+
     getPostRequests = function(job_id){
       requestRestService.getPostRequests(job_id)
         .then(function(data){
@@ -76,6 +81,7 @@
       createRequest: createRequest,
       submitRequest: submitRequest,
       getRequest: getRequest,
+      getRequestsByOwner: getRequestsByOwner,
       getPostRequests: getPostRequests,
       close: close
     };
