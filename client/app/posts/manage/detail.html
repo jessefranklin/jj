@@ -16,9 +16,13 @@
 
 	  	<div class="actions">
 			<a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.userProfile.user_id && vm.userProfile.user_id && vm.userProfile.user_id == vm.job.owner">Edit Post</a>
-			<a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === vm.job.owner">Publish</a>
-			<a href="" class="btn btn-default" ng-if="vm.userProfile.user_id != vm.job.owner && vm.already_applied" data-toggle="modal" data-target="#myModal">Lets do this!</a>
-			<a href="" class="btn btn-default" ng-if="vm.userProfile.user_id != vm.job.owner && !vm.already_applied" data-toggle="modal" data-target="#myModal">View Request</a>
+			<!-- <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === vm.job.owner">Publish</a> -->
+
+			<a href="" class="btn btn-default" ng-if="vm.userProfile.user_id != vm.job.owner && !vm.already_applied" data-toggle="modal" data-target="#myModal">Lets do this!</a>
+
+			<a ui-sref="app.manage" class="btn btn-default" ng-if="vm.userProfile.user_id != vm.job.owner && vm.already_applied">View Request</a>
+
+			<a ui-sref="app.manage" class="btn btn-default" ng-if="vm.userProfile.user_id == vm.job.owner">Manage Requests</a>
 		</div>
 
 

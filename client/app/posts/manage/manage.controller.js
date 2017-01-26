@@ -37,10 +37,9 @@
     // Remove request
     vm.removeRequest = function(id,rid){
       var data = { request_id: rid };
-      var data2 = { job_id: id };
 
       requestService.deleteRequest(id,rid,data);
-      setuserService.deleteJobFromUser(user_id,'requests',data2);
+      setuserService.deleteJobFromUser(user_id,'requests',data);
     };
 
     vm.deletePost = function(id){
@@ -55,8 +54,15 @@
     };
 
     vm.acceptOffer = function(id,job_id){
-      data = {stage:2,status:'confirmed'};
-      job_data = {status:'confirmed'};
+      data = { stage:2,status:'confirmed' };
+      job_data = { status:'confirmed' };
+      requestService.updateRequest(id,data);
+      jobsService.update(job_id,job_data);
+    };
+
+    vm.revertOffer = function(id,job_id){
+      data = { stage:1,status:'pending' };
+      job_data = { status:'pending' };
       requestService.updateRequest(id,data);
       jobsService.update(job_id,job_data);
     };

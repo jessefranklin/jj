@@ -30,7 +30,6 @@
       };
 
       vm.requestArray = {
-        request_id:request._id,
         job_id:job._id,
         title:job.title,
         status:'pending'
@@ -50,6 +49,7 @@
       vm.request.active = true;
       requestRestService.create(vm.request)
         .then(function(data){
+          vm.requestArray.request_id = data.data._id;
           setuserService.addToUser(vm.user,vm.requestArray,'requests');
           var applicant = {
             applicant_id: vm.request.provider_id,

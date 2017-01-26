@@ -27,7 +27,7 @@
         vm.request.bid=vm.job.cost.total_amount;
         for(var i = 0; i < vm.job.applicants.length; i++) {
             if (vm.job.applicants[i].applicant_id == vm.userProfile.user_id) {
-                vm.already_applied = false;
+                vm.already_applied = true;
                 break;
             }
         }

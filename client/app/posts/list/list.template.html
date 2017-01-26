@@ -1,4 +1,4 @@
-<div class="well item">
+<div class="well item" ng-class="vm.userProfile.user_id == job.owner?'owner':'nope'">
   	<div class="cost">${{job.cost.total_amount}}</div>
   	{{job.status}}
   	<h5>{{job.service_name}}</h5>
@@ -9,15 +9,20 @@
 		<a href="detail/{{job._id}}" class="btn btn-default" >View Posting</a>
 		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage" class="btn btn-default" >Delete</a> 
 	</div>
-	<div ng-if="vm.manage" ng-repeat="req in job.req | filter: (job.status == 'confirmed'?{ status : 'confirmed' }:null)" class="{{req.status}}">
-		{{$index}} {{req.provider_name}} {{req.rating}}
+	<div ng-if="vm.manage" ng-repeat="req in job.req" class="{{req.status}}">
+		<!-- | filter: (job.status == 'confirmed'?{ status : 'confirmed' }:null) -->
+		{{req.provider_name}} {{req.rating}}
 		offered {{req.bid}} on the date of {{req.provider_date | date:'MM/dd/yyyy'}}
 		<div ng-repeat="comment in req.comments">
 			{{comment}}
 		</div>
-		<div ng-if="job.status != 'confirmed'">
-		<a ng-click="vm.acceptOffer(req._id,job._id)" class="btn btn-default" >Accept</a>
-		<a ng-click="vm.declineOffer(req._id)" class="btn btn-default" >Decline</a> 
+		{{req.status}}
+		<div ng-if="job.status != 'confirmed' && req.status != 'declined' ">
+			<a ng-click="vm.acceptOffer(req._id,job._id)" class="btn btn-default" >Accept</a>
+			<a ng-click="vm.declineOffer(req._id)" class="btn btn-default" >Decline</a> 
+		</div>
+		<div ng-if="req.status == 'confirmed'">
+			<a ng-click="vm.revertOffer(req._id,job._id)" class="btn" >x</a>
 		</div>
 	</div>
 
