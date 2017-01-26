@@ -22,6 +22,13 @@
           });
       },
 
+      getUser = function(userProfile){
+        userService.getById(userProfile)
+          .then(function(data) {
+            
+          });
+      },
+
       createUser=function(userData,type){
         vm.user_data = {
           user_id: vm.userProfile.user_id,
@@ -45,11 +52,8 @@
           });
       },
 
-      deleteJobFromUser=function(user_id,data){
-        var userData = {
-          job_id: data
-        };
-        userService.removeFromUser(user_id,userData)
+      deleteJobFromUser=function(user_id,type,data){
+        userService.removeFromUser(user_id,type,data)
           .then(function(data) {
               console.log(data);
           });
@@ -59,6 +63,7 @@
         addToUser: addToUser,
         createUser: createUser,
         updateUser: updateUser,
+        getUser: getUser,
         deleteJobFromUser: deleteJobFromUser
       };
 
