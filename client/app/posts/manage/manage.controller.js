@@ -50,7 +50,7 @@
         });
 
       var data = { job_id: id };
-      
+      requestService.deleteAll(data);
       setuserService.deleteJobFromUser(user_id,'jobs',data);
     };
 

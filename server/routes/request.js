@@ -68,4 +68,15 @@ module.exports = function (app) {
         });
     });
 
+    // Delete request
+    app.put('/api/requestdelete/', function (req, res) {
+        console.log(req.body);
+        requestModel.remove({
+            'job_id': req.body.job_id
+        },function(err, request) {
+            if (err) res.send(err);
+            res.json('completed');
+        });
+    });
+
 };

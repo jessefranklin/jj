@@ -85,6 +85,14 @@
       });
     };
 
+    deleteAll = function(j_id){
+      console.log(j_id);
+      requestRestService.deleteAll(j_id)
+        .then(function(data){
+          console.log(data);
+      });
+    };
+
     deleteRequest = function(job_id,req_id,data){
       requestRestService.delete(req_id)
         .then(function(data){
@@ -105,7 +113,8 @@
       getPostRequests: getPostRequests,
       close: close,
       updateRequest: updateRequest,
-      deleteRequest: deleteRequest
+      deleteRequest: deleteRequest,
+      deleteAll: deleteAll
     };
 
   }
