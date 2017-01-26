@@ -16,7 +16,7 @@
 			{{request.provider_time}}
 
 			<div ng-if="request.status != 'declined'">
-				<a ng-click="vm.removeRequest(request.job_id,request._id)" class="btn btn-default">Delete</a>
+				<a ng-click="vm.removeRequest(request.job_id,request._id)" ng-if="request.status != 'confirmed'" class="btn btn-default">Delete</a>
 				<a ng-click="vm.editRequest(request.job_id)" class="btn btn-default">Edit</a>
 				<a ng-click="vm.viewFullRequest(request.job_id)" class="btn btn-default">View</a>
 			</div>

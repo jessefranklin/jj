@@ -50,6 +50,7 @@
         });
 
       var data = { job_id: id };
+      
       setuserService.deleteJobFromUser(user_id,'jobs',data);
     };
 
@@ -62,7 +63,7 @@
 
     vm.revertOffer = function(id,job_id){
       data = { stage:1,status:'pending' };
-      job_data = { status:'pending' };
+      job_data = { status:'open' };
       requestService.updateRequest(id,data);
       jobsService.update(job_id,job_data);
     };

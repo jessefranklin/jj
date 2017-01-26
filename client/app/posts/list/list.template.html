@@ -7,7 +7,7 @@
   	<div class="actions">
 		<a href="edit/{{job._id}}" ng-if="vm.manage" class="btn btn-default" >Edit</a>
 		<a href="detail/{{job._id}}" class="btn btn-default" >View Posting</a>
-		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage" class="btn btn-default" >Delete</a> 
+		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status != 'confirmed'" class="btn btn-default" >Delete</a> 
 	</div>
 	<div ng-if="vm.manage" ng-repeat="req in job.req" class="{{req.status}}">
 		<!-- | filter: (job.status == 'confirmed'?{ status : 'confirmed' }:null) -->
@@ -23,6 +23,7 @@
 		</div>
 		<div ng-if="req.status == 'confirmed'">
 			<a ng-click="vm.revertOffer(req._id,job._id)" class="btn" >x</a>
+			Option to revert confirmation within 10 mins
 		</div>
 	</div>
 
