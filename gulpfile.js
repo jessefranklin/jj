@@ -88,10 +88,10 @@ function startBrowserSync() {
         port: 3000,
         files: ['./client/**/**/*.*'],
         ghostMode: { // these are the defaults t,f,t,t
-            clicks: true,
+            clicks: false,
             location: false,
             forms: true,
-            scroll: true
+            scroll: false
         },
         logLevel: 'debug',
         logPrefix: 'jj',
