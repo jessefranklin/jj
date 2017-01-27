@@ -85,6 +85,7 @@ app.use( fileServer( __dirname+'/../client' ));
 require('./models/db');
 require('./routes/jobs')(app);
 require('./routes/users')(app);
+require('./routes/ratings')(app);
 require('./routes/request')(app);
 
 app.use(function(req, res) {

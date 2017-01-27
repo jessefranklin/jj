@@ -7,6 +7,7 @@ var userSchema = new Schema({
 	name: String,
 	email: String,
 	picture: String,
+	description: String,
 	role: String,
 	status: String,
 	jobs : [{
@@ -21,11 +22,8 @@ var userSchema = new Schema({
 		title: String,
 		status: String
 	}],
-	rating: [{
-		rating: Number,
-		category: String,
-		comment: String
-	}],
+	rating_id: String,
+	rating_avg: Number,
 	created_at: { type : Date, default: Date.now }
 });
 
