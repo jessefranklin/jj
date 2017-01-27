@@ -1,29 +1,61 @@
 <div class="well item" ng-class="vm.userProfile.user_id == job.owner?'owner':'nope'">
   	<div class="cost">${{job.cost.total_amount}}</div>
-  	{{job.status}}
+  	{{job.status}} {{job.service_category}}
   	<h5>{{job.service_name}}</h5>
   	<h2>{{job.title}}</h2>
   	<div>{{job.service_description}}</div>
   	<div class="actions">
-		<a href="edit/{{job._id}}" ng-if="vm.manage" class="btn btn-default" >Edit</a>
+		<!-- Edit post  -->
+		<a href="edit/{{job._id}}" ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Edit</a>
+		<!-- View Post -->
 		<a href="detail/{{job._id}}" class="btn btn-default" >View Posting</a>
-		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status != 'confirmed'" class="btn btn-default" >Delete</a> 
+		<!-- Delete TAsk  -->
+		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Delete</a> 
+		<!-- Task Completed -->
+		<a ng-if="vm.manage && job.status == 'confirmed'" class="btn btn-default" data-toggle="modal" data-target="#rateAndComplete">Task Completed</a> 
 	</div>
 	<div ng-if="vm.manage" ng-repeat="req in job.req" class="{{req.status}}">
 		<!-- | filter: (job.status == 'confirmed'?{ status : 'confirmed' }:null) -->
+		{{req.provider_status}}
+
 		{{req.provider_name}} {{req.rating}}
 		offered {{req.bid}} on the date of {{req.provider_date | date:'MM/dd/yyyy'}}
 		<div ng-repeat="comment in req.comments">
 			{{comment}}
 		</div>
 		{{req.status}}
-		<div ng-if="job.status != 'confirmed' && req.status != 'declined' ">
+		<div ng-if="job.status == 'open' && req.status != 'declined' ">
 			<a ng-click="vm.acceptOffer(req._id,job._id)" class="btn btn-default" >Accept</a>
 			<a ng-click="vm.declineOffer(req._id)" class="btn btn-default" >Decline</a> 
 		</div>
 		<div ng-if="req.status == 'confirmed'">
 			<a ng-click="vm.revertOffer(req._id,job._id)" class="btn" >x</a>
 			Option to revert confirmation within 10 mins
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="rateAndComplete" tabindex="-1" role="dialog" aria-labelledby="rateAndCompleteLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="rateAndCompleteLabel">Rate Provider & Complete Job</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<input type="hidden" ng-model="vm.rating.category" ng-init="vm.rating.category = job.service_category"/>
+						<input type="hidden" ng-model="vm.rating.type" ng-value="provider"/>
+						<star-rating ng-model="vm.rating.rating" readonly="vm.isReadonly"></star-rating>
+						<label for="comment-input">Review</label>
+						<textarea class="form-control" ng-model="vm.rating.review" id="comment-input"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<a href="" class="btn btn-default" ng-click="vm.completePost(job._id)">Rate and close</a>
+				</div>
+			</div>
 		</div>
 	</div>
 

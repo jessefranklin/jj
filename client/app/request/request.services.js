@@ -1,7 +1,7 @@
 (function() {
 
   angular
-    .module('app.profile')
+    .module('app.request')
     .factory('requestService', ['$http','$q','requestRestService','setuserService','$location','$document', requestService]);
 
   requestService.$inject = ['$http','$q','requestRestService','setuserService','$location','$document'];
@@ -103,7 +103,6 @@
           console.log(data);
       });
     };
-
 
     return {
       createRequest: createRequest,

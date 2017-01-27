@@ -12,6 +12,12 @@
     vm.jobs = [];
     var user_id;
     vm.manage = true;
+    vm.rating = {};
+    vm.rating.rating = 1;
+    vm.isReadonly = false;
+    this.rateFunction = function(rating) {
+      console.log('Rating selected: ' + rating);
+    };
 
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
@@ -34,14 +40,6 @@
       });
     };
 
-    // Remove request
-    vm.removeRequest = function(id,rid){
-      var data = { request_id: rid };
-
-      requestService.deleteRequest(id,rid,data);
-      setuserService.deleteJobFromUser(user_id,'requests',data);
-    };
-
     vm.deletePost = function(id){
       //Todo add are you sure dialog
       jobsService.delete(id)
@@ -52,6 +50,29 @@
       var data = { job_id: id };
       requestService.deleteAll(data);
       setuserService.deleteJobFromUser(user_id,'jobs',data);
+    };
+
+    // Request
+    vm.removeRequest = function(id,rid){
+      var data = { request_id: rid };
+      requestService.deleteRequest(id,rid,data);
+      setuserService.deleteJobFromUser(user_id,'requests',data);
+    };
+
+    vm.requestCompleted = function(id){
+      data = { stage:3, provider_status:'completed' };
+      requestService.updateRequest(id,data);
+    };
+
+    vm.completePost = function(id){
+      setuserService.updateRating(user_id,vm.rating,'provider_rating');
+      //job_data = { status:'completed' };
+      //jobsService.update(id,job_data);
+    };
+
+    vm.noRatingAndClose = function(id){
+      job_data = { status:'completed' };
+      jobsService.update(id,job_data);
     };
 
     vm.acceptOffer = function(id,job_id){
@@ -71,8 +92,9 @@
     vm.declineOffer = function(id){
       data = { status:'declined' };
       requestService.updateRequest(id,data);
-
     };
+
+
 
   }
 

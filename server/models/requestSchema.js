@@ -11,6 +11,7 @@ var requestSchema = new Schema({
 	title: String,
 	bid: Number,
 	status: String,
+	provider_status: String,
 	stage: Number,
 	rating: Number,
 	comments: [{
