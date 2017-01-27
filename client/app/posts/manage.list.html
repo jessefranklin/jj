@@ -27,7 +27,7 @@
 			<a ng-click="vm.requestCompleted(request._id)" ng-if="request.status == 'confirmed'" class="btn btn-default">Task Completed</a>
 
 			<!-- Task Feedback Provider -->
-			<a ng-if="request.status == 'completed'" class="btn btn-default" data-toggle="modal" data-target="#rateVendor" ng-click="vm.job_owner_id = request.job_owner_id">Vendor Feedback</a>
+			<a ng-if="request.status == 'completed'" class="btn btn-default" data-toggle="modal" data-target="#rateVendor" ng-click="vm.job_owner_id = request.job_owner_id; vm.id = request._id">Vendor Feedback</a>
 
 			<div ng-if="request.status == 'declined'">
 				<a ng-click="vm.removeRequest(request.job_id,request._id)" class="btn btn-default">Remove</a>
@@ -54,7 +54,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a href="" class="btn btn-default" ng-click="vm.rateVendor(vm.job_owner_id)">Rate and close</a>
+					<a href="" class="btn btn-default" ng-click="vm.rateVendor(vm.job_owner_id,vm.id)">Rate and close</a>
 				</div>
 			</div>
 		</div>

@@ -12,7 +12,7 @@
 		<!-- Delete TAsk  -->
 		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Delete</a> 
 		<!-- Task Completed -->
-		<a ng-if="vm.manage && job.status == 'confirmed'" class="btn btn-default" data-toggle="modal" data-target="#rateAndComplete">Task Completed</a> 
+		<a ng-if="vm.manage && job.status == 'confirmed'" ng-click="vm.req_id = job.owner" class="btn btn-default" data-toggle="modal" data-target="#rateAndComplete">Task Completed</a> 
 	</div>
 	<div ng-if="vm.manage" ng-repeat="req in job.req" class="{{req.status}}">
 		<!-- | filter: (job.status == 'confirmed'?{ status : 'confirmed' }:null) -->
@@ -55,7 +55,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a href="" class="btn btn-default" ng-click="vm.completePost(job._id)">Rate and close</a>
+					<a href="" class="btn btn-default" ng-click="vm.completePost(job._id, vm.req_id)">Rate and close</a>
 				</div>
 			</div>
 		</div>

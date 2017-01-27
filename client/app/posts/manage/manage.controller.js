@@ -59,39 +59,16 @@
       setuserService.deleteJobFromUser(user_id,'requests',data);
     };
 
-    vm.requestCompleted = function(id){
-      data = { stage:3, status:'completed', completed_date:new Date()};
+    vm.revertOffer = function(id,job_id){
+      data = { stage:1,status:'pending' };
+      job_data = { status:'open' };
       requestService.updateRequest(id,data);
-    };
-
-    vm.completePost = function(id){
-      setuserService.updateRating(user_id,vm.rating,'provider_rating');
-      job_data = { status:'completed' };
-      jobsService.update(id,job_data);
-      data = { stage:4, status:'feedback' };
-      requestService.updateRequest(id,data);
-    };
-
-    vm.rateVendor = function(id){
-      console.log(id);
-      setuserService.updateRating(id,vm.rating,'vendor_rating');
-    };
-
-    vm.noRatingAndClose = function(id){
-      job_data = { status:'completed'};
-      jobsService.update(id,job_data);
+      jobsService.update(job_id,job_data);
     };
 
     vm.acceptOffer = function(id,job_id){
       data = { stage:2,status:'confirmed' };
       job_data = { status:'confirmed' };
-      requestService.updateRequest(id,data);
-      jobsService.update(job_id,job_data);
-    };
-
-    vm.revertOffer = function(id,job_id){
-      data = { stage:1,status:'pending' };
-      job_data = { status:'open' };
       requestService.updateRequest(id,data);
       jobsService.update(job_id,job_data);
     };
@@ -101,7 +78,29 @@
       requestService.updateRequest(id,data);
     };
 
+    vm.requestCompleted = function(id){
+      data = { stage:3, status:'completed', completed_date:new Date()};
+      requestService.updateRequest(id,data);
+    };
 
+    vm.completePost = function(id,r_id){
+      setuserService.updateRating(user_id,vm.rating,'provider_rating');
+      job_data = { status:'completed' };
+      jobsService.update(id,job_data);
+      data = { stage:4, status:'feedback'};
+      requestService.updateRequest(r_id,data);
+    };
+
+    vm.noRatingAndClose = function(id){
+      job_data = { status:'completed'};
+      jobsService.update(id,job_data);
+    };
+
+    vm.rateVendor = function(id,r_id){
+      setuserService.updateRating(id,vm.rating,'vendor_rating');
+      data = { stage:5,status:'closed' };
+      requestService.updateRequest(r_id,data);
+    };
 
   }
 
