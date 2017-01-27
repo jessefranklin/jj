@@ -16,7 +16,7 @@
 }
 
 #shell-content {
-	padding: 0px 0 120px;
+	padding: 60px 0 120px;
 }
 
 img {
@@ -77,4 +77,29 @@ img {
 			font-size: 16px;
 		}
 	}
+}
+
+
+.star-rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  
+  .star {
+    padding: 1px;
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+
+    &.filled {
+      color: #fd0;
+    }
+  }
+
+  &.readonly .star.filled {
+    color: #666;
+  }
 }
