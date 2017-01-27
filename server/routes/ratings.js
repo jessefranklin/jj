@@ -25,7 +25,7 @@ module.exports = function (app) {
 		push[key] = req.body;
 		var query = {'user_id':req.params.id},
 		update = {
-			rating: { $push : push }
+			$push : push
 		},
 		options = { "multi": true };
         RatingModel.update(query, update, options, function(err, rating) {

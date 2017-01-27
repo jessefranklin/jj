@@ -58,6 +58,7 @@
           };
           requestRestService.addToJob(vm.request.job_id,applicant);
           vm.submitted = true;
+          $location.path('/manage');
         });
     };
 

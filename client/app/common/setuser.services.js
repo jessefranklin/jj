@@ -49,7 +49,7 @@
           .then(function(data) {
               console.log(data);
               console.log('user created');
-              vm.rating.user_id = data.data._id;
+              vm.rating.user_id = data.data.user_id;
               console.log(vm.rating);
               ratingService.create(vm.rating)
                 .then(function(data) {
@@ -68,7 +68,7 @@
       updateRating=function(user_id,userData,type){
         ratingService.addRatingToUser(user_id,type,userData)
           .then(function(data) {
-              console.log('update user');
+              console.log(data);
           });
       },
 
@@ -84,6 +84,7 @@
         createUser: createUser,
         updateUser: updateUser,
         getUser: getUser,
+        updateRating: updateRating,
         deleteJobFromUser: deleteJobFromUser
       };
 

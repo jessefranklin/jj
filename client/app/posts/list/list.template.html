@@ -8,7 +8,7 @@
 		<!-- Edit post  -->
 		<a href="edit/{{job._id}}" ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Edit</a>
 		<!-- View Post -->
-		<a href="detail/{{job._id}}" class="btn btn-default" >View Posting</a>
+		<a href="detail/{{job._id}}"  ng-if="job.status != 'completed'" class="btn btn-default" >View Posting</a>
 		<!-- Delete TAsk  -->
 		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Delete</a> 
 		<!-- Task Completed -->
@@ -17,9 +17,11 @@
 	<div ng-if="vm.manage" ng-repeat="req in job.req" class="{{req.status}}">
 		<!-- | filter: (job.status == 'confirmed'?{ status : 'confirmed' }:null) -->
 		{{req.provider_status}}
-
+		
 		{{req.provider_name}} {{req.rating}}
 		offered {{req.bid}} on the date of {{req.provider_date | date:'MM/dd/yyyy'}}
+		<span ng-if="req.status == 'completed'" >Marked post as completed 
+		{{req.provider_date | date:'MM/dd/yyyy'}}</span>
 		<div ng-repeat="comment in req.comments">
 			{{comment}}
 		</div>

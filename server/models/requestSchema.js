@@ -17,7 +17,7 @@ var requestSchema = new Schema({
 	comments: [{
 		comment: String
 	}],
-	completed: Boolean,
+	completed_date: Date,
 	archived: Boolean,
 	active: Boolean,
 	created_at: { type : Date, default: Date.now }

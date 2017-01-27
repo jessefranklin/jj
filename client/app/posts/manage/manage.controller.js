@@ -60,18 +60,20 @@
     };
 
     vm.requestCompleted = function(id){
-      data = { stage:3, provider_status:'completed' };
+      data = { stage:3, status:'completed', completed_date:new Date()};
       requestService.updateRequest(id,data);
     };
 
     vm.completePost = function(id){
       setuserService.updateRating(user_id,vm.rating,'provider_rating');
-      //job_data = { status:'completed' };
-      //jobsService.update(id,job_data);
+      job_data = { status:'completed' };
+      jobsService.update(id,job_data);
+      data = { stage:4, status:'feedback' };
+      requestService.updateRequest(id,data);
     };
 
     vm.noRatingAndClose = function(id){
-      job_data = { status:'completed' };
+      job_data = { status:'completed'};
       jobsService.update(id,job_data);
     };
 
