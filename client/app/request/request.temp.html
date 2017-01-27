@@ -1,6 +1,7 @@
 <div class="item">
   	<h5>{{vm.request.service_name}}</h5>
-  	<h2>{{vm.request}}</h2>
+  	<h2>{{vm.request.bid}} {{vm.request.provider_time}} {{vm.request.provider_date}}</h2>
+  	{{vm.request.comments[0].comment}}
   	<div class="actions">
 		<a class="btn btn-default" >Edit</a>
 		<a ng-click="vm.confirm()" class="btn btn-default">Confirm</a> 

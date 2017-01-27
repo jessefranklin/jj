@@ -7,7 +7,7 @@
         restrict: "E",
         replace: true,
         scope: true,
-        template: "<ul><jobdetail ng-repeat='job in vm.jobs | filter : vm.searchText'></jobdetail></ul>"
+        template: "<ul><jobdetail ng-repeat='job in vm.jobs | filter : vm.searchText '></jobdetail></ul>"
       };
     })
 

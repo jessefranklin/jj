@@ -26,6 +26,10 @@
           provider_date:request.provider_date,
           provider_time:request.provider_time,
           original_cost:job.cost.total_amount,
+          comments:[{
+            from : user.user_id,
+            comment : request.comment
+          }],
           bid:request.bid
       };
 

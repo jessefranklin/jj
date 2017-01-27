@@ -24,7 +24,7 @@
 
 			</div>
 			<!-- Task Completed Provider -->
-			<a ng-click="vm.requestCompleted(request._id)" ng-if="request.status == 'confirmed'" class="btn btn-default">Task Completed</a>
+			<a data-toggle="modal" data-target="#notifyVendor" ng-click="vm.r_id = request._id" ng-if="request.status == 'confirmed'" class="btn btn-default">Notify Vendor Completed</a>
 
 			<!-- Task Feedback Provider -->
 			<a ng-if="request.status == 'completed'" class="btn btn-default" data-toggle="modal" data-target="#rateVendor" ng-click="vm.job_owner_id = request.job_owner_id; vm.id = request._id">Vendor Feedback</a>
@@ -35,7 +35,40 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
+	<!-- Notify Vendor Modal -->
+	<div class="modal fade" id="notifyVendor" tabindex="-1" role="dialog" aria-labelledby="notifyVendorLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="notifyVendorLabel">Notify Vendor Task Completed</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<label for="comment-input">Comments</label>
+						<textarea class="form-control" ng-model="vm.notify_comment" id="comment-input"></textarea>
+						<label for="image-upload">Images - Share image of work done to speed process</label>
+					    <form name="vm.upload_form" flow-init="{ target: './uploads'}">
+				    		<label for="image-upload">Images</label>
+			    			<input type="file" ng-model="vm.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" id="image-upload" flow-btn />
+
+				          	<div class="col-xs-6 col-md-3" ng-repeat="file in $flow.files">
+					            <a href="#" class="thumbnail">
+					              	<img class="post-image" flow-img="file" />
+					            </a>
+					        </div>
+					    </form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<a href="" class="btn btn-default" data-dismiss="modal" ng-click="vm.notifyVendor(vm.r_id)">Notify Vendor</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Rate Vendor Modal -->
 	<div class="modal fade" id="rateVendor" tabindex="-1" role="dialog" aria-labelledby="rateVendorLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -54,7 +87,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a href="" class="btn btn-default" ng-click="vm.rateVendor(vm.job_owner_id,vm.id)">Rate and close</a>
+					<a class="btn btn-default" data-dismiss="modal" ng-click="vm.rateVendor(vm.job_owner_id,vm.id)">Rate and close</a>
 				</div>
 			</div>
 		</div>

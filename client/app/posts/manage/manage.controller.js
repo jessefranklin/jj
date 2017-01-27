@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('manageCtrl',  ['$scope','$q','jobsService','setuserService','requestService','authService',manageController]);
+    .controller('manageCtrl',  ['$scope','$q','jobsService','setuserService','requestService','authService','Upload',manageController]);
 
-  manageController.$inject = ['$scope','$q','jobsService','setuserService','requestService','authService'];
+  manageController.$inject = ['$scope','$q','jobsService','setuserService','requestService','authService','Upload'];
 
-  function manageController($scope,$q,jobsService,setuserService,requestService,authService) {
+  function manageController($scope,$q,jobsService,setuserService,requestService,authService,Upload) {
     var vm = this;
     vm.authService = authService;
     vm.jobs = [];
@@ -50,6 +50,7 @@
       var data = { job_id: id };
       requestService.deleteAll(data);
       setuserService.deleteJobFromUser(user_id,'jobs',data);
+      vm.getAllByOwner(user_id);
     };
 
     // Request
@@ -57,6 +58,7 @@
       var data = { request_id: rid };
       requestService.deleteRequest(id,rid,data);
       setuserService.deleteJobFromUser(user_id,'requests',data);
+      vm.getAllByOwner(user_id);
     };
 
     vm.revertOffer = function(id,job_id){
@@ -64,6 +66,7 @@
       job_data = { status:'open' };
       requestService.updateRequest(id,data);
       jobsService.update(job_id,job_data);
+      vm.getAllByOwner(user_id);
     };
 
     vm.acceptOffer = function(id,job_id){
@@ -71,35 +74,70 @@
       job_data = { status:'confirmed' };
       requestService.updateRequest(id,data);
       jobsService.update(job_id,job_data);
+      vm.getAllByOwner(user_id);
     };
     
     vm.declineOffer = function(id){
       data = { status:'declined' };
       requestService.updateRequest(id,data);
+      vm.getAllByOwner(user_id);
     };
 
+
+    //Requests
     vm.requestCompleted = function(id){
       data = { stage:3, status:'completed', completed_date:new Date()};
       requestService.updateRequest(id,data);
+      vm.getRequestsByOwner(user_id);
     };
 
     vm.completePost = function(id,r_id){
+      console.log(id,r_id);
       setuserService.updateRating(user_id,vm.rating,'provider_rating');
       job_data = { status:'completed' };
       jobsService.update(id,job_data);
       data = { stage:4, status:'feedback'};
-      requestService.updateRequest(r_id,data);
+      //requestService.updateRequest(r_id,data);
+    };
+
+    vm.provider_images = [];
+    vm.notifyVendor = function(id){
+      if(vm.file){
+          Upload.upload({
+            url: 'http://localhost:3010/upload',
+            data: { file: vm.file }
+          }).then(function (resp) {
+              console.log(resp.data.data);
+              if(resp.data.error_code === 0){
+                console.log('Success '+resp.data.data);
+                data = {
+                  image_name : resp.data.data.filename
+                };
+                // data = { stage:3, status:'completed', completed_date:new Date()};
+                // requestService.updateRequest(id,data);
+                vm.getRequestsByOwner(user_id);
+              } else {
+                console.log('an error occured '+ resp);
+              }
+          });
+      } else {
+        data = { stage:3, status:'completed', completed_date:new Date(), notify_comment: vm.notify_comment };
+        requestService.updateRequest(id,data);
+        vm.getRequestsByOwner(user_id);
+      }
     };
 
     vm.noRatingAndClose = function(id){
       job_data = { status:'completed'};
       jobsService.update(id,job_data);
+      vm.getAllByOwner(user_id);
     };
 
     vm.rateVendor = function(id,r_id){
       setuserService.updateRating(id,vm.rating,'vendor_rating');
       data = { stage:5,status:'closed' };
       requestService.updateRequest(r_id,data);
+      vm.getRequestsByOwner(user_id);
     };
 
   }

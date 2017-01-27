@@ -9,6 +9,7 @@ var jobSchema = new Schema({
 	owner: String,
 	address: String,
 	status: String,
+	request_id: String,
 	owner_meta : {
 		telephone: Number
 	},
