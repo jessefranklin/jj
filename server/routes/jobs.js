@@ -4,7 +4,7 @@ var requestModel = require('../models/requestSchema');
 module.exports = function (app) {
 	// Get all jobs
 	app.get('/api/jobs', function (req, res) {
-        JobModel.find(function(err, jobs) {
+        JobModel.find({'status':'open'},function(err, jobs) {
 			if(err) res.send(err);
 			res.json(jobs);
         });
