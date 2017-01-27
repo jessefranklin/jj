@@ -25,8 +25,37 @@
 			</div>
 			<!-- Task Completed Provider -->
 			<a ng-click="vm.requestCompleted(request._id)" ng-if="request.status == 'confirmed'" class="btn btn-default">Task Completed</a>
+
+			<!-- Task Feedback Provider -->
+			<a ng-if="request.status == 'completed'" class="btn btn-default" data-toggle="modal" data-target="#rateVendor" ng-click="vm.job_owner_id = request.job_owner_id">Vendor Feedback</a>
+
 			<div ng-if="request.status == 'declined'">
 				<a ng-click="vm.removeRequest(request.job_id,request._id)" class="btn btn-default">Remove</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="rateVendor" tabindex="-1" role="dialog" aria-labelledby="rateVendorLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="rateVendorLabel">Rate Vendor</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<input type="hidden" ng-model="vm.rating.category" ng-init="vm.rating.category = job.service_category"/>
+						<input type="hidden" ng-model="vm.rating.type" ng-value="provider"/>
+						<star-rating ng-model="vm.rating.rating" readonly="vm.isReadonly"></star-rating>
+						<label for="comment-input">Review</label>
+						<textarea class="form-control" ng-model="vm.rating.review" id="comment-input"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<a href="" class="btn btn-default" ng-click="vm.rateVendor(vm.job_owner_id)">Rate and close</a>
+				</div>
 			</div>
 		</div>
 	</div>

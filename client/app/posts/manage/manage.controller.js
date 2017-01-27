@@ -72,6 +72,11 @@
       requestService.updateRequest(id,data);
     };
 
+    vm.rateVendor = function(id){
+      console.log(id);
+      setuserService.updateRating(id,vm.rating,'vendor_rating');
+    };
+
     vm.noRatingAndClose = function(id){
       job_data = { status:'completed'};
       jobsService.update(id,job_data);
