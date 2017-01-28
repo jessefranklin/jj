@@ -27,6 +27,12 @@
       },
       delete : function(id) {
         return $http.delete('/api/user/' + id);
+      },
+      createStripeUser : function(token) {
+        return $http.post('/api/payment/', token);
+      },
+      processPayment : function(obj) {
+        return $http.post('/api/processpayment/', obj);
       }
       
     };

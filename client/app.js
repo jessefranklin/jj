@@ -6,9 +6,9 @@
       //vendor authO
       'auth0.lock',
       'angular-jwt',
+      'angularPayments',
       //angular
       'ui.router',
-
       //Custom Modules
       'app.profile',
       'app.map',
@@ -119,6 +119,10 @@
       whiteListedDomains: ['localhost'],
       unauthenticatedRedirectPath: '/login'
     });
+
+    // Secret Key sk_test_0cZVhmOMFxWEZWHJyj4tSuke
+    // test pub key pk_test_m7XJT8LHC63NoYnl2HAw2Vq7
+    window.Stripe.setPublishableKey('pk_test_m7XJT8LHC63NoYnl2HAw2Vq7');
 
   }
 

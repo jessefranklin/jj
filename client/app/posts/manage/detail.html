@@ -25,6 +25,32 @@
 			<a ui-sref="app.manage" class="btn btn-default" ng-if="vm.userProfile.user_id == vm.job.owner">Manage Requests</a>
 		</div>
 
+		<div class="container">
+			<div ng-if="!vm.userProfile.email">
+				<label for="email-input">An Email address is required</label>
+				<input ng-model="vm.emailAdd" ng-init="vm.emailAdd = vm.userProfile.email" type="email" id="email-input">
+			</div>
+
+			<form stripe-form="stripeCallback" name="checkoutForm">
+			    <input ng-model="number" placeholder="Card Number" 
+			             payments-format="card" payments-validate="card" name="card" />
+			    <input ng-model="expiry" placeholder="Expiration" 
+			             payments-format="expiry" payments-validate="expiry"                
+			             name="expiry" />
+			    <input ng-model="cvc" placeholder="CVC" payments-format="cvc" payments-validate="cvc" name="cvc" />
+			    <button type="submit">Submit</button>
+
+				<div ng-if="checkoutForm.card.$invalid">
+					Error: invalid card number!
+				</div>
+				<div ng-if="checkoutForm.expiry.$invalid">
+					Error: invalid expiration date!
+				</div>
+				<div ng-if="checkoutForm.cvc.$invalid">
+					Error: invalid CVC!
+				</div>
+			</form>  
+		</div>
 
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

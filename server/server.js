@@ -87,10 +87,12 @@ require('./routes/jobs')(app);
 require('./routes/users')(app);
 require('./routes/ratings')(app);
 require('./routes/request')(app);
+require('./routes/stripe')(app);
 
 app.use(function(req, res) {
   res.sendFile(path.join(__dirname, '/../client', 'index.html'));
 });
+
 
 app.listen(port, function() {
     console.log('env = ' + app.get('env') +

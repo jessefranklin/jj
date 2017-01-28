@@ -77,6 +77,30 @@
           .then(function(data) {
               console.log(data);
           });
+      },
+
+      createStripeUser = function(token){
+        userService.createStripeUser(token)
+          .then(function(data) {
+              var user = {
+                s_customer_id: data.data.id
+              };
+              //to do update user with s_id 
+          });
+
+      },
+
+      processPayment = function(c_id){
+        var payme = {
+          amount: 1000,
+          currency: "cad",
+          customer: c_id
+        };
+        userService.processPayment(payme)
+          .then(function(data) {
+              console.log(data);
+          });
+
       };
 
       return {
@@ -85,7 +109,9 @@
         updateUser: updateUser,
         getUser: getUser,
         updateRating: updateRating,
-        deleteJobFromUser: deleteJobFromUser
+        deleteJobFromUser: deleteJobFromUser,
+        processPayment:processPayment,
+        createStripeUser: createStripeUser
       };
 
   }

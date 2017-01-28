@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('detailCtrl',  ['jobsService','requestService','$state','authService','globalFunc','$location',detailController]);
+    .controller('detailCtrl',  ['$scope','jobsService','requestService','$state','authService','globalFunc','$location','setuserService',detailController]);
 
-  detailController.$inject = ['jobsService','requestService','$state','authService','globalFunc','$location'];
+  detailController.$inject = ['$scope','jobsService','requestService','$state','authService','globalFunc','$location','setuserService'];
 
-  function detailController(jobsService,requestService,$state,authService,globalFunc,$location) {
+  function detailController($scope,jobsService,requestService,$state,authService,globalFunc,$location,setuserService) {
     var vm = this;
     vm.authService = authService;
     vm.image_path = globalFunc.uploadPath;
@@ -35,6 +35,19 @@
 
     vm.createRequest=function(){
       requestService.createRequest(vm.job,vm.userProfile,vm.request);
+    };
+
+    $scope.stripeCallback = function (code, result) {
+      if (result.error) {
+        console.log('it failed! error: ' + result.error.message);
+      } else {
+        var email = vm.userProfile.email?vm.userProfile.email:vm.emailAdd;
+        var data = {
+          stripeToken: result.id,
+          email: email
+        };
+        setuserService.createStripeUser(data);
+      }
     };
 
   }
