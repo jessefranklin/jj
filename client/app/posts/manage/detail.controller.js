@@ -43,10 +43,9 @@
       } else {
         var email = vm.userProfile.email?vm.userProfile.email:vm.emailAdd;
         var data = {
-          stripeToken: result.id,
-          email: email
+          stripeToken: result.id
         };
-        setuserService.createStripeUser(data);
+        setuserService.createStripeUser(data,vm.userProfile.user_id);
       }
     };
 

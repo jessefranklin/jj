@@ -12,7 +12,7 @@
 		<!-- Delete TAsk  -->
 		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Delete</a> 
 		<!-- Task Completed -->
-		<a ng-if="vm.manage && job.status == 'confirmed'" ng-click="vm.jobid = job._id; vm.req_id = job.owner" class="btn btn-default" data-toggle="modal" data-target="#rateAndComplete">Task Completed</a> 
+		<a ng-if="vm.manage && job.status == 'confirmed'" ng-click="vm.jobid = job._id; vm.req_id = job.owner" class="btn btn-default" data-toggle="modal" data-target="#payComplete">Task Completed</a> 
 	</div>
 	<div ng-if="vm.manage" ng-repeat="req in job.req" class="{{req.status}}">
 		<!-- | filter: (job.status == 'confirmed'?{ status : 'confirmed' }:null) -->
@@ -36,6 +36,34 @@
 			Option to revert confirmation within 10 mins
 		</div>
 	</div>
+
+	<!-- Pay Provider -->
+	<div class="modal fade" id="payComplete" tabindex="-1" role="dialog" aria-labelledby="payLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="payLabel">Pay Provider</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						
+						<label for="amount-input">Amount to be paid</label>
+						<input type="text" class="form-control" ng-model="vm.paying.amount" id="amount-input"/>
+
+						<label for="tip-input">Tip</label>
+						<input type="text" class="form-control" ng-model="vm.paying.tip" id="tip-input"/>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<a class="btn btn-default" data-dismiss="modal" ng-click="vm.payProvider(job.owner)">Pay</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- Rate Provider Modal -->
 	<div class="modal fade" id="rateAndComplete" tabindex="-1" role="dialog" aria-labelledby="rateAndCompleteLabel">

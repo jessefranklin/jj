@@ -11,9 +11,8 @@ module.exports = function (app) {
 
 		stripe.customers.create({
 			email: useremail,
-			source: token,
+			source: token
 		}).then(function(customer) {
-		// YOUR CODE: Save the customer ID and other info in a database for later.
 			res.json(customer);
 			// return stripe.charges.create({
 			// 	amount: 1000,
@@ -26,14 +25,10 @@ module.exports = function (app) {
     });
 
 	app.post('/api/processpayment', function (req, res) {
-		console.log(req.body);
-		stripe.charges.create({
-				amount: 1000,
-				currency: "cad",
-				customer: customerId
-		}).then(function(charge) {
+		//populate charge
+		stripe.charges.create(req.body).then(function(charge) {
 			// Use and save the charge info.
-			console.log();
+			console.log(charge);
 		});
 
 	});

@@ -13,6 +13,7 @@
     var user_id;
     vm.manage = true;
     vm.rating = {};
+    vm.paying = {};
     vm.rating.rating = 1;
     vm.isReadonly = false;
     this.rateFunction = function(rating) {
@@ -92,7 +93,6 @@
     };
 
     vm.completePost = function(id,r_id){
-      console.log(id,r_id);
       setuserService.updateRating(user_id,vm.rating,'provider_rating');
       job_data = { status:'completed' };
       jobsService.update(id,job_data);
@@ -139,6 +139,28 @@
       requestService.updateRequest(r_id,data);
       vm.getRequestsByOwner(user_id);
     };
+
+    vm.payProvider = function(u_id){
+      var payme = {
+        currency: "cad"
+      };
+
+      if(vm.paying.tip){
+        payme.amount = vm.paying.tip+vm.paying.amount;
+      } else {
+        payme.amount = vm.paying.amount;
+      }
+
+      setuserService.getUser(u_id).then(function(data){
+        payme.customer = data.data[0].s_customer_token;
+        setuserService.processPayment(payme);
+          
+      });
+
+
+
+    };
+
 
   }
 

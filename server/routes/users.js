@@ -28,6 +28,7 @@ module.exports = function (app) {
 
     // Edit job
     app.put('/api/user/:id', function (req, res) {
+    	console.log(req.params.id);
 		var query = {'user_id':req.params.id},
 		update = {
 			"$set": req.body

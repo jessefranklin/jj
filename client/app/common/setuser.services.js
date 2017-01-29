@@ -23,10 +23,12 @@
       },
 
       getUser = function(userProfile){
+        var deferred = $q.defer();
         userService.getById(userProfile)
           .then(function(data) {
-            
+            deferred.resolve(data);
           });
+        return deferred.promise;
       },
 
       createUser=function(userData,type){
@@ -47,10 +49,8 @@
         };
         userService.create(vm.user_data)
           .then(function(data) {
-              console.log(data);
               console.log('user created');
               vm.rating.user_id = data.data.user_id;
-              console.log(vm.rating);
               ratingService.create(vm.rating)
                 .then(function(data) {
                   console.log('rating obj created');
@@ -79,23 +79,17 @@
           });
       },
 
-      createStripeUser = function(token){
+      createStripeUser = function(token, user_id){
         userService.createStripeUser(token)
           .then(function(data) {
-              var user = {
-                s_customer_id: data.data.id
+              var userData = {
+                s_customer_token: data.data.id
               };
-              //to do update user with s_id 
+              userService.update(user_id,userData);
           });
-
       },
 
-      processPayment = function(c_id){
-        var payme = {
-          amount: 1000,
-          currency: "cad",
-          customer: c_id
-        };
+      processPayment = function(payme){
         userService.processPayment(payme)
           .then(function(data) {
               console.log(data);
@@ -104,14 +98,14 @@
       };
 
       return {
-        addToUser: addToUser,
         createUser: createUser,
-        updateUser: updateUser,
         getUser: getUser,
-        updateRating: updateRating,
+        updateUser: updateUser,
+        addToUser: addToUser,
         deleteJobFromUser: deleteJobFromUser,
-        processPayment:processPayment,
-        createStripeUser: createStripeUser
+        updateRating: updateRating,
+        createStripeUser: createStripeUser,
+        processPayment:processPayment
       };
 
   }
