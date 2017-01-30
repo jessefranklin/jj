@@ -89,6 +89,16 @@
           }
         }
       })
+      .state('app.profile', {
+        url: 'profile',
+        views : {
+          'content@' : {
+              templateUrl: 'app/profile/profile.html',
+              controller: 'profileCtrl',
+              controllerAs: 'vm'
+          }
+        }
+      })
       .state('app.request', {
         url: 'request',
         views : {

@@ -18,7 +18,8 @@
                     <a href="#" data-ui-sref="{{state.sref}}" >{{state.name}}</a>
                 </li>
                 <li ng-if="!isAuthenticated"><a ng-click="authService.login()">Log In</a></li>
-                <li ng-if="isAuthenticated"><a ui-sref="app.manage">{{vm.userProfile.name}}</a></li>
+                <li ng-if="isAuthenticated"><a ui-sref="app.manage">Manage</a></li>
+                <li ng-if="isAuthenticated"><a ui-sref="app.profile">{{vm.userProfile.name}}</a></li>
                 <li ng-if="isAuthenticated"><a data-ui-sref="app" ng-click="authService.logout()">Log Out</a></li>
             </ul>
         </div>
