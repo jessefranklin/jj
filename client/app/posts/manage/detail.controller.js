@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('detailCtrl',  ['$scope','jobsService','requestService','$state','authService','globalFunc','$location','setuserService',detailController]);
+    .controller('detailCtrl',  ['$scope','jobsService','requestService','$state','authService','globalFunc','$location','setuserService','$document',detailController]);
 
-  detailController.$inject = ['$scope','jobsService','requestService','$state','authService','globalFunc','$location','setuserService'];
+  detailController.$inject = ['$scope','jobsService','requestService','$state','authService','globalFunc','$location','setuserService','$document'];
 
-  function detailController($scope,jobsService,requestService,$state,authService,globalFunc,$location,setuserService) {
+  function detailController($scope,jobsService,requestService,$state,authService,globalFunc,$location,setuserService,$document) {
     var vm = this;
     vm.authService = authService;
     vm.image_path = globalFunc.uploadPath;
@@ -14,7 +14,11 @@
 
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
-
+      setuserService.getUser(profile.user_id)
+        .then(function(data){
+          vm.userData = data.data[0];
+          console.log(vm.userData);
+        });
     });
 
     jobsService.getById($state.params.id)
@@ -41,11 +45,30 @@
       if (result.error) {
         console.log('it failed! error: ' + result.error.message);
       } else {
-        var email = vm.userProfile.email?vm.userProfile.email:vm.emailAdd;
+        var email = vm.userData.email?vm.userData.email:vm.emailAdd;
         var data = {
-          stripeToken: result.id
+          stripeToken: result.id,
+          email: email
         };
         setuserService.createStripeUser(data,vm.userProfile.user_id);
+      }
+    };
+
+    vm.approveCardtoProfile= function(j_id){
+      if ($scope.checkoutForm.$valid) {
+        var data = {
+          status:'open'
+        };
+        jobsService.update(j_id,data);
+        vm.job.status = 'open';
+        angular.element(document.querySelector('#paymentModal')).modal('hide');
+
+        if(!vm.userData.email){
+          var userData = {
+            email:vm.emailAdd
+          };
+          setuserService.update(vm.userProfile.user_id,userData);
+        }
       }
     };
 
@@ -53,7 +76,8 @@
       var data = {
         status:'open'
       };
-      setuserService.update(j_id,data);
+      vm.job.status = 'open';
+      jobsService.update(j_id,data);
     };
 
   }
