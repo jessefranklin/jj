@@ -26,7 +26,7 @@
           vm.job.location.type = 'Point';
           vm.job.location.coordinates = [results[0].geometry.location.lng(),results[0].geometry.location.lat()];
           vm.job.owner = vm.userProfile.user_id;
-          vm.job.status = 'open';
+          vm.job.status = 'draft';
           vm.job.request.active = false;
 
           if(vm.file){

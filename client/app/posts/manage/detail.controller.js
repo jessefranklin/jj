@@ -49,6 +49,13 @@
       }
     };
 
+    vm.publishPost= function(j_id){
+      var data = {
+        status:'open'
+      };
+      setuserService.update(j_id,data);
+    };
+
   }
 
 }());
