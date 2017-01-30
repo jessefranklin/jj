@@ -59,7 +59,7 @@
       var data = { request_id: rid };
       requestService.deleteRequest(id,rid,data);
       setuserService.deleteJobFromUser(user_id,'requests',data);
-      vm.getAllByOwner(user_id);
+      vm.getRequestsByOwner(user_id);
     };
 
     vm.revertOffer = function(id,job_id){
@@ -154,13 +154,11 @@
       setuserService.getUser(u_id).then(function(data){
         payme.customer = data.data[0].s_customer_token;
         setuserService.processPayment(payme);
-          
       });
 
-
+      //update request to paid
 
     };
-
 
   }
 

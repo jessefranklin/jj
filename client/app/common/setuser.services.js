@@ -2,10 +2,10 @@
 
   angular
     .module('app.profile')
-    .factory('setuserService', ['$http','$q','userService','ratingService', setuserService]);
+    .factory('setuserService', ['$http','$q','userService','ratingService','accountingService', setuserService]);
 
-  setuserService.$inject = ['$http','$q','userService','ratingService'];
-  function setuserService ($http,$q,userService,ratingService) {
+  setuserService.$inject = ['$http','$q','userService','ratingService','accountingService'];
+  function setuserService ($http,$q,userService,ratingService,accountingService) {
       var vm = this;
       vm.userProfile = {};
 
@@ -47,19 +47,39 @@
           provider_rating_avg: 0,
           provider_rating: []
         };
+        vm.accounting = {
+          user_id: vm.userProfile.user_id,
+          balance: 0,
+          total_earnings: 0,
+          owed:[],
+          earned:[]
+        };
         userService.create(vm.user_data)
           .then(function(data) {
-              console.log('user created');
               vm.rating.user_id = data.data.user_id;
               ratingService.create(vm.rating)
                 .then(function(data) {
-                  console.log('rating obj created');
+                  console.log('rating model created');
+                  accountingService.create(vm.accounting)
+                    .then(function(data) {
+                      console.log('accounting model created');
+
+                      console.log(data);
+                    });
                 });
+              
           });
       },
 
       updateUser=function(user_id,userData,type){
         userService.addToUser(user_id,type,userData)
+          .then(function(data) {
+              console.log('update user');
+          });
+      },
+
+      update=function(user_id,userData){
+        userService.update(user_id,userData)
           .then(function(data) {
               console.log('update user');
           });
@@ -101,6 +121,7 @@
         createUser: createUser,
         getUser: getUser,
         updateUser: updateUser,
+        update: update,
         addToUser: addToUser,
         deleteJobFromUser: deleteJobFromUser,
         updateRating: updateRating,

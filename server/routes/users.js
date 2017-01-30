@@ -26,7 +26,7 @@ module.exports = function (app) {
         });
     });
 
-    // Edit job
+    // Edit user
     app.put('/api/user/:id', function (req, res) {
     	console.log(req.params.id);
 		var query = {'user_id':req.params.id},

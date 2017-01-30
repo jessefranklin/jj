@@ -4,11 +4,10 @@ var stripe = require("stripe")(
 
 module.exports = function (app) {
 	
-	// Get all jobs
 	app.post('/api/payment', function (req, res) {
 		var token = req.body.stripeToken;
 		var useremail = req.body.email;
-
+		
 		stripe.customers.create({
 			email: useremail,
 			source: token

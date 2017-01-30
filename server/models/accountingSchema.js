@@ -6,7 +6,7 @@ var accountingSchema = new Schema({
 	user_id: String,
 	balance: Number,
 	total_earnings: Number,
-	paid: [{
+	owed: [{
 		processed: { type : Date, default: Date.now },
 		job_id: Number,
 		job_title: String,
@@ -14,7 +14,7 @@ var accountingSchema = new Schema({
 		amount: Number,
 		status: String
 	}],
-	earning: [{
+	earned: [{
 		processed: { type : Date, default: Date.now },
 		job_id: Number,
 		job_title: String,

@@ -11,6 +11,7 @@
     vm.authService = authService;
     vm.image_path = globalFunc.uploadPath;
     vm.request = {};
+    vm.requestformstatus = 'form';
 
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
@@ -38,7 +39,12 @@
     });
 
     vm.createRequest=function(){
+      vm.requestformstatus = 'review';
       requestService.createRequest(vm.job,vm.userProfile,vm.request);
+    };
+
+    vm.confirm=function(){
+      requestService.submitRequest();
     };
 
     $scope.stripeCallback = function (code, result) {

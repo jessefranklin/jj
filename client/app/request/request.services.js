@@ -42,11 +42,13 @@
       vm.user = user;
       requestData.push(vm.request);
 
+      vm.requestformstatus = 'review';
       //FIX FOR MODAL
-      angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
-      angular.element(document.body).removeClass('modal-open');
+      // angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
+      // angular.element(document.body).removeClass('modal-open');
+      // $location.path('/request');
 
-      $location.path('/request');
+
     };
 
     submitRequest = function(){
@@ -62,6 +64,8 @@
           };
           requestRestService.addToJob(vm.request.job_id,applicant);
           vm.submitted = true;
+          angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
+          angular.element(document.body).removeClass('modal-open');
           $location.path('/manage');
         });
     };
