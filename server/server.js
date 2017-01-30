@@ -88,6 +88,7 @@ require('./routes/users')(app);
 require('./routes/ratings')(app);
 require('./routes/request')(app);
 require('./routes/stripe')(app);
+require('./routes/accounting')(app);
 
 app.use(function(req, res) {
   res.sendFile(path.join(__dirname, '/../client', 'index.html'));

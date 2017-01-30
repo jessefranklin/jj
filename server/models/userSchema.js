@@ -25,6 +25,9 @@ var userSchema = new Schema({
 	rating_id: String,
 	rating_avg: Number,
 	s_customer_token: String,
+	archive_id: String,
+	balance: Number,
+	accounting_id: String,
 	created_at: { type : Date, default: Date.now }
 });
 
