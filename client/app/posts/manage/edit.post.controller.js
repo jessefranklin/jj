@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('editPostCtrl',['jobsService','authService','Upload', '$state','$location','globalFunc', editPostController]);
+    .controller('editPostCtrl',['$scope','jobsService','authService','fileUpload','$state','$location','globalFunc', editPostController]);
 
-  editPostController.$inject = ['jobsService','authService','Upload', '$state','$location','globalFunc'];
+  editPostController.$inject = ['$scope','jobsService','authService','fileUpload','$state','$location','globalFunc'];
 
-  function editPostController(jobsService,authService,Upload,$state,$location,globalFunc) {
+  function editPostController($scope,jobsService,authService,fileUpload,$state,$location,globalFunc) {
     var vm = this, geocoder;
     vm.authService = authService;
     vm.job = {};
@@ -30,10 +30,8 @@
       geocoder.geocode({ 'address': vm.job.address }, function(results, status) {
         if (status === 'OK') {
           vm.job.location.coordinates = [results[0].geometry.location.lng(),results[0].geometry.location.lat()];
-          if(vm.file){
-            if (vm.upload_form.file.$valid && vm.file) {
-              vm.upload(vm.file);
-            }
+          if($scope.myFile){
+            vm.upload();
           } else {
             vm.submitForm();
           }
@@ -41,14 +39,14 @@
       });
     };
 
-    vm.upload = function (file) {
-        Upload.upload({
-            url: 'http://localhost:3010/upload',
-            data: {file:file}
-        }).then(function (resp) {
+    vm.upload = function () {
+        var file = $scope.myFile;
+        var uploadUrl = "/upload";
+        fileUpload.uploadFileToUrl(file, uploadUrl).then(function(resp) {
+          console.log(resp.data);
             if(resp.data.error_code === 0){
+              console.log('Success '+resp.data.data);
               vm.job.image = {
-                image_name : resp.data.data.originalname,
                 image_path : resp.data.data.filename
               };
               vm.submitForm();

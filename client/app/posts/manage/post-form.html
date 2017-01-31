@@ -113,8 +113,8 @@
   </div>
       
 
-  <label for="image-upload">Upload images</label>
-  <input type = "file" file-model = "myFile" id="image-upload" />
+  <label for="image-upload">Upload image</label>
+  <input type="file" file-model="myFile" id="image-upload" />
 
       <div class="">
         <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === job.owner">Publish</a>
