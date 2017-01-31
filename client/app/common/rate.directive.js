@@ -11,11 +11,11 @@
     return {
       restrict: 'EA',
       template:
-		'<label for="rate-input">Rate Provider</label>'+
+		'<label for="rate-input" aria-label"Rate"></label>'+
 		'<input class="form-control" ng-model="scope.rating" type="hidden" id="bid-input">'+
         '<ul class="star-rating" ng-class="{readonly: readonly}">' +
         '  <li ng-repeat="star in stars" class="star" ng-class="{filled: star.filled}" ng-click="toggle($index)">' +
-        '    <i class="fa fa-star"></i>' + // or &#9733
+        '    <i class="fa fa-star"></i>' +
         '  </li>' +
         '</ul>',
       scope: {
