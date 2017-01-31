@@ -21,7 +21,7 @@ module.exports = function (app) {
 
     // Add accounting to array
     app.put('/api/addtoaccounting/:oid/:pid', function (req, res) {
-		var key = 'owed', push = {};
+		var key = 'paid', push = {};
 		push[key] = req.body;
 		var query = {'user_id':req.params.oid},
 		update = {

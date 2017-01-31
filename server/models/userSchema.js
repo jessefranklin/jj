@@ -27,7 +27,10 @@ var userSchema = new Schema({
 		total: Number
 	}],
 	rating_id: String,
-	rating_avg: Number,
+	ratings : {
+		vendor_rating: Number,
+		provider_rating: Number
+	},
 	s_customer_token: String,
 	archive_id: String,
 	balance: Number,

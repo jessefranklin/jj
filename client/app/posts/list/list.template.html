@@ -89,7 +89,7 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				 	<!-- Pass in provider user_id for rating -->
 				 	{{vm.job.provider.user_id}}
-					<a class="btn btn-default" data-dismiss="modal" ng-click="vm.completePost(vm.jobid,vm.req_id,job.provider.user_id)">Rate and close</a>
+					<a class="btn btn-default" data-dismiss="modal" ng-click="vm.completePost(vm.jobid,job.provider.request_id,job.provider.user_id)">Rate and close</a>
 				</div>
 			</div>
 		</div>

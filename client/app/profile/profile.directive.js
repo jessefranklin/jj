@@ -5,9 +5,9 @@
     .directive('profileview', function () {
       return {
         restrict: "E",
-        scope: {
-          user: '='
-        },
+        scope: true,
+        controller: "profileCtrl",
+        controllerAs: "vm",
         templateUrl: 'app/profile/profile.template.html'
       };
     });

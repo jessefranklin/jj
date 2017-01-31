@@ -1,5 +1,5 @@
 <div class="container">
-	<profileview user='vm.userProfile' viewingself='true'></profileview>
+	<profileview user='vm.userData' viewingself='true'></profileview>
 	
 	<div ng-if="vm.jobs" class="">
 	<h4>Current Postings</h4>
@@ -27,7 +27,7 @@
 			<a data-toggle="modal" data-target="#notifyVendor" ng-click="vm.r_id = request._id" ng-if="request.status == 'confirmed'" class="btn btn-default">Notify Vendor Completed</a>
 
 			<!-- Task Feedback Provider -->
-			<a ng-if="request.status == 'completed'" class="btn btn-default" data-toggle="modal" data-target="#rateVendor" ng-click="vm.job_owner_id = request.job_owner_id; vm.id = request._id">Vendor Feedback</a>
+			<a ng-if="request.status == 'feedback'" class="btn btn-default" data-toggle="modal" data-target="#rateVendor" ng-click="vm.job_owner_id = request.job_owner_id; vm.id = request._id">Vendor Feedback</a>
 
 			<div ng-if="request.status == 'declined'">
 				<a ng-click="vm.removeRequest(request.job_id,request._id)" class="btn btn-default">Remove</a>

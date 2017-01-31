@@ -1,4 +1,5 @@
 var RatingModel = require('../models/ratingSchema');
+var UserModel = require('../models/userSchema');
 
 module.exports = function (app) {
 
@@ -29,9 +30,50 @@ module.exports = function (app) {
 		},
 		options = { "multi": true };
         RatingModel.update(query, update, options, function(err, rating) {
-			if(err) res.send(err);
-			res.json(rating);
+			pushAverage(req.params.id,req.params.type);
         });
     });
+
+    // Push average rating to user obj
+	var pushAverage = function(id,type) {
+		RatingModel.aggregate([
+			{ $unwind:'$'+type},
+			{ $group: {
+					"_id": {
+						"_id": "$_id",
+						"user_id": id
+					},
+					"vendor_rating":{
+						"$push": '$'+type
+					},
+					"ratings_average": {
+						"$avg": '$'+type+'.rating'
+					}
+				}
+			},
+			{ "$project": {
+				"_id": 0,
+				"user_id": "$_id.user_id",
+				"ratings_average": 1,
+				"vendor_rating": 1
+			}}], function (err, result) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+			var key = type, push = {};
+			push[key] =  result[0].ratings_average;
+			var query = {'user_id':result[0].user_id},
+			update = {
+				"$set": { "ratings": push }
+			},
+			options = { "multi": true };
+			UserModel.update(query, update, options, function(err, user) {
+				console.log(user);
+			});
+		});
+	};
+
+
 
 };

@@ -103,7 +103,7 @@
       job_data = { status:'completed' };
       jobsService.update(id,job_data);
       data = { stage:4, status:'feedback'};
-      //requestService.updateRequest(r_id,data);
+      requestService.updateRequest(r_id,data);
     };
 
     vm.provider_images = [];

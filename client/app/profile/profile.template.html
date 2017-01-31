@@ -3,14 +3,16 @@
 <div class="row profile">
 	<div class="">
 		<div class="profile-pic">
-			<img src="{{user.picture}}" class="img-responsive" alt="">
+			<img src="{{vm.userData.picture}}" class="img-responsive" alt="">
 		</div>
 		<div class="profile-meta">
 			<div class="profile-usertitle-name">
-				{{user.name}}
+				{{vm.userData.name}}
 			</div>
 			<div class="profile-usertitle-job">
-				Postings X
+				Postings X<br />
+				Vendor Rating: {{vm.userData.ratings.vendor_rating}}<br />
+				Provider Rating: {{vm.userData.ratings.provider_rating}}
 			</div>
 			<div>
 				<span class="label label-default">Labour</span>

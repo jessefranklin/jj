@@ -12,6 +12,10 @@
     
     authService.getProfileDeferred().then(function (profile) {
       vm.userProfile = profile;
+      setuserService.getUser(profile.user_id)
+        .then(function(data){
+          vm.userData = data.data[0];
+        });
     });
 
   }
