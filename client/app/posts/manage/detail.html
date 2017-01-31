@@ -109,7 +109,7 @@
 		  		<div class="" ng-if="vm.requestformstatus == 'review'">
 		        	
 					Bid on Fee {{vm.request.bid}} <br />
-					I can come by {{vm.request.provider_date}}<br />
+					I can come by {{vm.request.provider_date | date:'MM/dd/yyyy' }}<br />
 	      			Within the hour of {{vm.request.provider_time}}<br />
       				Notes: {{vm.request.comment}}
 				

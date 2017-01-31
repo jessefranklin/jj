@@ -14,6 +14,9 @@
     vm.manage = true;
     vm.rating = {};
     vm.paying = {};
+    vm.show = {
+      show:'jobs'
+    };
     vm.rating.rating = 1;
     vm.isReadonly = false;
     this.rateFunction = function(rating) {
@@ -30,6 +33,7 @@
     vm.getRequestsByOwner = function(id){
       requestService.getRequestsByOwner(id)
         .then(function(user_data){
+          vm.show.request = user_data.data.length;
           vm.manageRequests = user_data.data;
       });
     };
@@ -37,9 +41,12 @@
     vm.getAllByOwner = function(user_id){
       jobsService.getAllByOwner(user_id)
         .then(function(data){
+          vm.show.job = data.data.length;
           vm.jobs = data.data;
       });
     };
+
+    
 
     vm.deletePost = function(id){
       //Todo add are you sure dialog

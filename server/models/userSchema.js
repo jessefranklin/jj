@@ -29,12 +29,18 @@ var userSchema = new Schema({
 	rating_id: String,
 	ratings : {
 		vendor_rating: Number,
-		provider_rating: Number
+		vendor_rating_count: Number,
+		provider_rating: Number,
+		provider_rating_count: Number
 	},
 	s_customer_token: String,
 	archive_id: String,
-	balance: Number,
 	accounting_id: String,
+	accounting : {
+		balance: Number,
+		total_earned: Number,
+		total_paid: Number
+	},
 	created_at: { type : Date, default: Date.now }
 });
 

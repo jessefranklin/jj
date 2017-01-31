@@ -11,8 +11,11 @@
 			</div>
 			<div class="profile-usertitle-job">
 				Postings X<br />
-				Vendor Rating: {{vm.userData.ratings.vendor_rating}}<br />
-				Provider Rating: {{vm.userData.ratings.provider_rating}}
+				<p ng-if="vm.userData.ratings.vendor_rating">Vendor Rating: {{vm.userData.ratings.vendor_rating}}
+				<star-rating ng-model="vm.userData.ratings.vendor_rating" readonly="true"></star-rating></p>
+
+				<p ng-if="vm.userData.ratings.provider_rating">Provider Rating: {{vm.userData.ratings.provider_rating}}
+				<star-rating ng-model="vm.userData.ratings.provider_rating" readonly="true"></star-rating></p>
 			</div>
 			<div>
 				<span class="label label-default">Labour</span>
