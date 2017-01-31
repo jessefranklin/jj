@@ -6,6 +6,7 @@
       //vendor authO
       'auth0.lock',
       'angular-jwt',
+      'angular.filter',
       'angularPayments',
       //angular
       'ui.router',
