@@ -4,6 +4,9 @@
   	<h5>{{job.service_name}}</h5>
   	<h2>{{job.title}}</h2>
   	<div>{{job.service_description}}</div>
+
+  	<br /><br />
+		Approved provider id {{job.provider.user_id}}
   	<div class="actions">
 		<!-- Edit post  -->
 		<a href="edit/{{job._id}}" ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Edit</a>
@@ -17,18 +20,18 @@
 	<div ng-if="vm.manage" ng-repeat="req in job.req" class="{{req.status}}">
 		<!-- | filter: (job.status == 'confirmed'?{ status : 'confirmed' }:null) -->
 		{{req.provider_status}}
-		
 		{{req.provider_name}} {{req.rating}}
 		offered {{req.bid}} on the date of {{req.provider_date | date:'MM/dd/yyyy'}}
 		<span ng-if="req.status == 'completed'" >Marked post as completed 
 		{{req.provider_date | date:'MM/dd/yyyy'}} with note: <br />
 		{{req.notify_comment}}</span>
+
 		<div ng-repeat="comment in req.comments">
 			Note: {{comment.comment}} {{comment.time_stamp | date:'MM/dd/yyyy' }}
 		</div>
 		
 		<div ng-if="job.status == 'open' && req.status != 'declined' ">
-			<a ng-click="vm.acceptOffer(req._id,job._id)" class="btn btn-default" >Accept</a>
+			<a ng-click="vm.acceptOffer(req._id,req.provider_id,job._id)" class="btn btn-default" >Accept</a>
 			<a ng-click="vm.declineOffer(req._id)" class="btn btn-default" >Decline</a> 
 		</div>
 		<div ng-if="req.status == 'confirmed'">
@@ -58,7 +61,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#rateAndComplete" ng-click="vm.payProvider(job.owner)">Pay</a>
+					<a class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#rateAndComplete" ng-click="vm.payProvider(job.owner,job.provider.user_id,job)">Pay</a>
 				</div>
 			</div>
 		</div>
@@ -84,7 +87,9 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a class="btn btn-default" data-dismiss="modal" ng-click="vm.completePost(vm.jobid,vm.req_id)">Rate and close</a>
+				 	<!-- Pass in provider user_id for rating -->
+				 	{{vm.job.provider.user_id}}
+					<a class="btn btn-default" data-dismiss="modal" ng-click="vm.completePost(vm.jobid,vm.req_id,job.provider.user_id)">Rate and close</a>
 				</div>
 			</div>
 		</div>

@@ -10,8 +10,8 @@
       getById : function(id) {
         return $http.get('/api/accounting/' + id);
       },
-      addPaymentToUser : function(id,type, data) {
-        return $http.put('/api/accounting/'+id+'/'+type, data);
+      addPaymentToUser : function(oid,pid, data) {
+        return $http.put('/api/addtoaccounting/'+oid+'/'+pid, data);
       },
       create : function(user) {
         return $http.post('/api/accounting', user);

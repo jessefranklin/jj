@@ -22,6 +22,10 @@ var userSchema = new Schema({
 		title: String,
 		status: String
 	}],
+	skills : [{
+		category: String,
+		total: Number
+	}],
 	rating_id: String,
 	rating_avg: Number,
 	s_customer_token: String,

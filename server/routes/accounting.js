@@ -20,17 +20,28 @@ module.exports = function (app) {
     });
 
     // Add accounting to array
-    app.put('/api/addtoaccounting/:id/:type', function (req, res) {
-		var key = req.params.type, push = {};
+    app.put('/api/addtoaccounting/:oid/:pid', function (req, res) {
+		var key = 'owed', push = {};
 		push[key] = req.body;
-		var query = {'user_id':req.params.id},
+		var query = {'user_id':req.params.oid},
 		update = {
 			$push : push
 		},
 		options = { "multi": true };
         AccountingModel.update(query, update, options, function(err, accounting) {
 			if(err) res.send(err);
-			res.json(accounting);
+			
+        });
+
+        var pkey = 'earned', ppush = {};
+		ppush[pkey] = req.body;
+		var pquery = {'user_id':req.params.pid},
+		pupdate = {
+			$push : ppush
+		},
+		poptions = { "multi": true };
+        AccountingModel.update(pquery, pupdate, poptions, function(err, accounting) {
+			if(err) res.send(err);
         });
     });
 

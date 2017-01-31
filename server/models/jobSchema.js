@@ -46,6 +46,10 @@ var jobSchema = new Schema({
 		request_id: String,
 		status: String
 	}],
+	provider: {
+		user_id: String,
+		request_id: String
+	},
 	created_at: { type : Date, default: Date.now }
 });
 

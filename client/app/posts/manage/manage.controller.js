@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('manageCtrl',  ['$scope','$q','jobsService','setuserService','requestService','authService','Upload',manageController]);
+    .controller('manageCtrl',  ['$scope','$q','jobsService','setuserService','requestService','authService','Upload','accountingService',manageController]);
 
-  manageController.$inject = ['$scope','$q','jobsService','setuserService','requestService','authService','Upload'];
+  manageController.$inject = ['$scope','$q','jobsService','setuserService','requestService','authService','Upload','accountingService'];
 
-  function manageController($scope,$q,jobsService,setuserService,requestService,authService,Upload) {
+  function manageController($scope,$q,jobsService,setuserService,requestService,authService,Upload,accountingService) {
     var vm = this;
     vm.authService = authService;
     vm.jobs = [];
@@ -70,10 +70,16 @@
       vm.getAllByOwner(user_id);
     };
 
-    vm.acceptOffer = function(id,job_id){
+    vm.acceptOffer = function(r_id,req_owner,job_id){
       data = { stage:2,status:'confirmed' };
-      job_data = { status:'confirmed' };
-      requestService.updateRequest(id,data);
+      job_data = {
+        status:'confirmed',
+        provider: {
+          user_id: req_owner,
+          request_id: r_id
+        }
+      };
+      requestService.updateRequest(r_id,data);
       jobsService.update(job_id,job_data);
       vm.getAllByOwner(user_id);
     };
@@ -92,8 +98,8 @@
       vm.getRequestsByOwner(user_id);
     };
 
-    vm.completePost = function(id,r_id){
-      setuserService.updateRating(user_id,vm.rating,'provider_rating');
+    vm.completePost = function(id,r_id,r_owner){
+      setuserService.updateRating(r_owner,vm.rating,'provider_rating');
       job_data = { status:'completed' };
       jobsService.update(id,job_data);
       data = { stage:4, status:'feedback'};
@@ -140,7 +146,7 @@
       vm.getRequestsByOwner(user_id);
     };
 
-    vm.payProvider = function(u_id){
+    vm.payProvider = function(u_id,p_id,job){
       var payme = {
         currency: "cad"
       };
@@ -156,7 +162,15 @@
         setuserService.processPayment(payme);
       });
 
-      //update request to paid
+      paymentData = {
+        job_id: job._id,
+        job_title: job.title,
+        request_id: job.provider.request_id,
+        amount: payme.amount,
+        status: 'paid'
+      };
+
+      accountingService.addPaymentToUser(u_id,p_id,paymentData);
 
     };
 
