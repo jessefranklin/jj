@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('postCtrl',['jobsService','setuserService','Upload','authService', '$location','globalFunc', postController]);
+    .controller('postCtrl',['$scope','jobsService','fileUpload','setuserService','authService', '$location','globalFunc', postController]);
 
-  postController.$inject = ['jobsService','setuserService','Upload','authService', '$location','globalFunc'];
+  postController.$inject = ['$scope','jobsService','fileUpload','setuserService','authService', '$location','globalFunc'];
 
-  function postController(jobsService,setuserService,Upload,authService,$location,globalFunc) {
+  function postController($scope,jobsService,fileUpload,setuserService,authService,$location,globalFunc) {
     var vm = this, geocoder;
     vm.authService = authService;
     vm.job = {};
@@ -29,10 +29,8 @@
           vm.job.status = 'draft';
           vm.job.request.active = false;
 
-          if(vm.file){
-            if (vm.upload_form.file.$valid && vm.file) {
-              vm.upload(vm.file);
-            }
+          if($scope.myFile){
+            vm.upload();
           } else {
             vm.submitForm();
           }
@@ -40,17 +38,14 @@
       });
     };
 
-
-    vm.upload = function (file) {
-        Upload.upload({
-            url: 'http://localhost:3010/upload',
-            data: {file:file}
-        }).then(function (resp) {
-            console.log(resp.data.data);
+    vm.upload = function () {
+        var file = $scope.myFile;
+        var uploadUrl = "/upload";
+        fileUpload.uploadFileToUrl(file, uploadUrl).then(function(resp) {
+          console.log(resp.data);
             if(resp.data.error_code === 0){
               console.log('Success '+resp.data.data);
               vm.job.image = {
-                image_name : resp.data.data.originalname,
                 image_path : resp.data.data.filename
               };
               vm.submitForm();

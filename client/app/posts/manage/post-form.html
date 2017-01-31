@@ -111,29 +111,10 @@
       </div>
     </div>
   </div>
+      
 
-
-  <div class="group">
-    <form name="vm.upload_form" flow-init="{target: './uploads'}">
-    		<label for="image-upload" class="col-2 col-form-label">Images</label>
-    		<input 
-    		type="file" 
-    		ng-model="vm.file" 
-    		name="file" 
-    		ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" id="image-upload" flow-btn />
-    		<i ng-show="vm.upload_form.file.$error.maxSize">File too large {{vm.file.size / 1000000|number:1}}</i>
-    		
-
-        <div class="row" >
-          <div class="col-xs-6 col-md-3" ng-repeat="file in $flow.files">
-            <a href="#" class="thumbnail">
-              <img class="post-image" flow-img="file" />
-            </a>
-          </div>
-        </div>
-
-    </form>
-  </div>
+  <label for="image-upload">Upload images</label>
+  <input type = "file" file-model = "myFile" id="image-upload" />
 
       <div class="">
         <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === job.owner">Publish</a>
