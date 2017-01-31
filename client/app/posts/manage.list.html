@@ -59,16 +59,8 @@
 						<label for="comment-input">Comments</label>
 						<textarea class="form-control" ng-model="vm.notify_comment" id="comment-input"></textarea>
 						<label for="image-upload">Images - Share image of work done to speed process</label>
-					    <form name="vm.upload_form" flow-init="{ target: './uploads'}">
-				    		<label for="image-upload">Images</label>
-			    			<input type="file" ng-model="vm.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" id="image-upload" flow-btn />
-
-				          	<div class="col-xs-6 col-md-3" ng-repeat="file in $flow.files">
-					            <a href="#" class="thumbnail">
-					              	<img class="post-image" flow-img="file" />
-					            </a>
-					        </div>
-					    </form>
+					    <input type="file" file-model="myFile" id="image-upload" />
+					    
 					</div>
 				</div>
 				<div class="modal-footer">

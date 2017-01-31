@@ -24,7 +24,7 @@ var requestSchema = new Schema({
 	archived: Boolean,
 	notify_comment: String,
 	provider_images: [{
-		image_name: String
+		image_path: String
 	}],
 	created_at: { type : Date, default: Date.now }
 });

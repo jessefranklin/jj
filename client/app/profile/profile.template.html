@@ -16,6 +16,8 @@
 
 				<p ng-if="vm.userData.ratings.provider_rating">Provider Rating: {{vm.userData.ratings.provider_rating}}
 				<star-rating ng-model="vm.userData.ratings.provider_rating" readonly="true"></star-rating></p>
+
+				<p>Balance: ${{vm.userData.accounting.balance}}</p>
 			</div>
 			<div>
 				<span class="label label-default">Labour</span>

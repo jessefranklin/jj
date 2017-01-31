@@ -2,11 +2,11 @@
 
   angular
     .module('app.post')
-    .controller('manageCtrl',  ['$scope','$q','jobsService','setuserService','requestService','authService','Upload','accountingService',manageController]);
+    .controller('manageCtrl',  ['$scope','$q','jobsService','setuserService','requestService','fileUpload','authService','accountingService',manageController]);
 
-  manageController.$inject = ['$scope','$q','jobsService','setuserService','requestService','authService','Upload','accountingService'];
+  manageController.$inject = ['$scope','$q','jobsService','setuserService','requestService','fileUpload','authService','accountingService'];
 
-  function manageController($scope,$q,jobsService,setuserService,requestService,authService,Upload,accountingService) {
+  function manageController($scope,$q,jobsService,setuserService,requestService,fileUpload,authService,accountingService) {
     var vm = this;
     vm.authService = authService;
     vm.jobs = [];
@@ -115,24 +115,24 @@
 
     vm.provider_images = [];
     vm.notifyVendor = function(id){
-      if(vm.file){
-          Upload.upload({
-            url: 'http://localhost:3010/upload',
-            data: { file: vm.file }
-          }).then(function (resp) {
-              console.log(resp.data.data);
-              if(resp.data.error_code === 0){
-                console.log('Success '+resp.data.data);
-                data = {
-                  image_name : resp.data.data.filename
-                };
-                // data = { stage:3, status:'completed', completed_date:new Date()};
-                // requestService.updateRequest(id,data);
-                vm.getRequestsByOwner(user_id);
-              } else {
-                console.log('an error occured '+ resp);
-              }
-          });
+      var file = $scope.myFile;
+      var uploadUrl = "/upload";
+
+      if($scope.myFile){
+        fileUpload.uploadFileToUrl(file, uploadUrl).then(function(resp) {
+          console.log(resp.data);
+            if(resp.data.error_code === 0){
+              console.log('Success '+resp.data.data);
+              var image = [{
+                image_path : resp.data.data.filename
+              }];
+              data = { stage:3, status:'completed', completed_date:new Date(), notify_comment: vm.notify_comment, provider_images: image };
+              requestService.updateRequest(id,data);
+              vm.getRequestsByOwner(user_id);
+            } else {
+              console.log('an error occured '+ resp);
+            }
+        });
       } else {
         data = { stage:3, status:'completed', completed_date:new Date(), notify_comment: vm.notify_comment };
         requestService.updateRequest(id,data);
