@@ -36,7 +36,9 @@
               controllerAs: 'vm'
           },
           'footer': {
-              templateUrl: 'app/shell/footer.html'
+              templateUrl: 'app/shell/footer.html',
+              controller: 'userCtrl',
+              controllerAs: 'vm'
           }
         }
       })
