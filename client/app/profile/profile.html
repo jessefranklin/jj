@@ -1,3 +1,10 @@
 <div class="profile">
-<profileview user='vm.userData' viewingself='true'></profileview>
+	<profileview user='vm.userData' viewingself='true'></profileview>
+
+	<div class="ratings">
+		<div ng-repeat="rating in vm.ratings.vendor_rating">
+			<star-rating ng-model="rating.rating" readonly="true"></star-rating>
+			{{rating.review}}
+		</div>
+	</div>
 </div>

@@ -17,13 +17,20 @@
 				<p ng-if="vm.userData.ratings.provider_rating">Provider Rating: {{vm.userData.ratings.provider_rating}}
 				<star-rating ng-model="vm.userData.ratings.provider_rating" readonly="true"></star-rating></p>
 
-				<p>Balance: ${{vm.userData.accounting.balance}}</p>
 			</div>
-			<div>
+			<!-- <div>
 				<span class="label label-default">Labour</span>
 				<span class="label label-primary">Cleaning</span>
 				<span class="label label-success">Moving</span>
-			</div>
+			</div> -->
+
+			<p>
+				{{vm.userData.description}}	
+			</p>
+
+			 <a class="btn btn-default">Edit Profile</a>
 		</div>
 	</div>	
+
+	
 </div>

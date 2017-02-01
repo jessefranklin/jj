@@ -4,7 +4,12 @@ body {
 }
 
 .profile {
-	padding-top:80px;	
+	padding-top:60px;
+	max-width: 100%;
+	.ratings {
+		max-width: 100%;
+		word-wrap:break-word;
+	}	
 }
 
 .profile-pic {

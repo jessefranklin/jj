@@ -7,6 +7,8 @@ var userSchema = new Schema({
 	name: String,
 	email: String,
 	picture: String,
+	title: String,
+	location: String,
 	description: String,
 	role: String,
 	status: String,
@@ -35,6 +37,11 @@ var userSchema = new Schema({
 	},
 	s_customer_token: String,
 	archive_id: String,
+	preferences: {
+		jobs: Boolean,
+		requests: Boolean,
+		profile: Boolean
+	},
 	accounting_id: String,
 	accounting : {
 		balance: Number,

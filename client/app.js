@@ -100,6 +100,16 @@
           }
         }
       })
+      .state('app.thankyou', {
+        url: 'thankyou/:id',
+        views : {
+          'content@' : {
+              templateUrl: 'app/posts/manage/thankyou.html',
+              controller: 'thanksCtrl',
+              controllerAs: 'vm'
+          }
+        }
+      })
       .state('app.request', {
         url: 'request',
         views : {

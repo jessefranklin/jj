@@ -70,6 +70,7 @@
             email:vm.emailAdd
           };
           setuserService.update(vm.userProfile.user_id,userData);
+          $location.path('/thankyou/' + j_id);
         }
       }
     };
@@ -79,7 +80,10 @@
         status:'open'
       };
       vm.job.status = 'open';
-      jobsService.update(j_id,data);
+      jobsService.update(j_id,data)
+        .then(function(){
+          $location.path('/thankyou/' + j_id);
+        });
     };
 
   }

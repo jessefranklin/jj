@@ -32,21 +32,30 @@
       },
 
       createUser=function(userData,type){
+        console.log(type);
         vm.user_data = {
           user_id: vm.userProfile.user_id,
           name: vm.userProfile.name,
           email: vm.userProfile.email || null,
           picture: vm.userProfile.picture,
           role: 'employer',
-          status: 'active'
+          status: 'active',
+          preferences: {
+            jobs: type=='jobs'?true:false,
+            requests: type=='requests'?true:false,
+            profile: true
+          }
         };
+        
         vm.user_data[type] = userData;
+
         vm.rating = {
           vendor_rating_avg: 0,
           vendor_rating:[],
           provider_rating_avg: 0,
           provider_rating: []
         };
+
         vm.accounting = {
           user_id: vm.userProfile.user_id,
           balance: 0,
@@ -67,7 +76,6 @@
                       console.log(data);
                     });
                 });
-              
           });
       },
 

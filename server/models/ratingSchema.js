@@ -8,12 +8,16 @@ var ratingSchema = new Schema({
 	vendor_rating: [{
 		rating: Number,
 		category: String,
+		reviewer: String,
+		reviewer_img: String,
 		review: String
 	}],
 	provider_rating_avg: Number,
 	provider_rating: [{
 		rating: Number,
 		category: String,
+		reviewer: String,
+		reviewer_img: String,
 		review: String
 	}]
 });
