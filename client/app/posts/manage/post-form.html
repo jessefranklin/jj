@@ -2,7 +2,18 @@
 <div class="container">
   <h3>{{vm.state}} Job</h3>
   <div class="group">
-    <div class="row">
+    <div class="">
+      <div class="form-group">
+        <label for="service-category-select" class="col-2 col-form-label">Service Category</label>
+        <div class="col-10">
+          <select class="form-control"  ng-init="vm.job.service_category = 'labour'" ng-model="vm.job.service_category" id="service-category-select">
+          <option ng-repeat="cat in vm.categories" value="{{cat.name}}">
+            {{cat.name}}
+          </option>
+        </select>
+        </div>
+      </div>
+
       <div class="six columns">
         <label for="title-input" class="col-2 col-form-label">Title</label>
         <input class="form-control" ng-model="vm.job.title" type="text" placeholder="Title for post" id="title-input">
@@ -13,34 +24,29 @@
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group ">
       <label for="service-description-input" class="col-2 col-form-label">Service Description</label>
       <div class="col-10">
       	<textarea class="form-control" id="service-description-input" ng-model="vm.job.service_description" placeholder="Service Description"/></textarea>
       </div>
     </div>
 
-    <div class="form-group row">
-      <label for="service-category-select" class="col-2 col-form-label">Service Category</label>
-      <div class="col-10">
-        <select class="form-control"  ng-init="vm.job.service_category = 'labour'" ng-model="vm.job.service_category" id="service-category-select">
-    		<option ng-repeat="cat in vm.categories" value="{{cat.name}}">
-    			{{cat.name}}
-    		</option>
-    	</select>
-      </div>
+    <div class="form-group ">
+      <label for="image-upload">Upload image</label>
+      <input type="file" file-model="myFile" id="image-upload" />
     </div>
-  </div>
 
+  </div>
+  <h3>Where and When</h3>
   <div class="group">
-    <div class="form-group row">
+    <div class="form-group">
       <label for="address-input" class="col-2 col-form-label">Address</label>
       <div class="col-10">
       	<input class="form-control" type="text" id="address-input" ng-model="vm.job.address" placeholder="address" required ng-Autocomplete />
       </div>
     </div>
 
-    <div class="row">
+    <div class="">
       <div class="six columns">
         <label for="date-input" class="col-2 col-form-label">Date Required</label>
         <input class="form-control" ng-model="vm.job.request.date_required" type="date" id="date-input">
@@ -57,9 +63,9 @@
       </div>
     </div>
 
-    <div class="form-group row" ng-if="vm.job.request.time_range === 'specified'">
+    <div class="form-group" ng-if="vm.job.request.time_range === 'specified'">
       <label for="time-input" class="col-2 col-form-label">Specify Time:</label>
-      <input class="form-control" ng-model="vm.job.request.time_required" type="time" id="time-input">
+      <input class="form-control" ng-model="vm.job.request.time_required | date:'HH:MM a'" type="time" id="time-input">
       </div>
 
       <label for="expire">
@@ -67,14 +73,14 @@
       <span class="label-body">Expire post if not fulfilled by:</span>
     </label>
 
-    <div class="row" ng-if="vm.job.request.expire_post">
+    <div class="" ng-if="vm.job.request.expire_post">
       <label for="date-end-input" class="col-2 col-form-label">Date Fulfilled by:</label>
       <input class="form-control" ng-model="vm.job.request.date_fulfillment_by" type="date" id="date-end-input"> 
     </div>
   </div>
-
+  <h3>Payment</h3>
   <div class="group">
-    <div class="row">
+    <div class="">
       <div class="columns">
         <label for="cost-type-input" class="col-2 col-form-label">Cost type</label>
         <select class="form-control" ng-init="vm.job.cost.arrange = 'fixed'"  ng-model="vm.job.cost.arrange" id="cost-type-input">
@@ -84,7 +90,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="">
       <div class="six columns">
         <label for="hours-input" class="col-2 col-form-label">Est. Hours of Service</label>
         <input class="form-control" ng-model="vm.job.cost.hours" 
@@ -99,7 +105,7 @@
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group">
       <label for="amount-input" class="col-2 col-form-label">Total Cost</label>
       <div class="col-10">
         <input class="form-control" ng-disabled="vm.job.cost.arrange === 'hr'" 
@@ -111,19 +117,19 @@
   </div>
       
 
-  <label for="image-upload">Upload image</label>
-  <input type="file" file-model="myFile" id="image-upload" />
-
       <div class="">
         <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === job.owner">Publish</a>
 
         <a href="/edit/{{vm.job._id}}" class="btn btn-default" ng-if="vm.job.status === 'draft' && vm.userProfile.user_id === job.owner">Publish</a>
 
+
         <input type="button" ng-if="vm.state === 'edit'" ng-click="vm.addJob()" value="save" />
 
         <input type="button" ng-if="vm.state === 'edit'" ng-click="vm.addJob(true)" value="save and view post" />
 
+        <input type="button" ng-if="vm.state !='edit'" ng-click="vm.addJob()" value="save draft" />
         <input type="button" ng-if="vm.state !='edit'" ng-click="vm.addJob()" value="add job" />
+
       </div>
 
   	</div>

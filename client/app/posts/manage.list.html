@@ -1,5 +1,4 @@
-<div class="container">
-	<profileview user='vm.userData' viewingself='true'></profileview>
+<div class="manage">
 	
 
 	<div class="btn-group btn-group-lg" role="group" aria-label="Jobs / request menu">
@@ -7,7 +6,7 @@
 	  <button type="button" ng-click="vm.show.show = 'requests'" class="btn btn-default"><span>Requests <span class="badge" ng-if="vm.show.request">{{vm.show.request}}</span></span></button>
 	</div>
 
-	<div ng-if="vm.show.show == 'jobs'" class="">
+	<div ng-if="vm.show.show == 'jobs'" class="list">
 		<joblist jobs='vm.jobs' searchtext='vm.searchText'></joblist>
 	</div>
 

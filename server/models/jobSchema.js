@@ -18,7 +18,7 @@ var jobSchema = new Schema({
 		state: String,
 		date_required: Date,
 		time_range: String,
-		time_required: Number,
+		time_required: Date,
 		expire_post: Boolean,
 		date_fulfillment_by: Date,
 	},

@@ -1,1 +1,10 @@
 #map { height: 400px; }
+
+.current-location {
+	position: absolute;
+	z-index: 5;
+	margin-top: -40px;
+	margin-left: 10px;
+	color: #999;
+}
+

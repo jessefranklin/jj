@@ -1,9 +1,15 @@
-<div class="well item" ng-class="vm.userProfile.user_id == job.owner?'owner':'nope'">
-  	<div class="cost">${{job.cost.total_amount}}</div>
-  	{{job.status}} {{job.service_category}}
+<div class="item" ng-class="vm.userProfile.user_id == job.owner?'owner':'nope'">
+  	
+  	<div class="jj-cost">${{job.cost.total_amount}}</div>
+  	<div class="jj-date">
+		{{job.request.date_required  | date:'MMM' }}
+		<span>
+			{{job.request.date_required | date:'dd'}}
+		</span>
+	</div>
   	<h5>{{job.service_name}}</h5>
   	<h2>{{job.title}}</h2>
-  	<div>{{job.service_description}}</div>
+
   	<div class="actions">
 		<!-- Edit post  -->
 		<a href="edit/{{job._id}}" ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Edit</a>

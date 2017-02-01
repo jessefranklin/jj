@@ -7,6 +7,7 @@
     "start": "gulp"
   },
   "dependencies": {
+    "angular-chart.js": "^1.1.1",
     "aws-sdk": "^2.7.24",
     "body-parser": "~1.0.0",
     "breeze-mongodb": "0.0.6",

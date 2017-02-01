@@ -109,6 +109,16 @@
               controllerAs: 'vm'
           }
         }
+      })
+      .state('app.balance', {
+        url: 'balance',
+        views : {
+          'content@' : {
+              templateUrl: 'app/profile/balance.html',
+              controller: 'profileCtrl',
+              controllerAs: 'vm'
+          }
+        }
       });
 
     lockProvider.init({

@@ -11,7 +11,14 @@ img {
 		position: relative;
 		display: block;
 		min-height: 150px;
+		height: 210px;
 		background:rgba(#555,0.8);
+		overflow: hidden;
+		img {
+			width: 100%;
+			position: absolute; 
+			top: 0;
+		}
 		.category {
 			position: absolute;
 			bottom: 0;
@@ -21,5 +28,8 @@ img {
 			color: #fff;
 			font-size: 16px;
 		}
+	}
+	.description {
+		margin-top: 40px;
 	}
 }

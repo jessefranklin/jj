@@ -25,10 +25,6 @@
     jobsService.getById($state.params.id)
       .then(function(data){
         vm.job = data.data[0];
-        vm.job.request.date_required = new Date(vm.job.request.date_required);
-        vm.job.request.date_fulfillment_by = new Date(vm.job.request.date_fulfillment_by);
-        vm.request.provider_date = vm.job.request.date_required;
-        vm.request.provider_time = vm.job.request.time_required;
         vm.request.bid=vm.job.cost.total_amount;
         for(var i = 0; i < vm.job.applicants.length; i++) {
             if (vm.job.applicants[i].applicant_id == vm.userProfile.user_id) {

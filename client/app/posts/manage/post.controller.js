@@ -13,6 +13,8 @@
     vm.detail = {};
     vm.state = 'Add';
     vm.job.location = {};
+    vm.job.request = {};
+    vm.job.cost = {};
     vm.categories = globalFunc.categories;
 
     authService.getProfileDeferred().then(function (profile) {

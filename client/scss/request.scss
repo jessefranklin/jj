@@ -7,14 +7,15 @@
 }
 
 .owner {
-	background: #ccc;
+	background: #f4f4f4;
 }
 
 .item {
-	margin-bottom: 40px;
-	.cost {
+	margin-bottom: 0px;
+	border-radius: 0px;
+	border-bottom: 1px dashed #999;
+	.jj-cost {
 		float: right;
-		font-size: 20px;
 	}
 	h2,h5, > div {
 		margin-bottom: 0px;
@@ -25,4 +26,8 @@
 	.actions {
 		margin-top: 20px;
 	}
+}
+
+.manage {
+	padding-top: 60px;
 }

@@ -1,5 +1,5 @@
 <mapapp searchtext='vm.searchText'></mapapp>
-
+<a ng-click="vm.currentLocation()" class="current-location"><i class="fa fa-location-arrow fa-2x"></i></a>
 <div class="input-group">
   <input type="text" class="form-control" ng-model="vm.searchText" placeholder="Search for...">
   <span class="input-group-btn">
@@ -7,8 +7,6 @@
   </span>
 
 </div>
-<div class="container">
-	<i class="fa fa-location-arrow fa-2x"></i>
-	<i class="fa fa-location-arrow fa-2x"></i>
+<div class="list">
 	<joblist jobs='vm.jobs' searchtext='vm.searchText' manage='false'></joblist>
 </div>

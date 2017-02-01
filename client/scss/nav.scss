@@ -4,7 +4,6 @@
 }
 
 .navbar-default {
-	background-color:rgba(#fafafa,0.8);
 	text-align: center;
 	.navbar-toggle {
 		float: left;
@@ -30,14 +29,16 @@
 }
 
 #mainNav {
-	background-color:rgba(#bcbcbc, 1);
+	background-color:rgba($joe-brand, .9);
+	border: none;
 	a {
 		color: #fff;
+		text-shadow: 0px 1px 1px $joe-dark;
 	}
 }
 
 .navbar-fixed-bottom {
-	background-color:rgba(#bcbcbc, 1);
+	background-color:rgba($joe-grey, .9);
 	padding: 5px;
 	min-height: auto;
 	ul {
@@ -49,7 +50,7 @@
 			margin-bottom: 0px;
 			a {
 				color: #fff;
-				text-shadow: 0px 1px 1px #999;
+				text-shadow: 0px 1px 1px $joe-grey-dark;
 				.fa-usd {
 					font-weight: 100;
 				}
