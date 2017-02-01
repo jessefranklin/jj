@@ -36,7 +36,7 @@
         vm.user_data = {
           user_id: vm.userProfile.user_id,
           name: vm.userProfile.name,
-          email: vm.userProfile.email || null,
+          email: vm.userProfile.email||null,
           picture: vm.userProfile.picture,
           role: 'employer',
           status: 'active',
@@ -44,6 +44,13 @@
             jobs: type=='jobs'?true:false,
             requests: type=='requests'?true:false,
             profile: true
+          },
+          ratings: {
+            provider_rating: 0,
+            vendor_rating: 0
+          },
+          accounting : {
+            balance: 0.00
           }
         };
         

@@ -36,7 +36,7 @@
 
     vm.createRequest=function(){
       vm.requestformstatus = 'review';
-      requestService.createRequest(vm.job,vm.userProfile,vm.request);
+      requestService.createRequest(vm.job,vm.userProfile,vm.request,vm.userData);
     };
 
     vm.confirm=function(){
@@ -47,12 +47,26 @@
       if (result.error) {
         console.log('it failed! error: ' + result.error.message);
       } else {
-        var email = vm.userData.email?vm.userData.email:vm.emailAdd;
+        var email = (vm.userData && vm.userData.email)?vm.userData.email:vm.emailAdd;
         var data = {
           stripeToken: result.id,
           email: email
         };
         setuserService.createStripeUser(data,vm.userProfile.user_id);
+        var j_data = {
+          status:'open'
+        };
+        jobsService.update(vm.job._id,j_data);
+        vm.job.status = 'open';
+        angular.element(document.querySelector('#paymentModal')).modal('hide');
+
+        if(vm.userData && !vm.userData.email){
+          var userData = {
+            email:vm.emailAdd
+          };
+          setuserService.update(vm.userProfile.user_id,userData);
+          $location.path('/thankyou/' + vm.job._id);
+        }
       }
     };
 
@@ -61,16 +75,16 @@
         var data = {
           status:'open'
         };
-        jobsService.update(j_id,data);
+        jobsService.update(vm.job._id,data);
         vm.job.status = 'open';
-        angular.element(document.querySelector('#paymentModal')).modal('hide');
+        angular.element($document.querySelector('#paymentModal')).modal('hide');
 
-        if(!vm.userData.email){
+        if(vm.userData && !vm.userData.email){
           var userData = {
             email:vm.emailAdd
           };
           setuserService.update(vm.userProfile.user_id,userData);
-          $location.path('/thankyou/' + j_id);
+          $location.path('/thankyou/' + vm.job._id);
         }
       }
     };

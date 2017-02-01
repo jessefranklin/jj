@@ -1,5 +1,3 @@
-
-
 <div class="profile">
 	<div class="">
 		<div class="profile-pic">
@@ -10,12 +8,24 @@
 				{{vm.userData.name}}
 			</div>
 			<div class="profile-usertitle-job">
-				Postings X<br />
-				<p ng-if="vm.userData.ratings.vendor_rating">Vendor Rating: {{vm.userData.ratings.vendor_rating}}
-				<star-rating ng-model="vm.userData.ratings.vendor_rating" readonly="true"></star-rating></p>
+				
+				<p>{{vm.userData.email}}<a ng-click="vm.toggleEdit()"><i class="fa fa-pencil fa-1x"></i></a></p>
+				<p>{{vm.userData.title}}<a ng-click="vm.toggleEdit()"><i class="fa fa-pencil fa-1x"></i></a></p>
+				<p>{{vm.userData.location}}<a ng-click="vm.toggleEdit()"><i class="fa fa-pencil fa-1x"></i></a></p>
 
-				<p ng-if="vm.userData.ratings.provider_rating">Provider Rating: {{vm.userData.ratings.provider_rating}}
-				<star-rating ng-model="vm.userData.ratings.provider_rating" readonly="true"></star-rating></p>
+				<div class="" ng-if="vm.userData.preferences.jobs">
+					<p ng-if="vm.userData.ratings.vendor_rating">Vendor Rating: {{vm.userData.ratings.vendor_rating}}
+
+					<star-rating ng-model="vm.userData.ratings.vendor_rating" readonly="true"></star-rating></p>
+				</div>
+
+				<div class="" ng-if="vm.userData.preferences.requests">
+					<p ng-if="vm.userData.ratings.provider_rating">Provider Rating: {{vm.userData.ratings.provider_rating}}
+
+					<star-rating ng-model="vm.userData.ratings.provider_rating" readonly="true"></star-rating></p>
+				</div>
+
+				<p>{{vm.userData.description}} <a ng-click="vm.toggleEdit()"><i class="fa fa-pencil fa-1x"></i></a></p>
 
 			</div>
 			<!-- <div>
@@ -24,11 +34,7 @@
 				<span class="label label-success">Moving</span>
 			</div> -->
 
-			<p>
-				{{vm.userData.description}}	
-			</p>
-
-			 <a class="btn btn-default">Edit Profile</a>
+			
 		</div>
 	</div>	
 

@@ -28,6 +28,10 @@
       user_id = vm.userProfile.user_id;
       vm.getAllByOwner(user_id);
       vm.getRequestsByOwner(user_id);
+      setuserService.getUser(profile.user_id)
+        .then(function(data){
+          vm.userData = data.data[0];
+        });
     });
 
     vm.getRequestsByOwner = function(id){

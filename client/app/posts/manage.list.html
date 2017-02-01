@@ -1,16 +1,16 @@
 <div class="manage">
 	
 
-	<div class="btn-group btn-group-lg" role="group" aria-label="Jobs / request menu">
-	  <button type="button" ng-click="vm.show.show = 'jobs'" class="btn btn-default"><span>Jobs <span class="badge" ng-if="vm.show.job">{{vm.show.job}}</span></span></button>
-	  <button type="button" ng-click="vm.show.show = 'requests'" class="btn btn-default"><span>Requests <span class="badge" ng-if="vm.show.request">{{vm.show.request}}</span></span></button>
+	<div ng-if="vm.userData.preferences.requests && vm.userData.preferences.jobs" class="btn-group btn-group-lg" role="group" aria-label="Jobs / request menu">
+	  <button type="button" ng-click="vm.show.show = 'jobs'" class="btn btn-default"><span>Jobs <span class="badge" >{{vm.show.job}}</span></span></button>
+	  <button type="button" ng-click="vm.show.show = 'requests'" class="btn btn-default"><span>Requests <span class="badge" >{{vm.show.request}}</span></span></button>
 	</div>
 
 	<div ng-if="vm.show.show == 'jobs'" class="list">
 		<joblist jobs='vm.jobs' searchtext='vm.searchText'></joblist>
 	</div>
 
-	<div ng-if="vm.show.show == 'requests'">
+	<div ng-if="vm.userData.preferences.requests">
 
 		<div ng-repeat="(key, value) in vm.manageRequests | groupBy: 'provider_date'">
 			<div class="item item-divider">

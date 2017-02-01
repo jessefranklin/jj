@@ -10,13 +10,15 @@
     var requestData = [];
     vm.submitted = false;
 
-    createRequest=function(job,user,request){
+    createRequest=function(job,user,request,userData){
+      console.log(job,user,request,userData);
       vm.request = {
           job_id: job._id,
           job_owner_id: job.owner,
           provider_id: user.user_id,
           provider_name: user.name,
-          rating: null,
+          provider_image_path: (userData)?userData.picture:user.picture,
+          rating: (userData)?userData.ratings.provider_rating:0,
           status: 'pending',
           stage: 1,
           title: job.title,
