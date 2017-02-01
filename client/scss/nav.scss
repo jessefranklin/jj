@@ -1,0 +1,65 @@
+
+.navbar-header {
+	padding-top: 10px;
+}
+
+.navbar-default {
+	background-color:rgba(#fafafa,0.8);
+	text-align: center;
+	.navbar-toggle {
+		float: left;
+		padding: 0 10px;
+		border: none;
+		margin: 0px;
+		&:hover, &:focus {
+			background: none;
+		}
+	}
+	.add-post {
+		padding: 0 10px;
+		display: block;
+	}
+}
+
+.navbar-brand {
+	float: none;
+	padding: 0 15px;
+	line-height: 1.5em;
+	font-size: 20px;
+	letter-spacing: .02em;
+}
+
+#mainNav {
+	background-color:rgba(#bcbcbc, 1);
+	a {
+		color: #fff;
+	}
+}
+
+.navbar-fixed-bottom {
+	background-color:rgba(#bcbcbc, 1);
+	padding: 5px;
+	min-height: auto;
+	ul {
+		list-style: none;
+		margin-bottom: 0px;
+		display: flex;
+		justify-content: space-around;
+		li {
+			margin-bottom: 0px;
+			a {
+				color: #fff;
+				text-shadow: 0px 1px 1px #999;
+				.fa-usd {
+					font-weight: 100;
+				}
+				.menu-balance {
+					font-size: 30px;
+					line-height: 1em;
+					font-weight: 100;
+					font-family: Helvetica, sans-serif;
+				}
+			}
+		}
+	}
+}

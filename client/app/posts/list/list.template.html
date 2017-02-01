@@ -10,7 +10,7 @@
 		<!-- View Post -->
 		<a href="detail/{{job._id}}"  ng-if="job.status != 'completed'" class="btn btn-default" >View Posting</a>
 		<!-- Delete TAsk  -->
-		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status == 'open'" class="btn btn-default" >Delete</a> 
+		<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status == 'open'" class="btn btn-default" ><i class="fa fa-trash-o fa-lg"></i>Delete</a> 
 		<!-- Task Completed -->
 		<a ng-if="vm.manage && job.status == 'confirmed'" ng-click="vm.jobid = job._id; vm.req_id = job.owner" class="btn btn-default" data-toggle="modal" data-target="#payComplete">Task Completed</a> 
 	</div>

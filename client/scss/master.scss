@@ -1,109 +1,26 @@
+
+@import "var";
+@import "nav";
+@import "map";
 @import "profile";
+@import "post";
+@import "request";
+@import "forms";
+@import "layout";
 
 
-.navbar-default {
-	background-color:rgba(#fafafa,0.8);
-}
-
-#map { height: 400px; }
-
-.navbar-toggle {
-	padding: 0 10px;
-}
-
-.post-image {
-	width: 200px;
-}
-
-#shell-content {
-	padding: 60px 0 120px;
-}
-
-img {
-	max-width: 100%;
-}
-
-.ng-invalid {
-    color: red;
-}
-
-.navbar-fixed-bottom {
-	background-color:rgba(#fafafa,0.8);
-	padding: 5px;
-	min-height: auto;
-}
-
-.container {
-	padding: 20px;
-}
-.item {
-	margin-bottom: 40px;
-	.cost {
-		float: right;
-		font-size: 20px;
-	}
-	h2,h5, > div {
-		margin-bottom: 0px;
-	}
-	.content {
-		margin-top: 20px;
-	}
-	.actions {
-		margin-top: 20px;
-	}
-}
-
-.confirmed {
-	background: #dff0d8;
-}
-
-.declined {
-	background: #ccc;
-}
-
-.owner {
-	background: #ccc;
-}
-
-.detail {
-	&.hero {
-		position: relative;
-		display: block;
-		min-height: 150px;
-		background:rgba(#555,0.8);
-		.category {
-			position: absolute;
-			bottom: 0;
-			right: 10px;
-			padding: 0 10px;
-			text-align: right;
-			color: #fff;
-			font-size: 16px;
-		}
-	}
-}
 
 
-.star-rating {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  
-  .star {
-    padding: 1px;
-    color: #ddd;
-    font-size: 20px;
-    text-shadow: .05em .05em #aaa;
-    list-style-type: none;
-    display: inline-block;
-    cursor: pointer;
 
-    &.filled {
-      color: #fd0;
-    }
-  }
 
-  &.readonly .star.filled {
-    color: #666;
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
