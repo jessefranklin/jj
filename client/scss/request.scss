@@ -10,6 +10,10 @@
 	background: #f4f4f4;
 }
 
+.manage {
+	padding-top: 60px;
+}
+
 .item {
 	margin-bottom: 0px;
 	border-radius: 0px;
@@ -25,9 +29,31 @@
 	}
 	.actions {
 		margin-top: 20px;
+	    text-align: right;
 	}
 }
 
-.manage {
-	padding-top: 60px;
+.jj-job-desc {
+	padding: 20px;
+	border-bottom: 1px dashed #999;
+}
+
+.request-list {
+	display: block;
+	padding: 20px;
+	border-bottom: 1px dashed #999;
+	min-height: 180px;
+	.jj-profile {
+		float: left;
+		text-align: center;
+		.star {
+			font-size: 18px;
+		}
+	}
+	.request-detail {
+	    margin-left: 130px;
+	}
+	.actions {
+		float: right;
+	}
 }

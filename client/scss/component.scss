@@ -35,3 +35,41 @@
 		font-family: Helvetica, sans-serif;
 	}
 }
+
+.jj-profile {
+	img {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		display: block;
+		overflow: hidden;
+	    margin: 0 auto 10px;
+	}
+	.name {
+		text-align: center;
+	}
+}
+
+.star-rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  
+  .star {
+    padding: 1px;
+    color: #ddd;
+    font-size: 20px;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+
+    &.filled {
+      color: #fd0;
+    }
+  }
+
+  &.readonly .star.filled {
+    color: #666;
+  }
+}
+
