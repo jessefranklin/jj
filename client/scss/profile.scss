@@ -4,8 +4,11 @@ body {
 }
 
 .profile {
-	padding-top:60px;
+	padding-top:50px;
 	max-width: 100%;
+	p {
+		margin-bottom: 5px;
+	}
 	.ratings {
 		max-width: 100%;
 		word-wrap:break-word;
@@ -13,11 +16,11 @@ body {
 }
 
 .profile-pic {
-	display: inline-block;
-	margin: 20px ;
+	display:block;
+	
 	img {
 		float: none;
-		margin: 0 auto;
+		margin: 20px auto;
 		width: 100px;
 		height: auto;
 		-webkit-border-radius: 50% !important;
@@ -25,12 +28,16 @@ body {
 		border-radius: 50% !important;
 	}
 }
+
 .profile-meta {
-	display: inline-block;
+	display: block;
 	vertical-align: top;
-	top: 50%;
+	text-align: center;
 }
 
 .balance {
 	padding-top:80px;	
+	h2 {
+		text-align: center;
+	}
 }

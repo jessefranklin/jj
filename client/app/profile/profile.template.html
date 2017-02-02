@@ -9,25 +9,32 @@
 			</div>
 			<div class="profile-usertitle-job">
 				
-				<p>{{vm.userData.email}}<a ng-click="vm.toggleEdit()"><i class="fa fa-pencil fa-1x"></i></a></p>
-				<p>{{vm.userData.title}}<a ng-click="vm.toggleEdit()"><i class="fa fa-pencil fa-1x"></i></a></p>
-				<p>{{vm.userData.location}}<a ng-click="vm.toggleEdit()"><i class="fa fa-pencil fa-1x"></i></a></p>
+				<p>{{vm.userData.email}}</p>
+				<p><a href="#" editable-text="vm.userData.title">{{vm.userData.title || 'title'}}</a></p>
+				<p><a href="#" editable-text="vm.userData.location">{{vm.userData.location || 'location'}}</a></p>
 
 				<div class="" ng-if="vm.userData.preferences.jobs">
-					<p ng-if="vm.userData.ratings.vendor_rating">Vendor Rating: {{vm.userData.ratings.vendor_rating}}
+					<p>Vendor Rating: {{vm.userData.ratings.vendor_rating}}</p>
 
-					<star-rating ng-model="vm.userData.ratings.vendor_rating" readonly="true"></star-rating></p>
+					<star-rating ng-model="vm.userData.ratings.vendor_rating" readonly="true"></star-rating>
 				</div>
 
 				<div class="" ng-if="vm.userData.preferences.requests">
-					<p ng-if="vm.userData.ratings.provider_rating">Provider Rating: {{vm.userData.ratings.provider_rating}}
+					<p>Provider Rating: {{vm.userData.ratings.provider_rating}}</p>
 
-					<star-rating ng-model="vm.userData.ratings.provider_rating" readonly="true"></star-rating></p>
+					<star-rating ng-model="vm.userData.ratings.provider_rating" readonly="true"></star-rating>
 				</div>
 
-				<p>{{vm.userData.description}} <a ng-click="vm.toggleEdit()"><i class="fa fa-pencil fa-1x"></i></a></p>
+				<div >
+				  <a href="#" editable-textarea="vm.userData.description" e-rows="7" e-cols="40">
+				    {{ vm.userData.description || 'no description' }}
+				  </a>
+				</div>
 
 			</div>
+
+
+			<a ng-click="vm.saveProfile()" class="btn btn-default">Save</a>
 			<!-- <div>
 				<span class="label label-default">Labour</span>
 				<span class="label label-primary">Cleaning</span>
@@ -37,6 +44,4 @@
 			
 		</div>
 	</div>	
-
-	
 </div>

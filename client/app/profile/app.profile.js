@@ -2,7 +2,8 @@
 
   angular
     .module('app.profile', [
-		'chart.js'
+		'chart.js',
+		'xeditable'
     ]);
     
 }());

@@ -17,7 +17,7 @@
 				<h1> {{key | date:'MMM dd'}}</h1>
 			</div>
 
-			<div ng-repeat="request in value" class="well {{request.status}}" >
+			<div ng-repeat="request in value" class=" {{request.status}}" >
 				{{request.title}}
 				{{request.status}}
 				{{request.bid}}
@@ -27,7 +27,7 @@
 				{{request.status}}
 
 				<div ng-if="request.status == 'pending'">
-					<a ng-click="vm.removeRequest(request.job_id,request._id)" ng-if="request.status != 'confirmed'" class="btn btn-default"><i class="fa fa-trash-o fa-lg"></i>Delete</a>
+					<a ng-click="vm.removeRequest(request.job_id,request._id)" ng-if="request.status != 'confirmed'" class="btn btn-default">Delete</a>
 					<a ng-click="vm.editRequest(request.job_id)" ng-if="request.status != 'confirmed'" class="btn btn-default">Edit</a>
 					<a ng-click="vm.viewFullRequest(request.job_id)" class="btn btn-default">View</a>
 

@@ -11,6 +11,9 @@ var jobSchema = new Schema({
 	status: String,
 	request_id: String,
 	owner_meta : {
+		name: String,
+		picture: String,
+		rating: String,
 		telephone: Number
 	},
 	request: {

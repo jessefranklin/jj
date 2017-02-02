@@ -1,14 +1,15 @@
-<div class="item" ng-class="vm.userProfile.user_id == job.owner?'owner':'nope'">
+<div class="item" ng-class="vm.userProfile.user_id == job.owner?'owner ':'nope '; job.status">
   	<div class="jj-job-desc">
-	  	<div class="jj-cost">${{job.cost.total_amount}}</div>
-	  	<div class="jj-date">
-			{{job.request.date_required  | date:'MMM' }}
-			<span>
-				{{job.request.date_required | date:'dd'}}
-			</span>
-		</div>
-	  	<h5>{{job.service_name}}</h5>
+
+	  	<!-- <h5>{{job.service_name}}</h5> -->
 	  	<h2>{{job.title}}</h2>
+	  	<p>{{job.service_description | cut:true:100:' ...' }}</p>
+
+	  	<ul>
+	  		<li><span>Offer:</span> ${{job.cost.total_amount}}</li>
+	  		<li><span>Requested Date:</span> {{job.request.date_required  | date:'MMM dd' }}</li>
+	  		<li><span>Requested Time:</span> {{job.request.time_range}}</li>
+  		</ul>
 
 	  	<div class="actions">
 			<!-- Edit post  -->
@@ -16,7 +17,7 @@
 			<!-- View Post -->
 			<a href="detail/{{job._id}}"  ng-if="job.status != 'completed'" class="btn btn-default" ><i class="fa fa-align-left"></i> View Posting</a>
 			<!-- Delete TAsk  -->
-			<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status == 'open'" class="btn btn-default" ><i class="fa fa-trash-o fa-lg"></i> Delete</a> 
+			<a ng-click="vm.deletePost(job._id)"  ng-if="vm.manage && job.status == 'open'" class="btn btn-default" ><i class="fa fa-times "></i> Delete</a> 
 			<!-- Task Completed -->
 			<a ng-if="vm.manage && job.status == 'confirmed'" ng-click="vm.jobid = job._id; vm.req_id = job.owner" class="btn btn-default" data-toggle="modal" data-target="#payComplete">Task Completed</a> 
 		</div>
@@ -30,14 +31,15 @@
 		</div>
 		
 		<div class="request-detail">
-			offered {{req.bid}} on the date of {{req.provider_date | date:'MM/dd/yyyy'}}
-
+			Bid: {{req.bid}} 
+			Date: {{req.provider_date | date:'MMM/dd'}}
+			Time: {{req.provider_time }}
 			<span ng-if="req.status == 'completed'" >Marked post as completed 
 			{{req.provider_date | date:'MM/dd/yyyy'}} with note: <br />
 			{{req.notify_comment}}</span>
 
 			<div ng-repeat="comment in req.comments">
-				Note: {{comment.comment}} {{comment.time_stamp | date:'MM/dd/yyyy' }}
+				Note: {{comment.comment}}
 			</div>
 			
 			<div ng-if="job.status == 'open' && req.status != 'declined' " class="actions">
@@ -102,6 +104,8 @@
 				<div class="modal-body">
 					<div>
 						<input type="hidden" ng-model="vm.rating.category" ng-init="vm.rating.category = job.service_category"/>
+						<!-- <input type="hidden" ng-model="vm.rating.reviewer" ng-init="vm.rating.reviewer = job.owner_meta.name"/>
+						<input type="hidden" ng-model="vm.rating.reviewer_img" ng-init="vm.rating.category = job.owner_meta.picture"/> -->
 						<input type="hidden" ng-model="vm.rating.type" ng-value="provider"/>
 						<star-rating ng-model="vm.rating.rating" readonly="vm.isReadonly"></star-rating>
 						<label for="comment-input">Review</label>

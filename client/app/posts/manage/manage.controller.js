@@ -110,6 +110,7 @@
     };
 
     vm.completePost = function(id,r_id,r_owner){
+      console.log(vm.rating);
       setuserService.updateRating(r_owner,vm.rating,'provider_rating');
       job_data = { status:'completed' };
       jobsService.update(id,job_data);
